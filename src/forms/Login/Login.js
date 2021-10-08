@@ -7,6 +7,7 @@ const Login = () => {
   //state
   const [email, setEmail] = useState('ralph@gmail.com');
   const [password, setPassword] = useState('123123');
+  const history = useHistory();
   
   const handleLogin = (e) => {
     //to prevent page reload
@@ -22,9 +23,10 @@ const Login = () => {
         localStorage.setItem('client', res.headers['client']);
         localStorage.setItem('expiry', res.headers['expiry']);
         localStorage.setItem('uid', res.headers['uid']);
+        history.push('/main');
       })
       .catch(err => err)
-  }
+  } 
 
   return (
     <div>

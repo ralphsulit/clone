@@ -11,4 +11,13 @@ function Home() {
   )
 };
 
+<<<<<<< HEAD
 export default Home;
+=======
+export default Home;
+
+const Body = styled.div`
+  display: flex;
+  height: 100vh;
+`;
+>>>>>>> master
