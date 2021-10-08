@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import SearchBox from '../SearchBox/SearchBox';
 import styled from 'styled-components';
+//icons
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import SearchIcon from '@material-ui/icons/Search';
 import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
@@ -16,17 +17,16 @@ function Header() {
 
   return (
     <HeaderContainer>
-
       <HeaderLeft>
         <Image>
           <img
-            src={`https://picsum.photos/id/${id}/40`}
+            src=""
             alt=""
           />
         </Image>
         <AccessTimeIcon/>
       </HeaderLeft>
-
+      
       <HeaderSearch>
         <SearchIcon />
         <button>
@@ -59,7 +59,7 @@ const HeaderContainer = styled.div`
   align-items: center;
   position: fixed;
   padding: 10px 0;
-  width: 100vw;
+  width: 100%;
 `;
 
 const HeaderSearch = styled.div`
