@@ -22,11 +22,33 @@ import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 function Sidebar() {
   //state
   const [toggleAddChannel, setToggleAddChannel] = useState(false);
+  const [channels, setChannels] = useState('');
+  const [render, setRender] = useState(false);
+
+  //render
+  const handleRender = () => {
+    setRender(!render);
+  };
 
   //toggles add channel
   const handleToggleAddChannel = () => {
     setToggleAddChannel(!toggleAddChannel);
-  }
+  };
+
+  useEffect(() => {
+    //get header from local storage
+    const headers = {
+      'access-token': localStorage.getItem('access-token'),
+      'client': localStorage.getItem('client'),
+      'expiry': localStorage.getItem('expiryuid'),
+      'uid': localStorage.getItem('uid')
+    }
+
+    const channelData = { headers }
+
+    //get channels
+    
+  })
 
   return (
     <SidebarContainer>
@@ -50,10 +72,12 @@ function Sidebar() {
       <SidebarOption Icon={ExpandLessIcon} title="Show less" />
       <hr />
       <SidebarOption Icon={AddIcon} title='Add Channel' />
-
+      <SidebarOption Icon={PeopleAltIcon} title="Channels Owned" />
+      <hr />
+      <SidebarOption Icon={PeopleAltIcon} title="Channel Joined" />
     </SidebarContainer>
   )
-}
+};
 
 export default Sidebar;
 
