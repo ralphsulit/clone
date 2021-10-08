@@ -23,45 +23,43 @@ import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 function Sidebar() {
   //state
   const [toggleAddChannel, setToggleAddChannel] = useState(false);
-  const [channels, setChannels] = useState();
-  const [render, setRender] = useState(false);
-
-  //render
-  const handleRender = () => {
-    setRender(!render);
-  };
-
-  //toggles add channel
-  const handleToggleAddChannel = () => {
-    setToggleAddChannel(!toggleAddChannel);
-  };
-
+  const [email, setEmail] = useState('');
+  const [channelsJoined, setChannelsJoined] = useState([]);
+  const [channelsOwned, setChannelsOwned] = useState([]);
+  //variables
+  const username = email.split('@')[0];
+  
   useEffect(() => {
-    //get header from local storage
+    //variables
     const headers = {
       'token': localStorage.getItem('access-token'),
       'client': localStorage.getItem('client'),
       'expiry': localStorage.getItem('expiry'),
       'uid': localStorage.getItem('uid')
     }
-
     const channelData = { headers }
-
-    //get channels
+    setEmail(headers.uid)
+  
+    //get channels joined
     getChannel(channelData)
       .then(res => {
-        setChannels(res)
+        setChannelsJoined(res.data.data)
+        
       })
       .catch(err => console.log(err));
     
-    console.log(joined)
-  }, [render]);
+    //get owned channels
+    getOwnedChannel(channelData)
+      .then(res => {
+        setChannelsOwned(res.data.data)
+      })
+      .catch(err => err)
 
-  const joined = channels.data.data;
-
-
-  // render all channel (joined)
-  const renderJoinedChannels = joined.map((channel, i) => {
+    
+  }, []);
+  
+  // render all channel (owned)
+  const renderOwnedChannels = channelsOwned.map((channel, i) => {
     return (
       <NavLink
         to={`/channel/${channel.id}`}
@@ -74,16 +72,33 @@ function Sidebar() {
         />
       </NavLink>
     )
-  })
+  });
+
+  // render all channel (joined)
+  const renderJoinedChannels = channelsJoined.map((channel, i) => {
+    return (
+      <NavLink
+        to={`/channel/${channel.id}`}
+        style={{ textDecoration: 'none', color: '#fff' }}
+      >
+        <SidebarOption
+          key={i}
+          Icon={InsertCommentIcon}
+          title={channel.name}
+        />
+      </NavLink>
+    )
+  });
+
 
   return (
     <SidebarContainer>
       <SidebarHeader>
         <SidebarInfo>
-          <h2>email</h2>
+          <h2>{email}</h2>
           <h3>
             <FiberManualRecordIcon />
-            user
+            {username}
           </h3>
         </SidebarInfo>
         <CreateIconStyle/>
@@ -99,9 +114,10 @@ function Sidebar() {
       <hr />
       <SidebarOption Icon={AddIcon} title='Add Channel' />
       <SidebarOption Icon={PeopleAltIcon} title="Channels Owned" />
+      {renderOwnedChannels}
       <hr />
       <SidebarOption Icon={PeopleAltIcon} title="Channel Joined" />
-      {renderJoinedChannels}
+      {renderJoinedChannels}  
     </SidebarContainer>
   )
 };
