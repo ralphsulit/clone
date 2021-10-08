@@ -20,7 +20,7 @@ function Header() {
       <HeaderLeft>
         <Image>
           <img
-            src=""
+            src={`https://picsum.photos/id/${id}/40`}
             alt=""
           />
         </Image>
