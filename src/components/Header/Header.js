@@ -59,7 +59,7 @@ const HeaderContainer = styled.div`
   align-items: center;
   position: fixed;
   padding: 10px 0;
-  width: 100vw;
+  width: 100%;
 `;
 
 const HeaderSearch = styled.div`

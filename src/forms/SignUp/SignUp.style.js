@@ -18,7 +18,8 @@ const SignUpInnerContainer = styled.div`
   background-color: white;
   border-radius: 10px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  width: 400px;
+  width: 600px;
+  margin-bottom: 60px;
     >img {
       object-fit: contain;
       height: 100px;
@@ -39,6 +40,7 @@ const Form = styled.form`
       padding: 1vh;
       margin: 1vh;
       min-width: 25vw;
+      outline: none;
     }
 
     >input[type=submit] {

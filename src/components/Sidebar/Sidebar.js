@@ -40,8 +40,16 @@ function Sidebar() {
         </SidebarInfo>
         <CreateIconStyle/>
       </SidebarHeader>
-      <hr /><hr />
-      <SidebarOption icon={AddIcon} title='Add Channel' />
+      <SidebarOption Icon={InsertCommentIcon} title="Threads" />
+      <SidebarOption Icon={InboxIcon} title="Mentions & Reactions" />
+      <SidebarOption Icon={DraftsIcon} title="Saved items" />
+      <SidebarOption Icon={BookmarkBorderIcon} title="Channel browser" />
+      <SidebarOption Icon={PeopleAltIcon} title="People & user groups" />
+      <SidebarOption Icon={AppsIcon} title="Apps" />
+      <SidebarOption Icon={FileCopyIcon} title="File browser" />
+      <SidebarOption Icon={ExpandLessIcon} title="Show less" />
+      <hr />
+      <SidebarOption Icon={AddIcon} title='Add Channel' />
 
     </SidebarContainer>
   )
@@ -52,14 +60,15 @@ export default Sidebar;
 const SidebarContainer = styled.div`
   color: #fff;
   background-color: var(--slack-color);
-  border-top: 1p solid #49274b;
-  flex; 0.5;
+  border-top: 1px solid #49274b;
+  flex: 0.5;
   max-width: 260px;
-  margin-top: 60px;
+  margin-top: 40px;
   overflow-y: auto;
 
     >hr {
-      margin: 10px 0;
+      margin-top: 10px;
+      margin-bottom: 10px;
       border: 1px solid #49274b;
     }
 
@@ -76,7 +85,7 @@ const SidebarHeader = styled.div`
     >.MuiSvgIcon-root {
       padding: 8px;
       color: #49274b;
-      font-size: 18px;
+      font-size: 2rem;
       background-color: white;
       border-radius: 1000px;
     }
