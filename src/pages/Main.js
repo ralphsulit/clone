@@ -8,16 +8,16 @@ function Home() {
   //state 
   const [render, setRender] = useState(false);
 
-  useEffect(() => {
-    //get header from local storage
-    const headers = {
-      'access-token': localStorage.getItem('access-token'),
-      'client': localStorage.getItem('client'),
-      'expiry': localStorage.getItem('expiryuid'),
-      'uid': localStorage.getItem('uid')
-    }
+  // useEffect(() => {
+  //   //get header from local storage
+  //   const headers = {
+  //     'access-token': localStorage.getItem('access-token'),
+  //     'client': localStorage.getItem('client'),
+  //     'expiry': localStorage.getItem('expiryuid'),
+  //     'uid': localStorage.getItem('uid')
+  //   }
 
-  }, [render])
+  // }, [render])
 
   return (
     <Router>

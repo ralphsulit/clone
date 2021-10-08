@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, NavLink } from 'react-router-dom';
+import { getChannel, getRecentDm, getOwnedChannel } from '../../api/api';
 import SidebarOption from './SidebarOption';
 import styled from 'styled-components';
 //Icons
@@ -22,7 +23,7 @@ import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 function Sidebar() {
   //state
   const [toggleAddChannel, setToggleAddChannel] = useState(false);
-  const [channels, setChannels] = useState('');
+  const [channels, setChannels] = useState();
   const [render, setRender] = useState(false);
 
   //render
@@ -38,16 +39,41 @@ function Sidebar() {
   useEffect(() => {
     //get header from local storage
     const headers = {
-      'access-token': localStorage.getItem('access-token'),
+      'token': localStorage.getItem('access-token'),
       'client': localStorage.getItem('client'),
-      'expiry': localStorage.getItem('expiryuid'),
+      'expiry': localStorage.getItem('expiry'),
       'uid': localStorage.getItem('uid')
     }
 
     const channelData = { headers }
 
     //get channels
+    getChannel(channelData)
+      .then(res => {
+        setChannels(res)
+      })
+      .catch(err => console.log(err));
     
+    console.log(joined)
+  }, [render]);
+
+  const joined = channels.data.data;
+
+
+  // render all channel (joined)
+  const renderJoinedChannels = joined.map((channel, i) => {
+    return (
+      <NavLink
+        to={`/channel/${channel.id}`}
+        style={{ textDecoration: 'none', color: '#fff' }}
+      >
+        <SidebarOption
+          key={i}
+          Icon={InsertCommentIcon}
+          title={channel.name}
+        />
+      </NavLink>
+    )
   })
 
   return (
@@ -75,6 +101,7 @@ function Sidebar() {
       <SidebarOption Icon={PeopleAltIcon} title="Channels Owned" />
       <hr />
       <SidebarOption Icon={PeopleAltIcon} title="Channel Joined" />
+      {renderJoinedChannels}
     </SidebarContainer>
   )
 };
