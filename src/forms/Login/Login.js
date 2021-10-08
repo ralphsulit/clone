@@ -58,7 +58,7 @@ const Login = () => {
           </Form>
         </LoginInnerContainer>
         <p>
-          Not a User? <Link to=''>Register</Link>
+          Not a User? <Link to='/register'>Register</Link>
         </p>
       </LoginContainer>
     </div>
