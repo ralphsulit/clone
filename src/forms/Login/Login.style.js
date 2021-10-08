@@ -1,18 +1,24 @@
 import styled from 'styled-components';
 
 const LoginContainer = styled.div`
-  background-color: #f8f8f8;
   height: 100vh;
-  display: grid;
-  place-items: center;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
 const LoginInnerContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 100px;
   text-align: center:
-  background-color: #fff;
+  background-color: white;
   border-radius: 10px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  width: 400px;
     >img {
       object-fit: contain;
       height: 100px;
