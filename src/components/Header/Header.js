@@ -29,7 +29,7 @@ function Header() {
 
       <HeaderSearch>
         <SearchIcon />
-        <button onClick={}>
+        <button>
           Search
         </button>
       </HeaderSearch>
