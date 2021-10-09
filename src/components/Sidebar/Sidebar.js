@@ -31,7 +31,7 @@ function Sidebar() {
 
   //route to message page
   const messagePage = () => {
-    history.push('/message-page')
+    history.push('/message')
   }
   
   useEffect(() => {

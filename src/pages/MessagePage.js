@@ -110,6 +110,7 @@ const SearchBox = styled.div`
   padding-left: 3rem;
   height: 200px;
   overflow-y: scroll;
+  scrollbar-width: none;
   border: none;
   border-radius: 20px;
   margin-top: 20px;
@@ -121,7 +122,6 @@ const SearchBoxResult = styled.div`
   padding: 1rem;
   padding-left: 3rem;
   cursor: pointer;
-  background: #f7f7f7;
 
     >p {
       font-size: .9rem;
