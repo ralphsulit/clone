@@ -42,7 +42,7 @@ const LoginInnerContainer = styled.div`
       height: 10px;
 
       >a {
-        color: rgb(92,100,171);
+        color: rgb(92,100,171); 
         margin-left: 10px;
         text-decoration: none;
         font-weight: 600;
