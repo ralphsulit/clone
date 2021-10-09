@@ -25,11 +25,12 @@ function ChatHeader({ receiver, headers }) {
     setToggleViewMembers(!toggleViewMembers)
   }
 
-  //toggle add members
-  // const handleToggleAddMembers = () => {
-  //   setToggleAddMembers(!toggleAddMembers)
-  // }
+  // toggle add members
+  const handleToggleAddMembers = () => {
+    setToggleAddMembers(!toggleAddMembers)
+  }
 
+  //get all user from api
   useEffect(() => {
     getAllUsers(headers)
       .then(res => { 
@@ -42,6 +43,11 @@ function ChatHeader({ receiver, headers }) {
       })
       .catch(err => err)
   }, [id])
+
+
+  useEffect(() => {
+
+  })
   
   return (
     <ChatHeaderContainer>
@@ -50,10 +56,16 @@ function ChatHeader({ receiver, headers }) {
           <strong>{ type === 'channel' ? receiver : receiver }</strong>
         </h2>
       </HeaderLeft>
-      <HeaderRight>
-        <button>Member List</button>
-        <button>Add Member</button>
-      </HeaderRight>
+      {type === 'channel'
+        ?
+          <HeaderRight>
+            <button onClick={handleToggleViewMembers}>Member List</button>
+            <button onClick={handleToggleAddMembers}>Add Member</button>
+          </HeaderRight>
+        :
+          ''
+      }
+      
     </ChatHeaderContainer>
   )
 };
@@ -65,20 +77,34 @@ const ChatHeaderContainer = styled.div`
   justify-content: space-between;
   padding: 20px;
   border-bottom: 1px solid lightgray;
+  height: 56px;
 `;
 
 const HeaderLeft = styled.div`
   display: flex;
   align-items: center;
   text-transform: lowercase;
+
+    >h2 {
+      font-family: 'Lato', sans-serif;
+      font-size: 1.3rem;
+    }
 `;
 
 const HeaderRight = styled.div`
   display: flex;
+  align-items: center;
   flex-direction: row;
 
     >button {
-      margin: 1vh;
+      cursor: pointer;
+      font-family: 'Noto Sans Display', sans-serif;
+      font-size: 0.8rem;
+      margin: 10px;
+      padding: 4px;
+      background-color: #fff;
+      border: 1px solid #e1e1e1;
+      outline: none;
     }
 `;
 
