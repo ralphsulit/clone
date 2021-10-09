@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { getMessage, getUser, getChannelData } from '../../api/api';
 import { useParams } from 'react-router-dom';
 import ChatHeader from './ChatHeader';
+import ChatInput from './ChatInput';
 import ChatBodyContainer from './ChatContainer';
 import styled from 'styled-components';
 
@@ -83,6 +84,7 @@ function Chat({headers}) {
       <ChatMessages>
         <ChatBodyContainer chatData={chatData} chatRef={chatRef}/>
       </ChatMessages>
+      <ChatInput headers={headers} render={handleChatRender} receiver={receiver} />
     </ChatContainer>
   )
 }
