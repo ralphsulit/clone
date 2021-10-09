@@ -1,10 +1,10 @@
 import React from 'react';
-import styled from 'styled-component';
+import styled from 'styled-components';
 
-function SidebarOption({icon, title, onClick}) {
+function SidebarOption({Icon, title, onClick}) {
   return (
     <SidebarOptionContainer onClick={onClick}>
-      {icon && <icon fontSize='small' style={{ padding: '10' }} />}
+      {Icon && <Icon fontSize='large' style={{ padding: '10' }} />}
       <h3>{title}</h3>
     </SidebarOptionContainer>
   )
@@ -16,7 +16,7 @@ const SidebarOptionContainer = styled.div`
   display: flex;
   align-items: center;
   font-size: 12px;
-  padding-left: 2px;
+  padding: 2px;
   cursor: pointer;
 
     >h3 {

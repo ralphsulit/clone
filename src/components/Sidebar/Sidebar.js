@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, NavLink } from 'react-router-dom';
+import { getChannel, getRecentDm, getOwnedChannel } from '../../api/api';
 import SidebarOption from './SidebarOption';
 import styled from 'styled-components';
 //Icons
@@ -21,45 +22,125 @@ import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 
 function Sidebar() {
   //state
-  const [toggleAddChannel, setToggleAddChannel] = useState(false);
+  const [email, setEmail] = useState('');
+  const [channelsJoined, setChannelsJoined] = useState([]);
+  const [channelsOwned, setChannelsOwned] = useState([]);
+  const history = useHistory();
+  //variables
+  const username = email.split('@')[0];
 
-  //toggles add channel
-  const handleToggleAddChannel = () => {
-    setToggleAddChannel(!toggleAddChannel);
+  //route to message page
+  const messagePage = () => {
+    history.push('/message-page')
   }
+  
+  useEffect(() => {
+    //variables
+    const headers = {
+      'token': localStorage.getItem('access-token'),
+      'client': localStorage.getItem('client'),
+      'expiry': localStorage.getItem('expiry'),
+      'uid': localStorage.getItem('uid')
+    }
+    const channelData = { headers }
+    setEmail(headers.uid)
+  
+    //get channels joined
+    getChannel(channelData)
+      .then(res => {
+        setChannelsJoined(res.data.data)
+        
+      })
+      .catch(err => console.log(err));
+    
+    //get owned channels
+    getOwnedChannel(channelData)
+      .then(res => {
+        setChannelsOwned(res.data.data)
+      })
+      .catch(err => err)
+
+    
+  }, []);
+  
+  // render all channel (owned)
+  const renderOwnedChannels = channelsOwned.map((channel, i) => {
+    return (
+      <NavLink
+        to={`/channel/${channel.id}`}
+        style={{ textDecoration: 'none', color: '#fff' }}
+      >
+        <SidebarOption
+          key={i}
+          Icon={InsertCommentIcon}
+          title={channel.name}
+        />
+      </NavLink>
+    )
+  });
+
+  // render all channel (joined)
+  const renderJoinedChannels = channelsJoined.map((channel, i) => {
+    return (
+      <NavLink
+        to={`/channel/${channel.id}`}
+        style={{ textDecoration: 'none', color: '#fff' }}
+      >
+        <SidebarOption
+          key={i}
+          Icon={InsertCommentIcon}
+          title={channel.name}
+        />
+      </NavLink>
+    )
+  });
+
 
   return (
     <SidebarContainer>
       <SidebarHeader>
         <SidebarInfo>
-          <h2>email</h2>
+          <h2>{email}</h2>
           <h3>
             <FiberManualRecordIcon />
-            user
+            {username}
           </h3>
         </SidebarInfo>
-        <CreateIconStyle/>
+        <CreateIconStyle onClick={messagePage}/>
       </SidebarHeader>
-      <hr /><hr />
-      <SidebarOption icon={AddIcon} title='Add Channel' />
-
+      <SidebarOption Icon={InsertCommentIcon} title="Threads" />
+      <SidebarOption Icon={InboxIcon} title="Mentions & Reactions" />
+      <SidebarOption Icon={DraftsIcon} title="Saved items" />
+      <SidebarOption Icon={BookmarkBorderIcon} title="Channel browser" />
+      <SidebarOption Icon={PeopleAltIcon} title="People & user groups" />
+      <SidebarOption Icon={AppsIcon} title="Apps" />
+      <SidebarOption Icon={FileCopyIcon} title="File browser" />
+      <SidebarOption Icon={ExpandLessIcon} title="Show less" />
+      <hr />
+      <SidebarOption Icon={AddIcon} title='Add Channel' />
+      <SidebarOption Icon={PeopleAltIcon} title="Channels Owned" />
+      {renderOwnedChannels}
+      <hr />
+      <SidebarOption Icon={PeopleAltIcon} title="Channel Joined" />
+      {renderJoinedChannels}  
     </SidebarContainer>
   )
-}
+};
 
 export default Sidebar;
 
 const SidebarContainer = styled.div`
   color: #fff;
   background-color: var(--slack-color);
-  border-top: 1p solid #49274b;
-  flex; 0.5;
-  max-width: 260px;
-  margin-top: 60px;
+  border-top: 1px solid #49274b;
+  flex: 0.5;
+  max-width: 300px;
+  margin-top: 40px;
   overflow-y: auto;
 
     >hr {
-      margin: 10px 0;
+      margin-top: 10px;
+      margin-bottom: 10px;
       border: 1px solid #49274b;
     }
 
@@ -76,7 +157,7 @@ const SidebarHeader = styled.div`
     >.MuiSvgIcon-root {
       padding: 8px;
       color: #49274b;
-      font-size: 18px;
+      font-size: 2rem;
       background-color: white;
       border-radius: 1000px;
     }
