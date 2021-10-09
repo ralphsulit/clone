@@ -3,19 +3,20 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Login from './forms/Login/Login';
 import SignUp from './forms/SignUp/SignUp';
 import Main from './pages/Main';
+import Homepage from '././pages/Homepage';
 
 function App() {
   return (
     <div>
       <Router>
         <Switch>
-          <Route exact path='/register'>
+          <Route path='/register'>
             <SignUp />
           </Route>
           <Route exact path='/'>
             <Login />
           </Route>
-          <Route exact path='/main'>
+          <Route path='/main'>
             <Main />
           </Route>
         </Switch>
