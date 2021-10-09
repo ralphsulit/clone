@@ -3,10 +3,19 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Header from '../components/Header/Header';
 import Sidebar from '../components/Sidebar/Sidebar';
 import Homepage from './Homepage';
+import Message from './MessagePage'
 import styled from 'styled-components';
 
 function Home() {
   //state 
+
+  //variables
+  const headers = {
+    'token': localStorage.getItem('access-token'),
+    'client': localStorage.getItem('client'),
+    'expiry': localStorage.getItem('expiry'),
+    'uid': localStorage.getItem('uid')
+  }
 
   return (
     <Router>
@@ -14,8 +23,9 @@ function Home() {
       <Body>
         <Sidebar />
         <Switch>
-          <Route exact path='/homepage' component={Homepage}>
-            <Homepage />
+          <Route path='/main' component={Homepage} />
+          <Route path='/message-page'>
+            <Message headers={headers} />
           </Route>
         </Switch>
       </Body>
@@ -28,4 +38,5 @@ export default Home;
 const Body = styled.div`
   display: flex;
   height: 100vh;
+  width: 100%;
 `;

@@ -22,12 +22,17 @@ import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 
 function Sidebar() {
   //state
-  const [toggleAddChannel, setToggleAddChannel] = useState(false);
   const [email, setEmail] = useState('');
   const [channelsJoined, setChannelsJoined] = useState([]);
   const [channelsOwned, setChannelsOwned] = useState([]);
+  const history = useHistory();
   //variables
   const username = email.split('@')[0];
+
+  //route to message page
+  const messagePage = () => {
+    history.push('/message-page')
+  }
   
   useEffect(() => {
     //variables
@@ -101,7 +106,7 @@ function Sidebar() {
             {username}
           </h3>
         </SidebarInfo>
-        <CreateIconStyle/>
+        <CreateIconStyle onClick={messagePage}/>
       </SidebarHeader>
       <SidebarOption Icon={InsertCommentIcon} title="Threads" />
       <SidebarOption Icon={InboxIcon} title="Mentions & Reactions" />
@@ -129,7 +134,7 @@ const SidebarContainer = styled.div`
   background-color: var(--slack-color);
   border-top: 1px solid #49274b;
   flex: 0.5;
-  max-width: 260px;
+  max-width: 300px;
   margin-top: 40px;
   overflow-y: auto;
 

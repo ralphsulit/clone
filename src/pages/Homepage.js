@@ -40,25 +40,18 @@ export default Homepage;
 const Home = styled.div`
   background-color: #fff;
   display: flex;
+  justify-content: center;
   align-items: center;
-  justify-content: space-between;
   flex-direction: column;
-  flex: 0.7;
-  flex-grow: 1;
-  margin-top: 5%;
-  margin-left: 40%;
-  height: 70vh;
+  height: 100vh;
+  width: 65vw;
+  text-align: center;
+  margin-left: 10%;
 `;
 
 const HomeInner = styled.div`
-  display: flex;
-  flex-direction; column;
-  justify-content; flex-start;
-  align-items: center;
-  height: 80%;
   background-color: transparent;
-  margin; auto;
-  width: 45vw;
+  margin: 0 auto;
 
     >h1 {
       font-family: 'Montserrat', sans-serif;
@@ -66,25 +59,24 @@ const HomeInner = styled.div`
 `;
 
 const Header = styled.div`
+  display: flex;
+  justify-content: center;
     >img {
-      height: 10vh;
-      width: 10vw;
-      margin: 5vh
+      height: 100px;
+      width: 100px;
+      margin: 50px;
     }
 `;
 
 const AvatarContainer = styled.div`
-  background-color: transparent;
   display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
+  background-color: transparent;
   font-family: 'Montserrat', sans-serif;
   align-items: center;
-  height: 80%;
     
     >img{
-      height: 20rem;
-      width: 20rem;
+      height: 100px;
+      width: 100px;
       margin: 1rem;
       border: 1px solid #000;
       border-radius: 30vh;
@@ -95,8 +87,8 @@ const JCarlo = styled.div`
   text-align: center;
 
     >img {
-      height: 20rem;
-      width: 20rem;
+      height: 200px;
+      width: 200px;
       margin: 1rem;
       border-radius: 30vh;
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.9), 0 1px 2px rgba(0, 0, 0, 0.75);
@@ -111,8 +103,8 @@ const JulieV = styled.div`
   text-align: center;
 
     >img {
-      height: 20rem;
-      width: 20rem;
+      height: 200px;
+      width: 200px;
       margin: 1rem;
       border-radius: 30vh;
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.9), 0 1px 2px rgba(0, 0, 0, 0.75);
@@ -127,8 +119,8 @@ const RalphS = styled.div`
   text-align: center;
 
     >img {
-      height: 20rem;
-      width: 20rem;
+      height: 200px;
+      width: 200px;
       margin: 1rem;
       border-radius: 30vh;
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.9), 0 1px 2px rgba(0, 0, 0, 0.75);
