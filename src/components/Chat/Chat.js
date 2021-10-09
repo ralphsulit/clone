@@ -41,30 +41,33 @@ function Chat({headers}) {
     headers
   }
 
-  
   const getDataObj = {
     id: parseInt(id),
     headers
   }
 
   useEffect(scrollToBottom, [chatData]);
+
   useEffect(() => {
     //get user message data
     getMessage(getMessageObj)
-      .then(res => { setChatData(res.data.data) })
+      .then(res => {
+        setChatData(res.data.data)
+        console.log(chatData)
+      })
       .catch(err => console.log('Error Sending Message: ', err))
     
     if (type === 'user') {
       //get user data
       getUser(getDataObj)
         .then(res => {
-          setReceiver(res[0].email)
+          setReceiver(res[0].email) 
         })
     } else {
       //get channel data
       getChannelData(getDataObj)
         .then(res => {
-          console.log(res)
+          setReceiver(res.data.data.name)
         })
     }
     scrollToBottomSmooth();
@@ -77,6 +80,9 @@ function Chat({headers}) {
         receiver={receiver}
         headers={headers}
       />
+      <ChatMessages>
+        <ChatBodyContainer chatData={chatData} chatRef={chatRef}/>
+      </ChatMessages>
     </ChatContainer>
   )
 }

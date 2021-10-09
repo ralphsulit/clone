@@ -16,6 +16,9 @@ function ChatBody({ data }) {
           <h3>{email.split('@')[0]}</h3>
           <label><Moment fromNow ago date={created_at}>ago</Moment></label>
         </ChatDetailsStyle>
+        <ChatBodyStyle>
+          {body}
+        </ChatBodyStyle>
       </ChatBodySubContainerStyle>
     </ChatBodyContainerStyle>
   )
@@ -53,4 +56,8 @@ const ChatDetailsStyle = styled.div`
       color: gray;
       font-size: 0.8rem;
     }
+`;
+
+const ChatBodyStyle = styled.div`
+
 `;

@@ -5,7 +5,7 @@ import styled from 'styled-components';
 function ChatContainer({chatData, chatRef}) {
   return (
     <Container>
-      {chatData.length > 0
+      { chatData.length > 0
         ? chatData.map(data => <ChatBody key={data.id} data={data} />)
         : ''
       }

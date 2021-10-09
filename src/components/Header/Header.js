@@ -28,10 +28,10 @@ function Header() {
       </HeaderLeft>
       
       <HeaderSearch>
-        <SearchIcon />
         <button>
           Search
         </button>
+        <SearchIcon />
       </HeaderSearch>
 
       <HeaderRight>
@@ -52,56 +52,52 @@ export default Header;
 
 //Styled Component
 const HeaderContainer = styled.div`
-  background-color: var(--slack-color); 
+  background-color: rgb(53,13,54); 
   color: #fff;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: center;
   position: fixed;
   padding: 10px 0;
   width: 100%;
+  font-family: 'Noto Sans Display', sans-serif;
 `;
 
 const HeaderSearch = styled.div`
   border: 1px #808080 solid;
   border-radius: 6px;
+  background-color: #644565;
   color: #808080;
   display: flex;
-  flex; 0.4;
   padding: 0 50px;
   opacity: 1;
-  text-align: center;
+  margin: 0 20px;
+  font-family: 'Noto Sans Display', sans-serif;
 
     >button {
       color: #fff;
       cursor: pointer;
-      background-color: transparent;
+      background-color: #644565;
       border: none;
       min-width: 30vw;
       outline: 0;
-      text-align: center;
+      text-align: left;
+      font-family: 'Noto Sans Display', sans-serif;
     }
 `;
 
 const HeaderLeft = styled.div`
   display: flex;
-  flex: 0.3;
   align-items: center;
-  margin-left: 20px;
 
     >.MuiSvgIcon-root {
-      margin-left: auto;
-      margin-right: 30px;
     }
 `;
 
 const HeaderRight = styled.div`
   display: flex;
-  flex: 0.3;
-  align-items: flex-end;
     
     > .MuiSvgIcon-root {
-      margin-left: auto;
       margin-right: 20px;
     }
 `;

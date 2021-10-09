@@ -133,8 +133,7 @@ const SidebarContainer = styled.div`
   color: #fff;
   background-color: var(--slack-color);
   border-top: 1px solid #49274b;
-  flex: 0.5;
-  max-width: 300px;
+  width: 300px;
   margin-top: 40px;
   overflow-y: auto;
 
