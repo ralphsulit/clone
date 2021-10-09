@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { LoginContainer, LoginInnerContainer, Form } from './Login.style';
+import './Login.style';
 import { Link, useHistory } from 'react-router-dom';
 import { userLogin } from '../../api/api';
 
@@ -30,13 +31,13 @@ const Login = () => {
 
   return (
     <div>
-      <LoginContainer>
+      <LoginContainer className='container'>
         <LoginInnerContainer>
-          <img
-            src="https://logos-world.net/wp-content/uploads/2020/10/Slack-Logo-2019-present.jpg"
-            alt="Slack Logo"
-          />
-          <h1>Sign In</h1>
+            <img
+              src="https://logos-world.net/wp-content/uploads/2020/10/Slack-Logo-2019-present.jpg"
+              alt="Slack Logo"
+            />
+          <h1>Sign in to Slack</h1>
           <Form>
             <input
               onChange={(e) => setEmail(e.target.value)}
@@ -54,14 +55,15 @@ const Login = () => {
             />
             <input
               type='submit'
-              value='Submit'
+              value='Sign In with Email'
               onClick={handleLogin}
             />
           </Form>
+          <p>
+            New to Slack?
+            <Link to='/register'>Create an account</Link>
+          </p>
         </LoginInnerContainer>
-        <p>
-          Not a User? <Link to='/register'>Register</Link>
-        </p>
       </LoginContainer>
     </div>
   )

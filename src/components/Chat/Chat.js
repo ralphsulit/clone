@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { getMessage, getUser, getChannelData } from '../../api/api';
 import { useParams } from 'react-router-dom';
+import ChatHeader from './ChatHeader';
+import ChatBodyContainer from './ChatContainer';
 import styled from 'styled-components';
 
 function Chat({headers}) {
@@ -71,7 +73,10 @@ function Chat({headers}) {
 
   return (
     <ChatContainer>
-      
+      <ChatHeader
+        receiver={receiver}
+        headers={headers}
+      />
     </ChatContainer>
   )
 }
