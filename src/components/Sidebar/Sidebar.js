@@ -25,6 +25,7 @@ function Sidebar() {
   const [email, setEmail] = useState('');
   const [channelsJoined, setChannelsJoined] = useState([]);
   const [channelsOwned, setChannelsOwned] = useState([]);
+  const [render, setRender] = useState(false);
   const history = useHistory();
   //variables
   const username = email.split('@')[0];
@@ -33,7 +34,7 @@ function Sidebar() {
   const messagePage = () => {
     history.push('/message')
   }
-  
+
   useEffect(() => {
     //variables
     const headers = {

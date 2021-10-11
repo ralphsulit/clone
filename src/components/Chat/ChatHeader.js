@@ -12,7 +12,12 @@ function ChatHeader({ receiver, headers }) {
   const [channelMemberInfo, setChannelMemberInfo] = useState([]);
   const [toggleViewMembers, setToggleViewMembers] = useState(false);
   const [toggleAddMembers, setToggleAddMembers] = useState(false);
+  const [render, setRender] = useState(false);
 
+  //handle render
+  const handleRender = () => {
+    setRender(!render)
+  }
 
   //parameter
   const params = useParams();
@@ -47,7 +52,11 @@ function ChatHeader({ receiver, headers }) {
         member_id: user.id,
         headers
       }
-      console.log(members)
+      addMemberToTheChannel(members)
+        .then(res => {
+          handleRender()
+        })
+        .catch(err => err)
     })
   }
 
@@ -74,7 +83,7 @@ function ChatHeader({ receiver, headers }) {
           .catch(err => err)
       })
       .catch(err => err)
-  }, [id])
+  }, [id, render])
 
   useEffect(() => {
     setChannelMemberInfo([])
@@ -122,6 +131,7 @@ function ChatHeader({ receiver, headers }) {
               handleAddedMember={handleAddedMember}
               handleAddMember={handleAddMember}
             />
+            <button onClick={handleAddedMember}>+</button>
           </MemberList>
         :
           ''
@@ -135,18 +145,18 @@ export default ChatHeader;
 
 const ChatHeaderContainer = styled.div`
   display: flex;
-  justify-content: center;
-  padding: 20px;
+  justify-content: space-between;
+  align-items: center;
   border-bottom: 1px solid lightgray;
   height: 56px;
   width: 100%;
+  padding: 0 6%;
 `;
 
 const HeaderLeft = styled.div`
   display: flex;
   align-items: center;
   text-transform: lowercase;
-  width: 72%;
 
     >h2 {
       font-family: 'Lato', sans-serif;
@@ -187,7 +197,8 @@ const MemberList = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-top: 50px;
+  margin-top: 500px;
+  margin-left: 500px;
     
     ${HeaderLeft} {
       color: red;

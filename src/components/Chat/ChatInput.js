@@ -29,7 +29,6 @@ function ChatInput({ headers, render, receiver  }) {
     //send message API
     sendMessage(messageObj)
       .then(res => {
-        console.log(res)
         render()
       })
       .catch(err => err)
@@ -64,7 +63,6 @@ export default ChatInput;
 const ChatInputContainer = styled.div`
   border-radius: 20px;
   width: 100%;
-  margin-left: 10px;
     
     >form {
       display: flex;

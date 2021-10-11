@@ -63,10 +63,18 @@ const Socials = styled.div`
     border: 2px solid #1D1C1D;
     border-radius: 4px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     
       &:first-child {
         color: #4285F4;
         border: 2px solid #4285F4;
+      }
+
+      >img {
+        width: 45px;
+        margin-right: 5px
       }
 `;
 

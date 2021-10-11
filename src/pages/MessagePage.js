@@ -114,6 +114,10 @@ const SearchBox = styled.div`
   border: none;
   border-radius: 20px;
   margin-top: 20px;
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const SearchBoxResult = styled.div`

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { getAllUsers, getUser } from '../../api/api';
 import styled from 'styled-components';
 
-function AddMember({ headers, handleAddedMember, handleAddMember = null }) {
+function AddMember({ headers, handleAddMember }) {
   //state
   const [allUsers, setAllUsers] = useState([]);
   const [search, setSearch] = useState('');
@@ -32,8 +32,9 @@ function AddMember({ headers, handleAddedMember, handleAddMember = null }) {
     setClick(updatedArray)
 
     //add array to chatHeader
-    if (handleAddMember !== null) 
+    if (handleAddMember !== null) {
       handleAddMember(updatedArray)
+    }
   }
 
   //user data 
@@ -44,7 +45,7 @@ function AddMember({ headers, handleAddedMember, handleAddMember = null }) {
       headers
     }
 
-    getAllUsers(getUserObj)
+    getUser(getUserObj)
       .then(res => {
         clickedUser(res[0])
       })
@@ -113,7 +114,6 @@ function AddMember({ headers, handleAddedMember, handleAddMember = null }) {
       <div>
         {displayUser}
       </div>
-      <button onClick={handleAddedMember}>+</button>
     </Container>
   )
 }

@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { userLogin } from '../../api/api';
 import { Link, useHistory } from 'react-router-dom';
 import { LoginContainer, LoginInnerContainer, Form, Socials, SocialContainer } from './Login.style';
+import AppleIcon from '@material-ui/icons/Apple';
+import styled from 'styled-components';
 
 
 const Login = () => {
@@ -40,9 +42,13 @@ const Login = () => {
           <h1>Sign in to Slack</h1>
           <SocialContainer>
             <Socials>
+              <img src='https://i1.wp.com/www.androidawareness.com/wp-content/uploads/2018/10/google-icon.png?fit=500%2C500' alt='' />
               Sign in with Google
             </Socials>
-            <Socials>Sign in with Apple</Socials>
+            <Socials>
+              <Sample/>
+              Sign in with Apple
+            </Socials>
           </SocialContainer>
           <Form>
             <input
@@ -76,3 +82,7 @@ const Login = () => {
 }
 
 export default Login;
+
+const Sample = styled(AppleIcon)`
+  margin-right: 15px;
+`;

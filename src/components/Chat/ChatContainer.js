@@ -20,7 +20,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   height: 42rem;
-  width: 100%;
+  margin-left: 70px;
   overflow-y: scroll;
 
   ::-webkit-scrollbar {

@@ -28,10 +28,7 @@ export default ChatBody;
 
 const ChatBodyContainerStyle = styled.div`
   display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
   width: 100%;
-  
 `;
 
 const Image = styled.div`
@@ -54,9 +51,9 @@ const ChatDetailsStyle = styled.div`
   flex-direction: row;
 
     >label {
-      padding-left;
       color: gray;
       font-size: 0.8rem;
+      margin-left: 10px;
     }
 `;
 

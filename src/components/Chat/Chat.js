@@ -79,6 +79,7 @@ function Chat({headers}) {
       <ChatHeader
         receiver={receiver}
         headers={headers}
+        render={handleChatRender}
       />
       <ChatMessages>
         <ChatBodyContainer chatData={chatData} chatRef={chatRef}/>
