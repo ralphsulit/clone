@@ -6,7 +6,6 @@ import AvatarRalph from "../assets/img/AvatarRalph.jpg";
 
 function Homepage() {
   return (
-    <div>
       <Home>
         <HomeInner>
           <h1>Group 6 Slack App Clone</h1>
@@ -31,7 +30,6 @@ function Homepage() {
           </AvatarContainer>
         </HomeInner>
       </Home>
-    </div>
   )
 };
 
@@ -43,16 +41,15 @@ const Home = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  margin: 0 auto;
   height: 100vh;
-  width: 65vw;
+  width: 100%;
   text-align: center;
-  margin-left: 10%;
 `;
 
 const HomeInner = styled.div`
   background-color: transparent;
   margin: 0 auto;
-
     >h1 {
       font-family: 'Montserrat', sans-serif;
     }
