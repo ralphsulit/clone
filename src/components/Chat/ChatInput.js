@@ -29,6 +29,7 @@ function ChatInput({ headers, render, receiver  }) {
     //send message API
     sendMessage(messageObj)
       .then(res => {
+        console.log(res)
         render()
       })
       .catch(err => err)
@@ -38,14 +39,14 @@ function ChatInput({ headers, render, receiver  }) {
   }
 
 
-
   return (
     <ChatInputContainer>
       <form>
         <input
-        
-          onChange={(e) => e.target.value}
+          onChange={(e) => setChatMessage(e.target.value)}
           placeholder={`Message ${receiver}`}
+          onSubmit={handleMessage}
+          value={chatMessage}
         />
         <Button
           type='submit'
@@ -63,8 +64,7 @@ export default ChatInput;
 const ChatInputContainer = styled.div`
   border-radius: 20px;
   width: 100%;
-  min-width: 500px;
-  margin: 0 auto;
+  margin-left: 10px;
     
     >form {
       display: flex;

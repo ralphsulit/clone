@@ -22,7 +22,7 @@ function ChatBody({ data }) {
       </ChatBodySubContainerStyle>
     </ChatBodyContainerStyle>
   )
-}
+};
 
 export default ChatBody;
 
@@ -30,6 +30,8 @@ const ChatBodyContainerStyle = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
+  width: 100%;
+  
 `;
 
 const Image = styled.div`

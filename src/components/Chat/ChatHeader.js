@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getChannelData, getAllUsers, addMemberToTheChannel } from '../../api/api';
+import AddMember from './AddMember.js';
 import styled from 'styled-components';
 
 function ChatHeader({ receiver, headers }) {
@@ -54,7 +55,9 @@ function ChatHeader({ receiver, headers }) {
   const memberList = channelMemberInfo.map((user, i) => {
     return (
       <div key={i}>
-        <p>{user.email}</p>
+        <Member>    
+          <p>{user.email.split('@')[0]}</p>
+        </Member>
       </div>
     )
   }) 
@@ -102,6 +105,11 @@ function ChatHeader({ receiver, headers }) {
       {toggleViewMembers
         ?
           <MemberList>
+            <HeaderLeft>
+              <h2>
+                <strong>{ type === 'channel' ? receiver : receiver }</strong>
+              </h2>
+            </HeaderLeft>
             {memberList}
           </MemberList>
         : ''
@@ -109,6 +117,11 @@ function ChatHeader({ receiver, headers }) {
       {toggleAddMembers
         ?
           <MemberList>
+            <AddMember
+              headers={headers}
+              handleAddedMember={handleAddedMember}
+              handleAddMember={handleAddMember}
+            />
           </MemberList>
         :
           ''
@@ -160,11 +173,28 @@ const HeaderRight = styled.div`
 `;
 
 const MemberList = styled.div`
+  font-family: 'Noto Sans Display', sans-serif;
+  font-size: 1rem;
   position: absolute;
-  background: gray;
+  background: #fff;
+  border: 1px solid #c1c1c1;
+  border-radius: 10px;
+  padding: 30px;
   height: 20rem;
-  width: 10rem;
+  width: 100%;
+  height: 500px;
+  max-width: 300px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
+  margin-top: 50px;
+    
+    ${HeaderLeft} {
+      color: red;
+      margin-bottom: 20px;
+    }
+`;
+
+const Member = styled.div`
+  margin: 2px 0
 `;
