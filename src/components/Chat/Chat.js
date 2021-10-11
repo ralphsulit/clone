@@ -4,9 +4,10 @@ import { useParams } from 'react-router-dom';
 import ChatHeader from './ChatHeader';
 import ChatInput from './ChatInput';
 import ChatBodyContainer from './ChatContainer';
+import { headers } from '../../Headers';
 import styled from 'styled-components';
 
-function Chat({headers}) {
+function Chat() {
   //state
   const [chatData, setChatData] = useState('');
   const [receiver, setReceiver] = useState('');
@@ -73,12 +74,35 @@ function Chat({headers}) {
     scrollToBottomSmooth();
   }, [id, render]);
   
+  useEffect(() => {
+    //get user message data
+    getMessage(getMessageObj)
+      .then(res => {
+        setChatData(res.data.data)
+      })
+      .catch(err => console.log('Error Sending Message: ', err))
+    
+    if (type === 'user') {
+      //get user data
+      getUser(getDataObj)
+        .then(res => {
+          setReceiver(res[0].email) 
+        })
+    } else {
+      //get channel data
+      getChannelData(getDataObj)
+        .then(res => {
+          setReceiver(res.data.data.name)
+        })
+    }
+    scrollToBottomSmooth();
+  }, []);
+
 
   return (
     <ChatContainer>
       <ChatHeader
         receiver={receiver}
-        headers={headers}
         render={handleChatRender}
       />
       <ChatMessages>
@@ -95,7 +119,8 @@ const ChatContainer = styled.div`
   width: 100%;
   flex: 0.7;
   flex-grow: 1;
-  margin-top: 60px;
+  margin-top: 45px;
+  background-color: #F8F8F8;
 `;
 
 const ChatMessages = styled.div`

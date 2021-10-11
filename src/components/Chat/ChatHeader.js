@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getChannelData, getAllUsers, addMemberToTheChannel } from '../../api/api';
-import AddMember from './AddMember.js';
+import { headers } from '../../Headers';
+import AddMember from '../Add/AddMember.js';
 import styled from 'styled-components';
 
-function ChatHeader({ receiver, headers }) {
+function ChatHeader({ receiver }) {
   //state
   const [allUsers, setAllUsers] = useState([]);
   const [addUser, setAddUser] = useState([]);
@@ -151,6 +152,7 @@ const ChatHeaderContainer = styled.div`
   height: 56px;
   width: 100%;
   padding: 0 6%;
+  background-color: #fff;
 `;
 
 const HeaderLeft = styled.div`

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Header from '../components/Header/Header';
 import Sidebar from '../components/Sidebar/Sidebar';
@@ -8,15 +8,6 @@ import Chat from '../components/Chat/Chat';
 import styled from 'styled-components';
 
 function Home() {
-  //state 
-
-  //variables
-  const headers = {
-    'token': localStorage.getItem('access-token'),
-    'client': localStorage.getItem('client'),
-    'expiry': localStorage.getItem('expiry'),
-    'uid': localStorage.getItem('uid')
-  }
 
   return (
     <Router>
@@ -25,14 +16,8 @@ function Home() {
         <Sidebar />
         <Switch>
           <Route path='/main' component={Homepage} />
-          <Route path='/:type/:id'>
-            <Chat
-              headers={headers}
-            />
-          </Route>
-          <Route path='/message'>
-            <Message headers={headers} />
-          </Route>
+          <Route path='/:type/:id' component={Chat} />
+          <Route path='/message' component={Message} />
         </Switch>
       </Body>
     </Router>

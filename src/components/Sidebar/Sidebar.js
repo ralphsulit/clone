@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, NavLink } from 'react-router-dom';
 import { getChannel, getRecentDm, getOwnedChannel } from '../../api/api';
+import AddChannel from '../Add/AddChannel';
 import SidebarOption from './SidebarOption';
 import styled from 'styled-components';
 //Icons
@@ -14,21 +15,23 @@ import PeopleAltIcon from "@material-ui/icons/PeopleAlt";
 import AppsIcon from "@material-ui/icons/Apps";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import AddIcon from "@material-ui/icons/Add";
-import EmailIcon from '@material-ui/icons/Email';
-import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
-
 
 function Sidebar() {
   //state
   const [email, setEmail] = useState('');
   const [channelsJoined, setChannelsJoined] = useState([]);
   const [channelsOwned, setChannelsOwned] = useState([]);
-  const [render, setRender] = useState(false);
-  const history = useHistory();
+  const [recentUsers, setRecentUsers] = useState('');
+  const [toggleAddChannel, setToggleAddChannel] = useState(false);
+
   //variables
+  const history = useHistory();
   const username = email.split('@')[0];
+
+  const handleToggleAddChannel = () => {
+    setToggleAddChannel(!toggleAddChannel)
+  }
 
   //route to message page
   const messagePage = () => {
@@ -53,6 +56,13 @@ function Sidebar() {
         
       })
       .catch(err => console.log(err));
+    
+    //get recent DMs
+    getRecentDm(channelData)
+      .then(res => {
+        setRecentUsers(res.data.data)
+      })
+      .catch(err => console.log('Error Getting Recent User: ', err))
     
     //get owned channels
     getOwnedChannel(channelData)
@@ -118,7 +128,11 @@ function Sidebar() {
       <SidebarOption Icon={FileCopyIcon} title="File browser" />
       <SidebarOption Icon={ExpandLessIcon} title="Show less" />
       <hr />
-      <SidebarOption Icon={AddIcon} title='Add Channel' />
+      <SidebarOption Icon={AddIcon} title='Add Channel' onClick={handleToggleAddChannel} />
+      <hr />
+      {toggleAddChannel ? (
+        <AddChannel/>
+      ): null}
       <SidebarOption Icon={PeopleAltIcon} title="Channels Owned" />
       {renderOwnedChannels}
       <hr />

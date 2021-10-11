@@ -183,3 +183,25 @@ export const addMemberToTheChannel = ({ id, member_id, headers:{ token, client, 
   .then(result => result)
   .catch(error => error)
 }
+
+//Add channel
+
+export const addChannel = ({ name, user_ids, headers:{ token, client, expiry, uid } }) => {
+
+  return axios.post('http://206.189.91.54//api/v1/channels',
+  {
+    name,
+    user_ids
+  },
+  {
+    headers:{
+      "access-token": token,
+      "client": client,
+      "expiry": expiry,
+      "uid": uid,
+    }
+  })
+  .then(response => response)
+  .then(result => result)
+  .catch(error => error)
+}

@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { getAllUsers } from '../api/api';
+import { headers } from '../Headers';
 import styled from 'styled-components';
 
-function NewMessage({headers}) {
+function NewMessage() {
   //state
   const [allUsers, setAllUsers] = useState([]);
   const [search, setSearch] = useState('');
@@ -58,7 +59,8 @@ const MessageContainer = styled.div`
   width: 100vw;
   flex: 0.7;
   flex-grow: 1;
-  margin-top: 60px;
+  margin-top: 40px;
+  background-color: #F8F8F8;
 `;
 
 const MessageHeader = styled.div`
@@ -66,6 +68,7 @@ const MessageHeader = styled.div`
   justify-content: space-between;
   padding: 20px;
   border-bottom: 1px solid lightgray;
+  background-color: #fff;
 
     >h2 {
       font-size: 1.2rem;
@@ -77,6 +80,7 @@ const MessageHeaderTo = styled.div`
   width: 100%;
   padding: 20px;
   border-bottom: 1px solid lightgray;
+  background-color: #fff;
 
     >h1 {
       color: #808080;
