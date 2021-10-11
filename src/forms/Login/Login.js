@@ -49,6 +49,7 @@ const Login = () => {
               <Sample/>
               Sign in with Apple
             </Socials>
+          <h2>OR</h2>
           </SocialContainer>
           <Form>
             <input

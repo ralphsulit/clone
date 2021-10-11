@@ -35,6 +35,23 @@ const LoginInnerContainer = styled.div`
       font-weight: 900;
     }
 
+    h2 {
+      display: flex;
+      align-items: center;
+      font-size: 1rem;
+      font-weight: 200;
+      margin: 20px auto 0 auto;
+      width: 100%;
+
+        &:before,
+        &:after {
+          content: '';
+          flex: 1 1;
+          border-bottom: 1px solid #BABABA;
+          margin: 0 12px;
+        }
+    }
+
     >p {
       font-size: 0.8rem;
       font-weight: 400;
