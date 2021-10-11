@@ -49,6 +49,27 @@ const LoginInnerContainer = styled.div`
     }
 `;
 
+const SocialContainer = styled.div`
+    margin-bottom: 20px;
+`;
+
+const Socials = styled.div`
+    font-family: 'Noto Sans Display', sans-serif;
+    font-size: 1rem;
+    font-weight: 900;
+    width: 350px;
+    text-align: center;
+    margin: 10px;
+    border: 2px solid #1D1C1D;
+    border-radius: 4px;
+    cursor: pointer;
+    
+      &:first-child {
+        color: #4285F4;
+        border: 2px solid #4285F4;
+      }
+`;
+
 
 const Form = styled.form`
   display: flex;
@@ -58,7 +79,7 @@ const Form = styled.form`
       font-family: 'Noto Sans Display', sans-serif;
       font-size: 1rem;
       padding: 12px;
-      margin: 1vh;
+      margin: 5px;
       width: 350px;
       outline: none;
       border: 1px solid rgb(186,186,186);
@@ -67,7 +88,6 @@ const Form = styled.form`
 
     >input[type=submit] {
       padding: 12px;
-      margin: 1vh;
       width: 350px;
       color: #fff;
       font-weight: bolder;
@@ -81,4 +101,4 @@ const Form = styled.form`
     }
 `;
 
-export { LoginContainer, LoginInnerContainer, Form };
+export { LoginContainer, LoginInnerContainer, Form, Socials, SocialContainer };

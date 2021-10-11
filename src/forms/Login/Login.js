@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { LoginContainer, LoginInnerContainer, Form } from './Login.style';
-import './Login.style';
-import { Link, useHistory } from 'react-router-dom';
 import { userLogin } from '../../api/api';
+import { Link, useHistory } from 'react-router-dom';
+import { LoginContainer, LoginInnerContainer, Form, Socials, SocialContainer } from './Login.style';
+
 
 const Login = () => {
   //state
@@ -33,11 +33,17 @@ const Login = () => {
     <div>
       <LoginContainer className='container'>
         <LoginInnerContainer>
-            <img
-              src="https://logos-world.net/wp-content/uploads/2020/10/Slack-Logo-2019-present.jpg"
-              alt="Slack Logo"
-            />
+          <img
+            src='https://logos-world.net/wp-content/uploads/2020/10/Slack-Logo-2019-present.jpg?__cf_chl_jschl_tk__=pmd_negmFVFyODiA0I2tMwG44SR8xWfe__CJXlX6RYQv47A-1633913602-0-gqNtZGzNAnujcnBszQZl'
+            alt="Slack Logo"
+          />
           <h1>Sign in to Slack</h1>
+          <SocialContainer>
+            <Socials>
+              Sign in with Google
+            </Socials>
+            <Socials>Sign in with Apple</Socials>
+          </SocialContainer>
           <Form>
             <input
               onChange={(e) => setEmail(e.target.value)}
