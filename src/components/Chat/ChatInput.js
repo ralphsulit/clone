@@ -77,14 +77,20 @@ const ChatInputContainer = styled.div`
       position: fixed;
       bottom: 2rem;
       width: 100%;
-      max-width: 80%;
+      max-width: 70%;
       border: 1px solid #868686;
       border-radius: 3px;
       padding: 1.5rem;
-      outline: none;  
+      outline: none;
     }
 
     >form >button {
       display: none;
+    }
+
+    @media (max-width: 1024px) {
+      >form > input {
+        max-width: 60%;
+      }
     }
 `;

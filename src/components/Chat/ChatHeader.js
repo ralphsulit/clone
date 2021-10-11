@@ -5,15 +5,18 @@ import styled from 'styled-components';
 
 function ChatHeader({ receiver, headers }) {
   //state
+  const [allUsers, setAllUsers] = useState([]);
+  const [addUser, setAddUser] = useState([]);
   const [channelMembers, setChannelMembers] = useState([]);
   const [channelMemberInfo, setChannelMemberInfo] = useState([]);
   const [toggleViewMembers, setToggleViewMembers] = useState(false);
   const [toggleAddMembers, setToggleAddMembers] = useState(false);
-  const [allUsers, setAllUsers] = useState([]);
+
 
   //parameter
   const params = useParams();
   const { type, id } = params;
+
   //data obj
   const getDataObj = {
     id: parseInt(id),
@@ -30,6 +33,32 @@ function ChatHeader({ receiver, headers }) {
     setToggleAddMembers(!toggleAddMembers)
   }
 
+  //add member data into an array
+  const handleAddMember = (data) => {
+    setAddUser(data)
+  }
+
+  const handleAddedMember = () => {
+    handleToggleAddMembers(false)
+    addUser.map(user => {
+      let members = {
+        id: parseInt(id),
+        member_id: user.id,
+        headers
+      }
+      console.log(members)
+    })
+  }
+
+  //member list
+  const memberList = channelMemberInfo.map((user, i) => {
+    return (
+      <div key={i}>
+        <p>{user.email}</p>
+      </div>
+    )
+  }) 
+
   //get all user from api
   useEffect(() => {
     getAllUsers(headers)
@@ -44,10 +73,15 @@ function ChatHeader({ receiver, headers }) {
       .catch(err => err)
   }, [id])
 
-
   useEffect(() => {
+    setChannelMemberInfo([])
+    channelMembers.forEach(member => {
+      const membersInfo = allUsers.find(user => user.id === member.user_id)
+      setChannelMemberInfo(prev => [...prev, membersInfo])
+    })
+  }, [channelMembers])
 
-  })
+
   
   return (
     <ChatHeaderContainer>
@@ -65,6 +99,20 @@ function ChatHeader({ receiver, headers }) {
         :
           ''
       }
+      {toggleViewMembers
+        ?
+          <MemberList>
+            {memberList}
+          </MemberList>
+        : ''
+      }
+      {toggleAddMembers
+        ?
+          <MemberList>
+          </MemberList>
+        :
+          ''
+      }
       
     </ChatHeaderContainer>
   )
@@ -74,16 +122,18 @@ export default ChatHeader;
 
 const ChatHeaderContainer = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   padding: 20px;
   border-bottom: 1px solid lightgray;
   height: 56px;
+  width: 100%;
 `;
 
 const HeaderLeft = styled.div`
   display: flex;
   align-items: center;
   text-transform: lowercase;
+  width: 72%;
 
     >h2 {
       font-family: 'Lato', sans-serif;
@@ -101,10 +151,11 @@ const HeaderRight = styled.div`
       font-family: 'Noto Sans Display', sans-serif;
       font-size: 0.8rem;
       margin: 10px;
-      padding: 4px;
+      padding: 4px 10px;
       background-color: #fff;
       border: 1px solid #e1e1e1;
       outline: none;
+      width: 100px;
     }
 `;
 
