@@ -117,8 +117,6 @@ export default Chat;
 
 const ChatContainer = styled.div`
   width: 100%;
-  flex: 0.7;
-  flex-grow: 1;
   margin-top: 45px;
   background-color: #F8F8F8;
 `;
