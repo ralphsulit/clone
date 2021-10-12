@@ -8,7 +8,7 @@ import styled from 'styled-components';
 
 const Login = () => {
   //state
-  const [email, setEmail] = useState('ralph@gmail.com');
+  const [email, setEmail] = useState('ayaya2@gmail.com');
   const [password, setPassword] = useState('123123');
   const history = useHistory();
   

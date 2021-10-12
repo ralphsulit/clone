@@ -1,36 +1,48 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, NavLink } from 'react-router-dom';
+import { headers } from '../../Headers';
 import { getChannel, getRecentDm, getOwnedChannel } from '../../api/api';
 import AddChannel from '../Add/AddChannel';
 import SidebarOption from './SidebarOption';
 import styled from 'styled-components';
+
+import './Sidebar.css';
 //Icons
 import FiberManualRecordIcon from "@material-ui/icons/FiberManualRecord";
 import CreateIcon from "@material-ui/icons/Create";
 import InsertCommentIcon from "@material-ui/icons/InsertComment";
-import InboxIcon from "@material-ui/icons/Inbox";
-import DraftsIcon from "@material-ui/icons/Drafts";
 import BookmarkBorderIcon from "@material-ui/icons/BookmarkBorder";
+import AlternateEmailIcon from '@material-ui/icons/AlternateEmail';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import PeopleAltIcon from "@material-ui/icons/PeopleAlt";
-import AppsIcon from "@material-ui/icons/Apps";
-import FileCopyIcon from "@material-ui/icons/FileCopy";
-import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import AddIcon from "@material-ui/icons/Add";
 
 function Sidebar() {
   //state
   const [email, setEmail] = useState('');
+  const [togDropdown, setToggleDropdown] = useState(false);
+  const [toggle, setToggle] = useState(false);
   const [channelsJoined, setChannelsJoined] = useState([]);
   const [channelsOwned, setChannelsOwned] = useState([]);
-  const [recentUsers, setRecentUsers] = useState('');
+  const [recentUsers, setRecentUsers] = useState([]);
   const [toggleAddChannel, setToggleAddChannel] = useState(false);
 
   //variables
   const history = useHistory();
-  const username = email.split('@')[0];
+  const userID = parseInt(headers.id);
 
   const handleToggleAddChannel = () => {
     setToggleAddChannel(!toggleAddChannel)
+  }
+
+  const handleToggleDropdown = () => {
+    setToggleDropdown(!togDropdown)
+  }
+
+  const handleToggle = () => {
+    setToggle(!toggle)
   }
 
   //route to message page
@@ -40,12 +52,6 @@ function Sidebar() {
 
   useEffect(() => {
     //variables
-    const headers = {
-      'token': localStorage.getItem('access-token'),
-      'client': localStorage.getItem('client'),
-      'expiry': localStorage.getItem('expiry'),
-      'uid': localStorage.getItem('uid')
-    }
     const channelData = { headers }
     setEmail(headers.uid)
   
@@ -71,7 +77,6 @@ function Sidebar() {
       })
       .catch(err => err)
 
-    
   }, []);
   
   // render all channel (owned)
@@ -92,20 +97,33 @@ function Sidebar() {
 
   // render all channel (joined)
   const renderJoinedChannels = channelsJoined.map((channel, i) => {
-    return (
-      <NavLink
-        to={`/channel/${channel.id}`}
-        style={{ textDecoration: 'none', color: '#fff' }}
-      >
-        <SidebarOption
+    if (userID !== channel.owner_id) {
+      return (
+        <NavLink
+          style={{textDecoration: 'none', color: 'white'}} 
+          to={`/channel/${channel.id}`}
           key={i}
-          Icon={InsertCommentIcon}
-          title={channel.name}
-        />
-      </NavLink>
-    )
-  });
+        >
+          <SidebarOption Icon={InsertCommentIcon} title={channel.name} />
+        </NavLink>
+      )
+    }
+  })
 
+  //direct messages
+  const recentDM = recentUsers.map((user, i) => {
+    if (user.id !== userID) {
+      return (
+        <NavLink
+          style={{textDecoration: 'none', color: 'white'}} 
+          to={`/user/${user.id}`}
+          key={i}
+        >
+          <SidebarOption Icon={PeopleAltIcon} title={user.uid}/>
+        </NavLink>
+      )
+    }
+  })
 
   return (
     <SidebarContainer>
@@ -114,30 +132,39 @@ function Sidebar() {
           <h2>{email}</h2>
           <h3>
             <FiberManualRecordIcon />
-            {username}
+            username
           </h3>
         </SidebarInfo>
         <CreateIconStyle onClick={messagePage}/>
       </SidebarHeader>
-      <SidebarOption Icon={InsertCommentIcon} title="Threads" />
-      <SidebarOption Icon={InboxIcon} title="Mentions & Reactions" />
-      <SidebarOption Icon={DraftsIcon} title="Saved items" />
-      <SidebarOption Icon={BookmarkBorderIcon} title="Channel browser" />
-      <SidebarOption Icon={PeopleAltIcon} title="People & user groups" />
-      <SidebarOption Icon={AppsIcon} title="Apps" />
-      <SidebarOption Icon={FileCopyIcon} title="File browser" />
-      <SidebarOption Icon={ExpandLessIcon} title="Show less" />
+        <SidebarOption Icon={InsertCommentIcon} title="Threads" />
+        <SidebarOption Icon={AlternateEmailIcon} title="Mentions & Reactions" />
+        <SidebarOption Icon={BookmarkBorderIcon} title="Saved items" />
+        <SidebarOption Icon={MoreVertIcon} title="More" />
       <hr />
-      <SidebarOption Icon={AddIcon} title='Add Channel' onClick={handleToggleAddChannel} />
-      <hr />
-      {toggleAddChannel ? (
-        <AddChannel/>
-      ): null}
-      <SidebarOption Icon={PeopleAltIcon} title="Channels Owned" />
-      {renderOwnedChannels}
-      <hr />
-      <SidebarOption Icon={PeopleAltIcon} title="Channel Joined" />
-      {renderJoinedChannels}  
+      
+      <SidebarOption
+        Icon={togDropdown ? ExpandMoreIcon : ChevronRightIcon}
+        title='Channels'
+        onClick={handleToggleDropdown}
+      />
+      <div className={togDropdown ? `sidebar-channel` : `sidebar-channels hidden`}>
+        {renderOwnedChannels}
+        <SidebarOption Icon={AddIcon} title='Add Channel' onClick={handleToggleAddChannel}/>
+        {toggleAddChannel ? <AddChannel/> : null}
+      </div>
+
+      <SidebarOption
+        Icon={toggle ? ExpandMoreIcon : ChevronRightIcon}
+        title='Direct Messages'
+        onClick={handleToggle}
+      />
+      <div className={toggle ? `sidebar-channel` : `sidebar-channels hidden`}>
+        {recentDM}
+      </div>
+
+      
+      
     </SidebarContainer>
   )
 };

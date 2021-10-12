@@ -18,6 +18,7 @@ const SidebarOptionContainer = styled.div`
   font-size: 12px;
   padding: 2px;
   cursor: pointer;
+  color: #BCABBC;
 
     >h3 {
       font-weight: 500;
