@@ -76,6 +76,7 @@ const HeaderContainer = styled.div`
   padding: 10px 0;
   width: 100%;
   font-family: 'Noto Sans Display', sans-serif;
+  padding-left: 450px;
 `;
 
 const HeaderSearch = styled.div`
