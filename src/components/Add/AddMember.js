@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { getAllUsers, getUser } from '../../api/api';
 import styled from 'styled-components';
+import { headers } from '../../Headers';
 
-function AddMember({ headers, handleAddMember }) {
+function AddMember({handleAddMember }) {
   //state
   const [allUsers, setAllUsers] = useState([]);
   const [search, setSearch] = useState('');

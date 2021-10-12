@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import SearchBox from '../SearchBox/SearchBox';
 import styled from 'styled-components';
 //icons
@@ -9,10 +10,20 @@ import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
 function Header() {
   //state
   const [toggleSearch, setToggleSearch] = useState(false);
+  
+  //variables
+  const history = useHistory();
 
   //toggle searchbox
   const handleToggleSearchBox = () => {
     setToggleSearch(!toggleSearch);
+  }
+
+  //logout
+  const handleLogout = () => {
+    history.push('/')
+    localStorage.clear()
+    window.location.reload()
   }
 
   return (
@@ -35,7 +46,8 @@ function Header() {
       </HeaderSearch>
 
       <HeaderRight>
-        <HelpOutlineIcon/>
+        <HelpOutlineIcon />
+        <button onClick={handleLogout}>Log Out</button>
       </HeaderRight>
 
       {toggleSearch ? (

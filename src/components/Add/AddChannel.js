@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { addChannel } from '../../api/api';
 import { headers } from '../../Headers';
+import AddMember from './AddMember';
 import styled from 'styled-components';
 
 
@@ -77,6 +78,17 @@ function AddChannel() {
               <button onClick={handleAddChanneltoAddMembers}>Next</button>
               <ErrorStyle>{warning ? <p>{error}</p> : ''}</ErrorStyle>
             </AddChannelForm>
+          : ''
+        }
+        {addMemberToggle
+          ?
+            <div>
+              <AddMember
+              addMember={handleGetAddMemberArray}
+              channelName={channelName}
+              />
+              <button onClick={createChannel}>Add Channel with Members</button>
+            </div>
           : ''
         }
         

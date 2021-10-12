@@ -31,9 +31,7 @@ function Sidebar() {
 
   //variables
   const history = useHistory();
-  const username = email.split('@')[0];
-  const userID = parseInt(localStorage.getItem('id'));
-  const userEmail  = localStorage.getItem('email')
+  const userID = parseInt(headers.id);
 
   const handleToggleAddChannel = () => {
     setToggleAddChannel(!toggleAddChannel)
@@ -79,7 +77,6 @@ function Sidebar() {
       })
       .catch(err => err)
 
-    
   }, []);
   
   // render all channel (owned)
@@ -100,19 +97,18 @@ function Sidebar() {
 
   // render all channel (joined)
   const renderJoinedChannels = channelsJoined.map((channel, i) => {
-    return (
-      <NavLink
-        to={`/channel/${channel.id}`}
-        style={{ textDecoration: 'none', color: '#fff' }}
-      >
-        <SidebarOption
+    if (userID !== channel.owner_id) {
+      return (
+        <NavLink
+          style={{textDecoration: 'none', color: 'white'}} 
+          to={`/channel/${channel.id}`}
           key={i}
-          Icon={InsertCommentIcon}
-          title={channel.name}
-        />
-      </NavLink>
-    )
-  });
+        >
+          <SidebarOption Icon={InsertCommentIcon} title={channel.name} />
+        </NavLink>
+      )
+    }
+  })
 
   //direct messages
   const recentDM = recentUsers.map((user, i) => {
@@ -123,10 +119,7 @@ function Sidebar() {
           to={`/user/${user.id}`}
           key={i}
         >
-          <SidebarOption
-            Icon={PeopleAltIcon}
-            title={user.uid}
-          />
+          <SidebarOption Icon={PeopleAltIcon} title={user.uid}/>
         </NavLink>
       )
     }
@@ -139,7 +132,7 @@ function Sidebar() {
           <h2>{email}</h2>
           <h3>
             <FiberManualRecordIcon />
-            {username}
+            username
           </h3>
         </SidebarInfo>
         <CreateIconStyle onClick={messagePage}/>
@@ -157,6 +150,8 @@ function Sidebar() {
       />
       <div className={togDropdown ? `sidebar-channel` : `sidebar-channels hidden`}>
         {renderOwnedChannels}
+        <SidebarOption Icon={AddIcon} title='Add Channel' onClick={handleToggleAddChannel}/>
+        {toggleAddChannel ? <AddChannel/> : null}
       </div>
 
       <SidebarOption
@@ -169,7 +164,7 @@ function Sidebar() {
       </div>
 
       
-      {toggleAddChannel ? <AddChannel/> : null}
+      
     </SidebarContainer>
   )
 };
