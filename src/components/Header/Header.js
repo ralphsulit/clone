@@ -24,7 +24,6 @@ function Header() {
   const handleLogout = () => {
     history.push('/')
     localStorage.clear()
-    window.location.reload()
   }
 
   return (

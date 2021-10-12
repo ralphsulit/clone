@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, NavLink } from 'react-router-dom';
-import { headers } from '../../Headers';
 import { getChannel, getRecentDm, getOwnedChannel } from '../../api/api';
-import AddChannel from '../Add/AddChannel';
+import AddChannel from '../Channel/AddChannel';
 import SidebarOption from './SidebarOption';
 import styled from 'styled-components';
 
@@ -20,6 +19,13 @@ import PeopleAltIcon from "@material-ui/icons/PeopleAlt";
 import AddIcon from "@material-ui/icons/Add";
 
 function Sidebar() {
+  const headers = {
+    'token': localStorage.getItem('access-token'),
+    'client': localStorage.getItem('client'),
+    'expiry': localStorage.getItem('expiry'),
+    'uid': localStorage.getItem('uid')
+  }
+
   //state
   const [email, setEmail] = useState('');
   const [togDropdown, setToggleDropdown] = useState(false);
@@ -28,6 +34,12 @@ function Sidebar() {
   const [channelsOwned, setChannelsOwned] = useState([]);
   const [recentUsers, setRecentUsers] = useState([]);
   const [toggleAddChannel, setToggleAddChannel] = useState(false);
+  const [recentUser, setRecentUser] = useState('');
+  const [render, setRender] = useState(false);
+
+  const handleRender = () => {
+    setRender(!render);
+  }
 
   //variables
   const history = useHistory();
@@ -53,8 +65,10 @@ function Sidebar() {
   const home = () => {
     history.push('/main')
   }
+  console.log('1');
 
   useEffect(() => {
+    console.log(headers)
     //variables
     const channelData = { headers }
     setEmail(headers.uid)
@@ -63,7 +77,7 @@ function Sidebar() {
     getChannel(channelData)
       .then(res => {
         setChannelsJoined(res.data.data)
-        
+        console.log(res)
       })
       .catch(err => console.log(err));
     
@@ -81,7 +95,13 @@ function Sidebar() {
       })
       .catch(err => err)
 
+    console.log('useEffect')
   }, []);
+
+  useEffect(() => {
+    console.log(email)
+  }, [email])
+
   
   // render all channel (owned)
   const renderOwnedChannels = channelsOwned.map((channel, i) => {
