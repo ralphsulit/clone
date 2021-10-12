@@ -16,21 +16,24 @@ import AlternateEmailIcon from '@material-ui/icons/AlternateEmail';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import PeopleAltIcon from "@material-ui/icons/PeopleAlt";
 import AddIcon from "@material-ui/icons/Add";
 
 function Sidebar() {
   //state
   const [email, setEmail] = useState('');
-  const [togDropdown, setToggleDropdown] = useState(true);
-  const [toggle, setToggle] = useState(true);
+  const [togDropdown, setToggleDropdown] = useState(false);
+  const [toggle, setToggle] = useState(false);
   const [channelsJoined, setChannelsJoined] = useState([]);
   const [channelsOwned, setChannelsOwned] = useState([]);
-  const [recentUsers, setRecentUsers] = useState('');
+  const [recentUsers, setRecentUsers] = useState([]);
   const [toggleAddChannel, setToggleAddChannel] = useState(false);
 
   //variables
   const history = useHistory();
   const username = email.split('@')[0];
+  const userID = parseInt(localStorage.getItem('id'));
+  const userEmail  = localStorage.getItem('email')
 
   const handleToggleAddChannel = () => {
     setToggleAddChannel(!toggleAddChannel)
@@ -112,8 +115,22 @@ function Sidebar() {
   });
 
   //direct messages
-  
-
+  const recentDM = recentUsers.map((user, i) => {
+    if (user.id !== userID) {
+      return (
+        <NavLink
+          style={{textDecoration: 'none', color: 'white'}} 
+          to={`/user/${user.id}`}
+          key={i}
+        >
+          <SidebarOption
+            Icon={PeopleAltIcon}
+            title={user.uid}
+          />
+        </NavLink>
+      )
+    }
+  })
 
   return (
     <SidebarContainer>
@@ -132,6 +149,7 @@ function Sidebar() {
         <SidebarOption Icon={BookmarkBorderIcon} title="Saved items" />
         <SidebarOption Icon={MoreVertIcon} title="More" />
       <hr />
+      
       <SidebarOption
         Icon={togDropdown ? ExpandMoreIcon : ChevronRightIcon}
         title='Channels'
@@ -140,6 +158,16 @@ function Sidebar() {
       <div className={togDropdown ? `sidebar-channel` : `sidebar-channels hidden`}>
         {renderOwnedChannels}
       </div>
+
+      <SidebarOption
+        Icon={toggle ? ExpandMoreIcon : ChevronRightIcon}
+        title='Direct Messages'
+        onClick={handleToggle}
+      />
+      <div className={toggle ? `sidebar-channel` : `sidebar-channels hidden`}>
+        {recentDM}
+      </div>
+
       
       {toggleAddChannel ? <AddChannel/> : null}
     </SidebarContainer>
