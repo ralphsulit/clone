@@ -13,8 +13,8 @@ import styled from 'styled-components';
 function App() {
   return (
     <Router>
-      <Route exact path='/' component={Login} />
-      <Route path='/register' component={Signup} />
+        <Route exact path='/' component={Login} />
+        <Route path='/register' component={Signup} />
       <Body>
       {localStorage.getItem('access-token') && <Header/>} 
       {localStorage.getItem('access-token') && <Sidebar/>} 
