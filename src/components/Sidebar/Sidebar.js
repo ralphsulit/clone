@@ -1,25 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, NavLink } from 'react-router-dom';
+import { headers } from '../../Headers';
 import { getChannel, getRecentDm, getOwnedChannel } from '../../api/api';
 import AddChannel from '../Add/AddChannel';
 import SidebarOption from './SidebarOption';
 import styled from 'styled-components';
+
+import './Sidebar.css';
 //Icons
 import FiberManualRecordIcon from "@material-ui/icons/FiberManualRecord";
 import CreateIcon from "@material-ui/icons/Create";
 import InsertCommentIcon from "@material-ui/icons/InsertComment";
-import InboxIcon from "@material-ui/icons/Inbox";
-import DraftsIcon from "@material-ui/icons/Drafts";
 import BookmarkBorderIcon from "@material-ui/icons/BookmarkBorder";
-import PeopleAltIcon from "@material-ui/icons/PeopleAlt";
-import AppsIcon from "@material-ui/icons/Apps";
-import FileCopyIcon from "@material-ui/icons/FileCopy";
-import ExpandLessIcon from "@material-ui/icons/ExpandLess";
+import AlternateEmailIcon from '@material-ui/icons/AlternateEmail';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import AddIcon from "@material-ui/icons/Add";
 
 function Sidebar() {
   //state
   const [email, setEmail] = useState('');
+  const [togDropdown, setToggleDropdown] = useState(true);
+  const [toggle, setToggle] = useState(true);
   const [channelsJoined, setChannelsJoined] = useState([]);
   const [channelsOwned, setChannelsOwned] = useState([]);
   const [recentUsers, setRecentUsers] = useState('');
@@ -33,6 +36,14 @@ function Sidebar() {
     setToggleAddChannel(!toggleAddChannel)
   }
 
+  const handleToggleDropdown = () => {
+    setToggleDropdown(!togDropdown)
+  }
+
+  const handleToggle = () => {
+    setToggle(!toggle)
+  }
+
   //route to message page
   const messagePage = () => {
     history.push('/message')
@@ -40,12 +51,6 @@ function Sidebar() {
 
   useEffect(() => {
     //variables
-    const headers = {
-      'token': localStorage.getItem('access-token'),
-      'client': localStorage.getItem('client'),
-      'expiry': localStorage.getItem('expiry'),
-      'uid': localStorage.getItem('uid')
-    }
     const channelData = { headers }
     setEmail(headers.uid)
   
@@ -106,6 +111,9 @@ function Sidebar() {
     )
   });
 
+  //direct messages
+  
+
 
   return (
     <SidebarContainer>
@@ -119,25 +127,21 @@ function Sidebar() {
         </SidebarInfo>
         <CreateIconStyle onClick={messagePage}/>
       </SidebarHeader>
-      <SidebarOption Icon={InsertCommentIcon} title="Threads" />
-      <SidebarOption Icon={InboxIcon} title="Mentions & Reactions" />
-      <SidebarOption Icon={DraftsIcon} title="Saved items" />
-      <SidebarOption Icon={BookmarkBorderIcon} title="Channel browser" />
-      <SidebarOption Icon={PeopleAltIcon} title="People & user groups" />
-      <SidebarOption Icon={AppsIcon} title="Apps" />
-      <SidebarOption Icon={FileCopyIcon} title="File browser" />
-      <SidebarOption Icon={ExpandLessIcon} title="Show less" />
+        <SidebarOption Icon={InsertCommentIcon} title="Threads" />
+        <SidebarOption Icon={AlternateEmailIcon} title="Mentions & Reactions" />
+        <SidebarOption Icon={BookmarkBorderIcon} title="Saved items" />
+        <SidebarOption Icon={MoreVertIcon} title="More" />
       <hr />
-      <SidebarOption Icon={AddIcon} title='Add Channel' onClick={handleToggleAddChannel} />
-      <hr />
-      {toggleAddChannel ? (
-        <AddChannel/>
-      ): null}
-      <SidebarOption Icon={PeopleAltIcon} title="Channels Owned" />
-      {renderOwnedChannels}
-      <hr />
-      <SidebarOption Icon={PeopleAltIcon} title="Channel Joined" />
-      {renderJoinedChannels}  
+      <SidebarOption
+        Icon={togDropdown ? ExpandMoreIcon : ChevronRightIcon}
+        title='Channels'
+        onClick={handleToggleDropdown}
+      />
+      <div className={togDropdown ? `sidebar-channel` : `sidebar-channels hidden`}>
+        {renderOwnedChannels}
+      </div>
+      
+      {toggleAddChannel ? <AddChannel/> : null}
     </SidebarContainer>
   )
 };
