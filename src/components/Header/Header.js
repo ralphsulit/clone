@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import SearchIcon from '@material-ui/icons/Search';
 import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 function Header() {
   //state
@@ -47,8 +48,10 @@ function Header() {
 
       <HeaderRight>
         <HelpOutlineIcon />
-        <button onClick={handleLogout}>Log Out</button>
       </HeaderRight>
+      <Logout>
+        <ExitToAppIcon onClick={handleLogout} style={{ cursor: 'pointer'}}/>
+      </Logout>
 
       {toggleSearch ? (
         <SearchBox
@@ -73,6 +76,7 @@ const HeaderContainer = styled.div`
   padding: 10px 0;
   width: 100%;
   font-family: 'Noto Sans Display', sans-serif;
+  padding-left: 450px;
 `;
 
 const HeaderSearch = styled.div`
@@ -121,3 +125,9 @@ const Image = styled.div`
       border-radius: 50%;
     }
 `;
+
+const Logout = styled.div`
+  display: flex;
+  margin-left: 100px;
+`;
+

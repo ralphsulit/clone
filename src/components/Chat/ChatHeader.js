@@ -4,6 +4,8 @@ import { getChannelData, getAllUsers, addMemberToTheChannel } from '../../api/ap
 import { headers } from '../../Headers';
 import AddMember from '../Add/AddMember.js';
 import styled from 'styled-components';
+import PeopleAltIcon from "@material-ui/icons/PeopleAlt";
+import GroupAddIcon from '@material-ui/icons/GroupAdd';
 
 function ChatHeader({ receiver }) {
   //state
@@ -79,7 +81,7 @@ function ChatHeader({ receiver }) {
         setAllUsers(res.data.data)
         getChannelData(getDataObj)
           .then(res => {
-            setChannelMembers(res.data.data.channel_members)  
+            setChannelMembers(res.data.data.channel_members)
           })
           .catch(err => err)
       })
@@ -106,8 +108,8 @@ function ChatHeader({ receiver }) {
       {type === 'channel'
         ?
           <HeaderRight>
-            <button onClick={handleToggleViewMembers}>Member List</button>
-            <button onClick={handleToggleAddMembers}>Add Member</button>
+          <PeopleAltIcon onClick={handleToggleViewMembers} fontSize='medium' />
+          {channelMembers.length}
           </HeaderRight>
         :
           ''
@@ -115,11 +117,12 @@ function ChatHeader({ receiver }) {
       {toggleViewMembers
         ?
           <MemberList>
-            <HeaderLeft>
-              <h2>
-                <strong>{ type === 'channel' ? receiver : receiver }</strong>
-              </h2>
-            </HeaderLeft>
+              <HeaderLeft>
+                <h2>
+                  <strong>{ type === 'channel' ? receiver : receiver }</strong>
+                </h2>
+                <GroupAddIcon onClick={handleToggleAddMembers} />
+              </HeaderLeft>
             {memberList}
           </MemberList>
         : ''
@@ -170,9 +173,9 @@ const HeaderRight = styled.div`
   display: flex;
   align-items: center;
   flex-direction: row;
+  cursor: pointer;
 
     >button {
-      cursor: pointer;
       font-family: 'Noto Sans Display', sans-serif;
       font-size: 0.8rem;
       margin: 10px;
@@ -181,6 +184,16 @@ const HeaderRight = styled.div`
       border: 1px solid #e1e1e1;
       outline: none;
       width: 100px;
+    }
+
+    ${PeopleAltIcon} {
+      color: #3F0E40;
+      border: 1px solid #CDC3CD;
+      border-radius: 5px;
+      width: 50px;
+      font-weight: 700;
+      font-size: 0.8rem;
+      padding: 2px 8px;
     }
 `;
 
@@ -195,7 +208,7 @@ const MemberList = styled.div`
   height: 20rem;
   width: 100%;
   height: 500px;
-  max-width: 300px;
+  max-width: 500px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -205,6 +218,8 @@ const MemberList = styled.div`
     ${HeaderLeft} {
       color: red;
       margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
     }
 `;
 

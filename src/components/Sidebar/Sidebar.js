@@ -50,6 +50,10 @@ function Sidebar() {
     history.push('/message')
   }
 
+  const home = () => {
+    history.push('/main')
+  }
+
   useEffect(() => {
     //variables
     const channelData = { headers }
@@ -129,7 +133,7 @@ function Sidebar() {
     <SidebarContainer>
       <SidebarHeader>
         <SidebarInfo>
-          <h2>{email}</h2>
+          <h2 onClick={home}>{email}</h2>
           <h3>
             <FiberManualRecordIcon />
             username
@@ -211,6 +215,7 @@ const SidebarInfo = styled.div`
       font-size: 16px;
       font-weight: 900;
       margin-bottom: 5px;
+      cursor: pointer;
     }
     
     >h3 {

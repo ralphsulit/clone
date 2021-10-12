@@ -56,9 +56,7 @@ function NewMessage() {
 export default NewMessage;
 
 const MessageContainer = styled.div`
-  width: 100vw;
-  flex: 0.7;
-  flex-grow: 1;
+  width: 100%;
   margin-top: 40px;
   background-color: #F8F8F8;
 `;
