@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import SearchBox from '../SearchBox/SearchBox';
+//icons and styles
 import styled from 'styled-components';
-//icons
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import SearchIcon from '@material-ui/icons/Search';
 import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
@@ -39,7 +39,7 @@ function Header() {
       </HeaderLeft>
       
       <HeaderSearch>
-        <button>
+        <button onClick={handleToggleSearchBox}>
           Search
         </button>
         <SearchIcon />
@@ -53,9 +53,7 @@ function Header() {
       </Logout>
 
       {toggleSearch ? (
-        <SearchBox
-          handleToggleSearchBox={handleToggleSearchBox}
-        />
+        <SearchBox handleToggleSearchBox={handleToggleSearchBox}/>
       ) : null}
 
     </HeaderContainer>

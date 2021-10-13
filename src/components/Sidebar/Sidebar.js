@@ -65,10 +65,8 @@ function Sidebar() {
   const home = () => {
     history.push('/main')
   }
-  console.log('1');
 
   useEffect(() => {
-    console.log(headers)
     //variables
     const channelData = { headers }
     setEmail(headers.uid)
@@ -77,7 +75,6 @@ function Sidebar() {
     getChannel(channelData)
       .then(res => {
         setChannelsJoined(res.data.data)
-        console.log(res)
       })
       .catch(err => console.log(err));
     
@@ -94,15 +91,8 @@ function Sidebar() {
         setChannelsOwned(res.data.data)
       })
       .catch(err => err)
-
-    console.log('useEffect')
   }, []);
 
-  useEffect(() => {
-    console.log(email)
-  }, [email])
-
-  
   // render all channel (owned)
   const renderOwnedChannels = channelsOwned.map((channel, i) => {
     return (
