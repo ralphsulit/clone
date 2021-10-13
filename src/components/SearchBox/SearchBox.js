@@ -42,8 +42,8 @@ function SearchBox({ handleToggleSearchBox }) {
   const searchUserList = users.map((user, i) => {
     return (
       <LinkElement to={`/user/${user.id}`} onClick={handleToggleSearchBox}>
-        <SearchBoxResults key={i}>
-          <p>{user.email}</p>
+        <SearchBoxResults>
+          <p key={i}>{user.email}</p>
         </SearchBoxResults>
       </LinkElement>
     )

@@ -99,6 +99,7 @@ function Sidebar() {
       <NavLink
         to={`/channel/${channel.id}`}
         style={{ textDecoration: 'none', color: '#fff' }}
+        key={i}
       >
         <SidebarOption
           key={i}
@@ -118,7 +119,7 @@ function Sidebar() {
           to={`/channel/${channel.id}`}
           key={i}
         >
-          <SidebarOption Icon={InsertCommentIcon} title={channel.name} />
+          <SidebarOption Icon={InsertCommentIcon} title={channel.name} key={i} />
         </NavLink>
       )
     }
@@ -133,7 +134,7 @@ function Sidebar() {
           to={`/user/${user.id}`}
           key={i}
         >
-          <SidebarOption Icon={PeopleAltIcon} title={user.uid}/>
+          <SidebarOption Icon={PeopleAltIcon} title={user.uid} key={i}/>
         </NavLink>
       )
     }
