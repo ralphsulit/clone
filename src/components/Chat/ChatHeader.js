@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { getChannelData, getAllUsers, addMemberToTheChannel } from '../../api/api';
 import { headers } from '../../Headers';
 import AddMember from '../Channel/AddMember.js';
+//styles
 import styled from 'styled-components';
 import PeopleAltIcon from "@material-ui/icons/PeopleAlt";
 import GroupAddIcon from '@material-ui/icons/GroupAdd';

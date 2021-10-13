@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import SearchBox from '../SearchBox/SearchBox';
+//icons and styles
 import styled from 'styled-components';
-//icons
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import SearchIcon from '@material-ui/icons/Search';
 import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
@@ -38,7 +38,7 @@ function Header() {
         <AccessTimeIcon/>
       </HeaderLeft>
       
-      <HeaderSearch>
+      <HeaderSearch onClick={handleToggleSearchBox} style={{cursor: 'pointer'}}>
         <button>
           Search
         </button>
@@ -53,9 +53,7 @@ function Header() {
       </Logout>
 
       {toggleSearch ? (
-        <SearchBox
-          handleToggleSearchBox={handleToggleSearchBox}
-        />
+        <SearchBox handleToggleSearchBox={handleToggleSearchBox}/>
       ) : null}
 
     </HeaderContainer>
@@ -84,17 +82,18 @@ const HeaderSearch = styled.div`
   background-color: #644565;
   color: #808080;
   display: flex;
-  padding: 0 50px;
+  justify-content: space-between;
   opacity: 1;
   margin: 0 20px;
   font-family: 'Noto Sans Display', sans-serif;
+  width: 500px;
+  padding: 0 10px;
 
     >button {
       color: #fff;
       cursor: pointer;
       background-color: #644565;
       border: none;
-      min-width: 30vw;
       outline: 0;
       text-align: left;
       font-family: 'Noto Sans Display', sans-serif;

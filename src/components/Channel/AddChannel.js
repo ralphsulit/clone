@@ -55,8 +55,7 @@ function AddChannel() {
     //add channel api
     addChannel(addNewChannelObj)
       .then(res => {
-        const channelID = res.data.data.
-        handleToggleAddChannel()
+        const channelID = res.data.data
         history.push(`/channel/${channelID}`)
         console.log(`Successfully added`, res)
       })
