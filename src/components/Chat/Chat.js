@@ -66,7 +66,7 @@ function Chat() {
       getUser()
     } else {
       //get channel data
-      getChannelData()
+      getChannelData(userID)
         .then(res => {
           setReceiver(res.data.data.name)
         })

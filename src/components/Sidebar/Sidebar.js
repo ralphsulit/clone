@@ -39,7 +39,7 @@ function Sidebar() {
 
   //variables
   const history = useHistory();
-  const userID = parseInt(headers.id);
+  const userID = parseInt(localStorage.getItem('id'));
   const user = localStorage.getItem('uid');
 
   const handleToggleAddChannel = () => {
@@ -134,7 +134,7 @@ function Sidebar() {
           to={`/user/${user.id}`}
           key={i}
         >
-          <SidebarOption Icon={PeopleAltIcon} title={user.uid} key={i}/>
+          <SidebarOption Icon={PeopleAltIcon} title={user.uid} key={i} />
         </NavLink>
       )
     }

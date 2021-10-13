@@ -84,6 +84,7 @@ function ChatHeader({ receiver }) {
         getChannelData(getDataObj)
           .then(res => {
             setChannelMembers(res.data.data.channel_members)
+            console.log(channelMembers)
           })
           .catch(err => err)
       })

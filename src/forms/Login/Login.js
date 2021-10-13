@@ -26,6 +26,7 @@ const Login = () => {
         localStorage.setItem('client', res.headers['client']);
         localStorage.setItem('expiry', res.headers['expiry']);
         localStorage.setItem('uid', res.headers['uid']);
+        localStorage.setItem('id', res.data.data.id);
         window.location = '/message';
       })
       .catch(err => err)

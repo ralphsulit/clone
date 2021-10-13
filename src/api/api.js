@@ -54,7 +54,7 @@ export const getMessage = ({
 
 //Get All User Data
 export const getAllUsers = () => {
-  return axiosFetch.get(`http://206.189.91.54//api/v1/users`)
+  return axiosFetch.get(`/api/v1/users`)
 };
 
 //Get user via id
@@ -72,23 +72,23 @@ export const getChannel = () => {
 };
 
 //Get Channel via ID
-export const getChannelData = ({ id }) => {
-  return axiosFetch.get(`http://206.189.91.54//api/v1/channels/${id}`)
+export const getChannelData = (id) => {
+  return axiosFetch.get(`/api/v1/channels/${id}`)
 };
 
 //Get Recent Messages
 export const getRecentDm = () => {
-  return axiosFetch.get(`http://206.189.91.54//api/v1/users/recent/`)
+  return axiosFetch.get(`/api/v1/users/recent/`)
 };
 
 //Get user owned channel
 export const getOwnedChannel = () => {
-  return axiosFetch.get(`http://206.189.91.54//api/v1/channel/owned`)
+  return axiosFetch.get(`/api/v1/channel/owned`)
 };
 
 //Add a member to the channel
 export const addMemberToTheChannel = ({ id, member_id }) => {
-  return axiosFetch.post(`http://206.189.91.54//api/v1/channel/add_member`, 
+  return axiosFetch.post(`/api/v1/channel/add_member`, 
   {
     id,
     member_id
@@ -97,7 +97,7 @@ export const addMemberToTheChannel = ({ id, member_id }) => {
 
 //Add channel
 export const addChannel = ({ name, user_ids }) => {
-  return axiosFetch.post('http://206.189.91.54//api/v1/channels',
+  return axiosFetch.post('/api/v1/channels',
   {
     name,
     user_ids
