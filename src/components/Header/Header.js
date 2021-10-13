@@ -38,8 +38,8 @@ function Header() {
         <AccessTimeIcon/>
       </HeaderLeft>
       
-      <HeaderSearch>
-        <button onClick={handleToggleSearchBox}>
+      <HeaderSearch onClick={handleToggleSearchBox} style={{cursor: 'pointer'}}>
+        <button>
           Search
         </button>
         <SearchIcon />
@@ -82,17 +82,18 @@ const HeaderSearch = styled.div`
   background-color: #644565;
   color: #808080;
   display: flex;
-  padding: 0 50px;
+  justify-content: space-between;
   opacity: 1;
   margin: 0 20px;
   font-family: 'Noto Sans Display', sans-serif;
+  width: 500px;
+  padding: 0 10px;
 
     >button {
       color: #fff;
       cursor: pointer;
       background-color: #644565;
       border: none;
-      min-width: 30vw;
       outline: 0;
       text-align: left;
       font-family: 'Noto Sans Display', sans-serif;

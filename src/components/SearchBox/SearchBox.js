@@ -41,7 +41,7 @@ function SearchBox({ handleToggleSearchBox }) {
 
   const searchUserList = users.map((user, i) => {
     return (
-      <LinkElement to={`/user${user.id}`} onClick={handleToggleSearchBox}>
+      <LinkElement to={`/user/${user.id}`} onClick={handleToggleSearchBox}>
         <SearchBoxResults key={i}>
           <p>{user.email}</p>
         </SearchBoxResults>
@@ -60,6 +60,12 @@ function SearchBox({ handleToggleSearchBox }) {
           {searchUserList}
         </SearchBoxResult>
       </div>
+        <Footer>
+          <p>Messages</p>   
+          <p>Files</p>
+          <p>Channels</p>
+          <p>People</p>
+        </Footer>
     </SearchBoxContainer>
   )
 }
@@ -67,29 +73,82 @@ function SearchBox({ handleToggleSearchBox }) {
 export default SearchBox;
 
 //styled component
+const Footer = styled.div`
+  color: black;
+  width: 100%;
+  text-align: center;
+  cursor: pointer;
+
+    >p {
+      background-color: #E8F5FB;
+      border: none;
+      border-radius: 8px;
+      font-weight: 500;
+      padding: 5px 15px;
+      margin: 0 10px;
+      width: 100px;
+    }
+`;
+
+
 const SearchBoxContainer = styled.div`
-  position: absolute;
-  width: 60vw;
-  height: 20rem;
-  top: 1rem;
-  left: 20rem;
+  background-color: #fff;
+  border: 1px solid #CECECE;
+  border-radius: 5px;
   display: flex;
-  padding-top: .5rem;
-  align-items: flex-start;
-  justify-content: center;
-  overflow-y: hidden;
-  
-  > div {
-    width: 60%;
-    border-radius: .5rem;
-  }
+  flex-direction: column;
+  justify-content: flex-start;
+  position: absolute;
+  top: 0;
+  left: 40%;
+  width: 100%;
+  max-width: 700px;
+  height: 300px;
+  margin-top: 10px;
+  padding: 20px;
+  z-index: 1;
+
+    ${Footer} {
+      color: black;
+      display: flex;
+      align-items: center;
+      width: 100%;
+    }
+`;
+
+const HeaderSearch = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  width: 650px;
+
+    >input {
+      border: none;
+      padding-bottom: 5px;
+      width: 100%;
+      outline: 0;
+    }
+
+    >p {
+      color: black;
+      cursor: pointer;
+      font-family: 'Fredoka One', cursive;
+    }
 `;
 
 const SearchBoxResult = styled.div`
   width: 100%;
-  max-height: 30rem;
+  height: 200px;
   overflow-y: scroll;
+  border-top: 1px solid #DDDDDD;
+  z-index: 10;
+
+    ::-webkit-scrollbar {
+    display: none;
+  }
 `;
+
 
 const SearchBoxResults = styled.div`
   display: flex;
@@ -100,7 +159,8 @@ const SearchBoxResults = styled.div`
   background: white;
 
   > p {
-    font-size: 1rem;
+    font-family: 'Noto Sans Display', sans-serif;
+    font-size: 0.8rem;
     font-weight: bolder;
     padding-left: 1rem;
     letter-spacing: .2px;
@@ -115,33 +175,6 @@ const SearchBoxResults = styled.div`
     }
   }
 `
-
-const HeaderSearch = styled.div`
-  background-color: white;
-  height: 6vh;
-  width: 83%;
-  padding-left: 4rem;
-  padding-right: 1rem;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  border-bottom: 1px gray solid;
-  
-  > input {
-    background-color: transparent;
-    border: none;
-    text-align: center;
-    color: black;
-    outline: 0;
-    font-weight: bolder;
-    font-size: 1rem;
-  }
-
-  > p {
-    color: black;
-    cursor: pointer;
-  }
-`;
 
 const LinkElement = styled(NavLink)`
   text-decoration: none;
