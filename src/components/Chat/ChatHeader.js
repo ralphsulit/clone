@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getChannelData, getAllUsers, addMemberToTheChannel } from '../../api/api';
-import { headers } from '../../Headers';
 import AddMember from '../Channel/AddMember.js';
 //styles
 import styled from 'styled-components';
@@ -32,7 +31,7 @@ function ChatHeader({ receiver }) {
   //data obj
   const getDataObj = {
     id: parseInt(id),
-    headers
+    // headers
   }
 
   //toggle view members
@@ -56,7 +55,7 @@ function ChatHeader({ receiver }) {
       let members = {
         id: parseInt(id),
         member_id: user.id,
-        headers
+        // headers
       }
       addMemberToTheChannel(members)
         .then(res => {
@@ -79,7 +78,7 @@ function ChatHeader({ receiver }) {
 
   //get all user from api
   useEffect(() => {
-    getAllUsers(headers)
+    getAllUsers()
       .then(res => { 
         setAllUsers(res.data.data)
         getChannelData(getDataObj)
@@ -140,7 +139,6 @@ function ChatHeader({ receiver }) {
         ?
           <MemberList>
             <AddMember
-              headers={headers}
               handleAddedMember={handleAddedMember}
               handleAddMember={handleAddMember}
             />
@@ -171,14 +169,24 @@ const HeaderLeft = styled.div`
   display: flex;
   align-items: center;
   text-transform: lowercase;
-  z-index: 10;
+  z-index: 1;
 
     >h2 {
       font-family: 'Lato', sans-serif;
       font-size: 1.3rem;
     }
+`;
 
-    
+const Image = styled.div`
+  display: flex;
+  margin-right: 10px;
+  
+    >img {
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      padding: auto;
+    }
 `;
 
 const HeaderRight = styled.div`

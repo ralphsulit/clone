@@ -4,8 +4,14 @@ import { useParams } from 'react-router-dom';
 import ChatHeader from './ChatHeader';
 import ChatInput from './ChatInput';
 import ChatBodyContainer from './ChatContainer';
-import { headers } from '../../Headers';
 import styled from 'styled-components';
+
+// const headers = {
+// 'token': localStorage.getItem('access-token'),
+// 'client': localStorage.getItem('client'),
+// 'expiry': localStorage.getItem('expiry'),
+// 'uid': localStorage.getItem('uid')
+// }
 
 function Chat() {
   //state
@@ -40,13 +46,10 @@ function Chat() {
   const getMessageObj = {
     receiver_class: capitalizedType,
     receiver_id: parseInt(id),
-    headers
+    // headers
   }
 
-  const getDataObj = {
-    id: parseInt(id),
-    headers
-  }
+  const userID = parseInt(id);
 
   useEffect(scrollToBottom, [chatData]);
 
@@ -60,55 +63,28 @@ function Chat() {
     
     if (type === 'user') {
       //get user data
-      getUser(getDataObj)
-        .then(res => {
-          setReceiver(res[0].email) 
-        })
+      getUser()
     } else {
       //get channel data
-      getChannelData(getDataObj)
+      getChannelData()
         .then(res => {
           setReceiver(res.data.data.name)
         })
     }
     scrollToBottomSmooth();
   }, [id, render]);
-  
-  useEffect(() => {
-    //get user message data
-    getMessage(getMessageObj)
-      .then(res => {
-        setChatData(res.data.data)
-      })
-      .catch(err => console.log('Error Sending Message: ', err))
-    
-    if (type === 'user') {
-      //get user data
-      getUser(getDataObj)
-        .then(res => {
-          setReceiver(res[0].email) 
-        })
-    } else {
-      //get channel data
-      getChannelData(getDataObj)
-        .then(res => {
-          setReceiver(res.data.data.name)
-        })
-    }
-    scrollToBottomSmooth();
-  }, []);
-
 
   return (
     <ChatContainer>
       <ChatHeader
+        // headers={headers}
         receiver={receiver}
         render={handleChatRender}
       />
       <ChatMessages>
         <ChatBodyContainer chatData={chatData} chatRef={chatRef}/>
       </ChatMessages>
-      <ChatInput headers={headers} render={handleChatRender} receiver={receiver} />
+      <ChatInput render={handleChatRender} receiver={receiver} />
     </ChatContainer>
   )
 }
@@ -124,4 +100,5 @@ const ChatContainer = styled.div`
 const ChatMessages = styled.div`
   padding: 3rem;
   margin-bottom: 2rem;
+  z-index: -1;
 `;

@@ -13,17 +13,13 @@ import styled from 'styled-components';
 function App() {
   return (
     <Router>
-        <Route exact path='/' component={Login} />
-        <Route path='/register' component={Signup} />
-      <Body>
-      {localStorage.getItem('access-token') && <Header/>} 
-      {localStorage.getItem('access-token') && <Sidebar/>} 
+      <Route exact path='/' component={Login} />
+      <Route path='/register' component={Signup} />
+      {/* <Body>
         <Switch>
-          <Route path='/main' component={Homepage} />
-          <Route path='/:type/:id' component={Chat} />
-          <Route path='/message' component={Message} />        
+      
         </Switch>
-      </Body>
+      </Body> */}
     </Router>
   );
 }

@@ -35,17 +35,12 @@ function Sidebar() {
   const [channelsOwned, setChannelsOwned] = useState([]);
   const [recentUsers, setRecentUsers] = useState([]);
   const [toggleAddChannel, setToggleAddChannel] = useState(false);
-  const [recentUser, setRecentUser] = useState('');
-  const [render, setRender] = useState(false);
   const [toggleWarning, setToggleWarning] = useState(false);
-
-  const handleRender = () => {
-    setRender(!render);
-  }
 
   //variables
   const history = useHistory();
   const userID = parseInt(headers.id);
+  const user = localStorage.getItem('uid');
 
   const handleToggleAddChannel = () => {
     setToggleAddChannel(!toggleAddChannel)
@@ -74,25 +69,24 @@ function Sidebar() {
 
   useEffect(() => {
     //variables
-    const channelData = { headers }
     setEmail(headers.uid)
   
     //get channels joined
-    getChannel(channelData)
+    getChannel()
       .then(res => {
         setChannelsJoined(res.data.data)
       })
       .catch(err => console.log(err));
     
     //get recent DMs
-    getRecentDm(channelData)
+    getRecentDm()
       .then(res => {
         setRecentUsers(res.data.data)
       })
       .catch(err => console.log('Error Getting Recent User: ', err))
     
     //get owned channels
-    getOwnedChannel(channelData)
+    getOwnedChannel()
       .then(res => {
         setChannelsOwned(res.data.data)
       })
@@ -154,7 +148,7 @@ function Sidebar() {
           <h2 onClick={home}>{email}</h2>
           <h3>
             <FiberManualRecordIcon />
-            username
+            {user}
           </h3>
         </SidebarInfo>
         <CreateIconStyle onClick={messagePage}/>
@@ -216,6 +210,7 @@ const SidebarContainer = styled.div`
   width: 300px;
   margin-top: 40px;
   overflow-y: auto;
+  height: 95vh;
 
     >hr {
       margin-top: 10px;

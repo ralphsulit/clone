@@ -9,46 +9,49 @@ import DescriptionIcon from '@material-ui/icons/Description';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 import SupervisedUserCircleIcon from '@material-ui/icons/SupervisedUserCircle';
 
-function SearchBox({ handleToggleSearchBox }) {
+function SearchBox({ handleToggleSearchBox, handleToggleWarning }) {
   //state
   const [users, setUsers] = useState([]);
   const [search, setSearch] = useState('');
+  const [allUser, setAllUser] = useState([]);
+
 
   //variables
   const searchBoxRef = useRef();
 
   useEffect(() => {
-    const hideSearchBox = (e) => {
-      if (searchBoxRef.current.contains(e.target)) return
-      handleToggleSearchBox()
-    }
-      document.body.addEventListener('click', hideSearchBox, { capture: true })
-    return () => {
-      document.body.removeEventListener('click', hideSearchBox, {capture: true})
-    }
+    // const hideSearchBox = (e) => {
+    //   if (searchBoxRef.current.contains(e.target)) return
+    //   handleToggleSearchBox()
+    // }
+    //   document.body.addEventListener('click', hideSearchBox, { capture: true })
+    // return () => {
+    //   document.body.removeEventListener('click', hideSearchBox, {capture: true})
+    // }
+    getAllUsers(headers)
+      .then(res => {
+        setAllUser(res.data.data)
+      })
+      .catch(err => err)
   }, [])
 
   //get user data from api
   const viewAllUsers = () => {
-    getAllUsers(headers)
-      .then(res => {
-        const userArray = res.data.data
-        const resArray = userArray.filter(user => user.email.includes(search))
-        setUsers(resArray)  
-      })
-      .catch(err => err)
+
   }
 
   const handleSearch = (e) => {
     setSearch(e.target.value);
-    viewAllUsers()
+    const searchUser = allUser.filter(user => user.email.includes(search))
+    setUsers(searchUser)  
   }
 
   const searchUserList = users.map((user, i) => {
     return (
-      <LinkElement to={`/user/${user.id}`} onClick={handleToggleSearchBox}>
+      <LinkElement to={`/user/${user.id}`} onClick={handleToggleSearchBox} key={i}>
         <SearchBoxResults>
-          <p key={i}>{user.email}</p>
+          {/* <Image><img src={`https://picsum.photos/id/${user.id}/40`} alt=""/></Image> */}
+          <p>{user.email}</p>
         </SearchBoxResults>
       </LinkElement>
     )
@@ -66,10 +69,12 @@ function SearchBox({ handleToggleSearchBox }) {
         </SearchBoxResult>
       </div>
       <Footer>
-        <p><ForumIcon fontSize='small' style={{marginRight: '2px'}}/> Messages</p>   
-        <p><DescriptionIcon fontSize='small' style={{marginRight: '2px'}}/>Files</p>
-        <p><ListAltIcon fontSize='small' style={{marginRight: '2px'}}/>Channels</p>
-        <p><SupervisedUserCircleIcon fontSize='small' style={{marginRight: '2px'}}/>People</p>
+        <span onClick={handleToggleWarning}><ForumIcon fontSize='small' style={{ marginRight: '2px' }} />
+          <p onClick={handleToggleSearchBox}>Messages</p>
+        </span>
+        <span onClick={handleToggleWarning}><DescriptionIcon fontSize='small' style={{marginRight: '2px'}}/><p onClick={handleToggleSearchBox}>Files</p></span>
+        <span onClick={handleToggleWarning}><ListAltIcon fontSize='small' style={{marginRight: '2px'}}/><p onClick={handleToggleSearchBox}>Channels</p></span>
+        <span onClick={handleToggleWarning}><SupervisedUserCircleIcon fontSize='small' style={{marginRight: '2px'}}/><p onClick={handleToggleSearchBox}>People</p></span>
       </Footer>
     </SearchBoxContainer>
   )
@@ -83,9 +88,10 @@ const Footer = styled.div`
   padding-top: 10px;
   width: 100%;
   text-align: center;
-  cursor: pointer;
 
-    >p {
+
+    >span {
+      cursor: pointer;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -118,7 +124,7 @@ const SearchBoxContainer = styled.div`
   height: 320px;
   margin-top: 10px;
   padding: 20px;
-  z-index: 1;
+  z-index: 0  ;
 
     ${Footer} {
       color: black;
@@ -154,11 +160,22 @@ const SearchBoxResult = styled.div`
   height: 200px;
   overflow-y: scroll;
   border-top: 1px solid #DDDDDD;
-  z-index: 10;
+  z-index: 100;
 
     ::-webkit-scrollbar {
     display: none;
   }
+`;
+
+const Image = styled.div`
+  display: flex;
+
+    >img {
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      padding: auto;
+    }
 `;
 
 

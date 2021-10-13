@@ -1,20 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import styled from 'styled-components'; 
+import styled from 'styled-components';
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 
-function Alert({handleToggleWarning}) {
-
+function Alert({ handleToggleWarning }) {
   return (
       <Modal>
-          <ModalContent>
+        <ModalContent>
           <ModalHeader>
-            <h1>Oops!</h1>
+            <ErrorOutlineIcon/> 
+            <h1>Warning</h1>
           </ModalHeader>
           <ModalBody>
             <h1>This feature is not available yet</h1>
           </ModalBody>
-          <ErrorOutlineIcon/>
-          <button onClick={handleToggleWarning}>Okay</button>
+          <button onClick={handleToggleWarning}>Go Back</button>
         </ModalContent>
       </Modal>
   )
@@ -22,8 +20,10 @@ function Alert({handleToggleWarning}) {
 export default Alert;
 
 const Modal = styled.div`
+  width: 100vw;
+  height: 100vh;
   color: black;
-  position: fixed;
+  position: absolute;
   left: 0;
   top: 0;
   right: 0;
@@ -32,48 +32,52 @@ const Modal = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 2;
+  z-index: 20;
 `
 
 const ModalContent = styled.div`
+  font-family: 'Fredoka One', cursive;
   width: 500px;
+  border-top: 6px solid #FFD091;
   background-color: #fff;
-  height: 50vh;
+  height: 300px;
   display: flex;
   flex-direction: column;
-  border-radius: 20px;
+  border-radius: 4px;
+  padding: 50px;
 
-  >.MuiSvgIcon-root {
-    padding: 8px;
-    color: rgb(161, 63, 63);
-    font-size: 15rem;
-    background-color: white;
-    display: flex;
-    text-align: center;
-    margin: auto;
-  }
-  >button{
-    width: 20%;
-    margin: auto auto 20px;
-    padding: 0.25vh;
-    border-radius: 20px;
-    border: green 1px solid;
-    color: green;
-  }
+    >button{
+      width: 100px;
+      margin: 50px auto;
+      padding: 10px 10px;
+      border: none;
+      border-radius: 5px;
+      background: #350D36;
+      color: #D1C8D2;
+      cursor: pointer;
+    }
 `;
 
 const ModalHeader = styled.div`
+  text-transform: uppercase;
+  display: flex;
   padding: 10px;
   justify-content: center;
   align-items: center;
   text-align: center;
-  font-size: 3rem;
+  font-size: 0.9rem;
+
+    >.MuiSvgIcon-root {
+    color: #EFB796;
+    font-size: 2.5rem;
+    background-color: white;
+    margin-right: 2px;
+  }
 `;
 
 const ModalBody = styled.div`
+  font-family: Noto Sans Display, 'sans-serif';
   text-align: center;
   padding: 10px;
-  border-top: 1px solid #eee;
-  border-bottom: 1px solid #eee;
-  font-size: 1rem;
+  font-size: 0.5rem;
 `;

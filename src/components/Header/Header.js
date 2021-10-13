@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import SearchBox from '../SearchBox/SearchBox';
+import Alert from '../Alert/Alert';
 //icons and styles
 import styled from 'styled-components';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
@@ -11,9 +12,15 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 function Header() {
   //state
   const [toggleSearch, setToggleSearch] = useState(false);
+  const [warning, setWarning] = useState(false);
   
   //variables
   const history = useHistory();
+
+//toggle warning
+const handleToggleWarning = () => {
+  setWarning(!warning);
+}
 
   //toggle searchbox
   const handleToggleSearchBox = () => {
@@ -22,12 +29,13 @@ function Header() {
 
   //logout
   const handleLogout = () => {
-    history.push('/')
+    window.location = '/'
     localStorage.clear()
   }
 
   return (
     <HeaderContainer>
+      {warning ? <Alert handleToggleWarning={handleToggleWarning} /> : null} 
       <HeaderLeft>
         <Image>
           <img
@@ -53,7 +61,7 @@ function Header() {
       </Logout>
 
       {toggleSearch ? (
-        <SearchBox handleToggleSearchBox={handleToggleSearchBox}/>
+        <SearchBox handleToggleSearchBox={handleToggleSearchBox} handleToggleWarning={handleToggleWarning}/>
       ) : null}
 
     </HeaderContainer>

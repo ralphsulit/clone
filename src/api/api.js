@@ -1,7 +1,13 @@
 import axios from 'axios';
 
 const axiosFetch = axios.create({
-  baseURL: process.env.REACT_APP_SLACK_API_URL
+  baseURL: process.env.REACT_APP_SLACK_API_URL,
+  headers: {
+  'access-token': localStorage.getItem('access-token'),
+  'client': localStorage.getItem('client'),
+  'expiry': localStorage.getItem('expiry'),
+  'uid': localStorage.getItem('uid')
+  }
 })
 
 //user registration
@@ -11,9 +17,6 @@ export const userRegister = ({ email, password, password_confirmation }) => {
     password,
     password_confirmation
   })
-    .then(response => response)
-    .then(result => result)
-    .catch(err => err)
 };
 
 //login
@@ -22,186 +25,81 @@ export const userLogin = ({ email, password }) => {
     email,
     password
   })
-    .then(response => response)
-    .then(result => result)
-    .catch(err => err)
 };
 
 //Send Message 
 export const sendMessage = ({
-  receiver_id, receiver_class, body, headers: { token, client, expiry, uid }
+  receiver_id, receiver_class, body
 }) => {
-  return axiosFetch.post('http://206.189.91.54//api/v1/messages',
+  return axiosFetch.post('/api/v1/messages',
     {
       receiver_id,
       receiver_class,
       body
-    },
-    {
-      headers: {
-        'access-token': token,
-        'client': client,
-        'expiry': expiry,
-        'uid': uid
-      }
-    })
-    .then(res => res)
-    .then(result => result)
-    .catch(err => err)
+    },)
 };
 
 //Get Messages
 export const getMessage = ({
-  receiver_class, receiver_id, headers: { token, client, expiry, uid }
+  receiver_class, receiver_id
 }) => {
-  return axiosFetch.get('http://206.189.91.54//api/v1/messages',
+  return axiosFetch.get('/api/v1/messages',
     {
-      headers: {
-        'access-token': token,
-        'client': client,
-        'expiry': expiry,
-        'uid': uid
-      },
       params: {
         receiver_class,
         receiver_id
       }
     })
-  .then(response => response)
-  .then(result => result)
-  .catch(err => err)
 };
 
 //Get All User Data
-export const getAllUsers = ({ token, client, expiry, uid }) => {
-  return axiosFetch.get(`http://206.189.91.54//api/v1/users`, {
-    headers: {
-      "access-token": token,
-      "client": client,
-      "expiry": expiry,
-      "uid": uid
-    }
-  })
-    .then(res => res)
-    .then(result => result)
-    .catch(err => err)
+export const getAllUsers = () => {
+  return axiosFetch.get(`http://206.189.91.54//api/v1/users`)
 };
 
 //Get user via id
-export const getUser = ({ id, headers: { token, client, expiry, uid } }) => {
-  return axiosFetch.get('http://206.189.91.54//api/v1/users', {
-    headers: {
-      "access-token": token,
-      "client": client,
-      "expiry": expiry,
-      "uid": uid
-    }
-  })
-    .then(res => res)
-    .then(result => {
-      return result.data.data.filter(data => data.id === id)
-    })
-    .catch(err => err)
+export const getUser = () => {
+  return axiosFetch.get('/api/v1/users')
 };
 
 //Get Channel
-export const getChannel = ({ headers: { token, client, expiry, uid } }) => {
-  return axiosFetch.get(`http://206.189.91.54//api/v1/channels`,
-    {
-      headers: {
-        "access-token": token,
-        "client": client,
-        "expiry": expiry,
-        "uid": uid
-      }
-    })
-      .then(res => res)
-      .then(result => result)
-      .catch(err => err)
+export const getChannel = () => {
+  const options = {
+    method: 'get',
+    url: '/api/v1/channels'
+  }
+  return axiosFetch.request(options)
 };
 
 //Get Channel via ID
-export const getChannelData = ({ id, headers: { token, client, expiry, uid } }) => {
-  return axiosFetch.get(`http://206.189.91.54//api/v1/channels/${id}`,
-    {
-      headers: {
-        "access-token": token,
-        "client": client,
-        "expiry": expiry,
-        "uid": uid
-      }
-    })
-      .then(res => res)
-      .then(result => result)
-      .catch(err => err)
+export const getChannelData = ({ id }) => {
+  return axiosFetch.get(`http://206.189.91.54//api/v1/channels/${id}`)
 };
 
 //Get Recent Messages
-export const getRecentDm = ({ headers: { token, client, expiry, uid } }) => {
-  return axiosFetch.get(`http://206.189.91.54//api/v1/users/recent/`, {
-    headers: {
-      "access-token": token,
-      "client": client,
-      "expiry": expiry,
-      "uid": uid
-    }
-  })
-    .then(res => res)
-    .catch(err => err)
+export const getRecentDm = () => {
+  return axiosFetch.get(`http://206.189.91.54//api/v1/users/recent/`)
 };
 
 //Get user owned channel
-export const getOwnedChannel = ({ headers: { token, client, expiry, uid } }) => {
-  return axiosFetch.get(`http://206.189.91.54//api/v1/channel/owned`, {
-    headers: {
-      "access-token": token,
-      "client": client,
-      "expiry": expiry,
-      "uid": uid
-    }
-  })
-    .then(res => res)
-    .catch(err => err)
+export const getOwnedChannel = () => {
+  return axiosFetch.get(`http://206.189.91.54//api/v1/channel/owned`)
 };
 
 //Add a member to the channel
-export const addMemberToTheChannel = ({ id, member_id, headers:{ token, client, expiry, uid } }) => {
-  return axios.post(`http://206.189.91.54//api/v1/channel/add_member`, 
+export const addMemberToTheChannel = ({ id, member_id }) => {
+  return axiosFetch.post(`http://206.189.91.54//api/v1/channel/add_member`, 
   {
     id,
     member_id
-  },
-  {
-    headers:{
-      "access-token": token,
-      "client": client,
-      "expiry": expiry,
-      "uid": uid,
-    }
   })
-  .then(response => response)
-  .then(result => result)
-  .catch(error => error)
 }
 
 //Add channel
-
-export const addChannel = ({ name, user_ids, headers:{ token, client, expiry, uid } }) => {
-
-  return axios.post('http://206.189.91.54//api/v1/channels',
+export const addChannel = ({ name, user_ids }) => {
+  return axiosFetch.post('http://206.189.91.54//api/v1/channels',
   {
     name,
     user_ids
-  },
-  {
-    headers:{
-      "access-token": token,
-      "client": client,
-      "expiry": expiry,
-      "uid": uid,
-    }
   })
-  .then(response => response)
-  .then(result => result)
-  .catch(error => error)
 }

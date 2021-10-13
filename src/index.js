@@ -1,12 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import { BrowserRouter as Router } from 'react-router-dom';
+import Routes from './routes'
 import reportWebVitals from './reportWebVitals';
+import axios from 'axios';
+axios.defaults.headers = {
+  'access-token': localStorage.getItem('access-token'),
+  'client': localStorage.getItem('client'),
+  'expiry': localStorage.getItem('expiry'),
+  'uid': localStorage.getItem('uid')
+}
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Router>
+      <Routes/>
+    </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );
