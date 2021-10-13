@@ -66,10 +66,10 @@ function SearchBox({ handleToggleSearchBox }) {
         </SearchBoxResult>
       </div>
       <Footer>
-        <p><ForumIcon fontSize='small'/> Messages</p>   
-        <p><DescriptionIcon fontSize='small'/>Files</p>
-        <p><ListAltIcon fontSize='small'/>Channels</p>
-        <p><SupervisedUserCircleIcon fontSize='small'/>People</p>
+        <p><ForumIcon fontSize='small' style={{marginRight: '2px'}}/> Messages</p>   
+        <p><DescriptionIcon fontSize='small' style={{marginRight: '2px'}}/>Files</p>
+        <p><ListAltIcon fontSize='small' style={{marginRight: '2px'}}/>Channels</p>
+        <p><SupervisedUserCircleIcon fontSize='small' style={{marginRight: '2px'}}/>People</p>
       </Footer>
     </SearchBoxContainer>
   )
