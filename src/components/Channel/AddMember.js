@@ -3,7 +3,7 @@ import { getAllUsers, getUser } from '../../api/api';
 import styled from 'styled-components';
 import { headers } from '../../Headers';
 
-function AddMember({handleAddMember }) {
+function AddMember({handleAddMember, channelName="" }) {
   //state
   const [allUsers, setAllUsers] = useState([]);
   const [search, setSearch] = useState('');
@@ -27,7 +27,7 @@ function AddMember({handleAddMember }) {
     const found = check.some(user => user.id === data.id)
     if (found) return setWarning(true)
 
-    //
+  // Since state was previously empty, we need to add it to an array first
     const updatedArray = [...click, data]
     setWarning(false)
     setClick(updatedArray)
@@ -74,8 +74,8 @@ function AddMember({handleAddMember }) {
 
   const searchUser = allUsers.map((user, i) => {
     return (
-      <LinkElement onClick={() => userSearchDetails(user.id)}>
-        <SearchBoxResults key={i}>
+      <LinkElement onClick={() => userSearchDetails(user.id)} key={i}>
+        <SearchBoxResults>
           <p>{ user.email }</p>
         </SearchBoxResults>
       </LinkElement>
@@ -94,7 +94,9 @@ function AddMember({handleAddMember }) {
 
   return (
     <Container>
-      <HeaderSearch>
+      <h1>Add people</h1>
+      <p>#{channelName}</p>
+      <Search>
         <input
           type='text'
           placeholder='search'
@@ -103,8 +105,8 @@ function AddMember({handleAddMember }) {
           value={search}
         />
         <p onClick={handleAddMember}>x</p>
-        {warning ? <label>User is already added</label> : ''}
-      </HeaderSearch>
+        
+      </Search>
       {toggleSearchList 
         ?
           <SearchBoxResult>
@@ -115,6 +117,7 @@ function AddMember({handleAddMember }) {
       <div>
         {displayUser}
       </div>
+      {warning ? <label>User is already added</label> : ''}
     </Container>
   )
 }
@@ -122,10 +125,20 @@ function AddMember({handleAddMember }) {
 export default AddMember;
 
 const Container = styled.div`
-  
+  >h1{
+    margin-top: 2vh;
+    text-align: left;
+    margin-left: 2vw;
+  }
+  >p{
+    margin-top: 0.5vh;
+    text-align: left;
+    margin-left: 2vw;
+    color: #4e4e4e;
+  }
 `
 
-const HeaderSearch = styled.div`
+const Search = styled.div`
   background-color: white;
   margin-top: 1rem;
   height: 3rem;
