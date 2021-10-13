@@ -3,6 +3,11 @@ import { NavLink } from 'react-router-dom';
 import { getAllUsers } from '../../api/api';
 import { headers } from '../../Headers';
 import styled from 'styled-components';
+//icons
+import ForumIcon from '@material-ui/icons/Forum';
+import DescriptionIcon from '@material-ui/icons/Description';
+import ListAltIcon from '@material-ui/icons/ListAlt';
+import SupervisedUserCircleIcon from '@material-ui/icons/SupervisedUserCircle';
 
 function SearchBox({ handleToggleSearchBox }) {
   //state
@@ -60,12 +65,12 @@ function SearchBox({ handleToggleSearchBox }) {
           {searchUserList}
         </SearchBoxResult>
       </div>
-        <Footer>
-          <p>Messages</p>   
-          <p>Files</p>
-          <p>Channels</p>
-          <p>People</p>
-        </Footer>
+      <Footer>
+        <p><ForumIcon fontSize='small' style={{marginRight: '2px'}}/> Messages</p>   
+        <p><DescriptionIcon fontSize='small' style={{marginRight: '2px'}}/>Files</p>
+        <p><ListAltIcon fontSize='small' style={{marginRight: '2px'}}/>Channels</p>
+        <p><SupervisedUserCircleIcon fontSize='small' style={{marginRight: '2px'}}/>People</p>
+      </Footer>
     </SearchBoxContainer>
   )
 }
@@ -74,19 +79,26 @@ export default SearchBox;
 
 //styled component
 const Footer = styled.div`
-  color: black;
+  border-top: 1px solid #CECECE;
+  padding-top: 10px;
   width: 100%;
   text-align: center;
   cursor: pointer;
 
     >p {
+      display: flex;
+      justify-content: center;
+      align-items: center;
       background-color: #E8F5FB;
-      border: none;
       border-radius: 8px;
       font-weight: 500;
       padding: 5px 15px;
       margin: 0 10px;
-      width: 100px;
+      width: 110px;
+    }
+
+    >:first-child {
+      margin-left: 0;
     }
 `;
 
@@ -103,7 +115,7 @@ const SearchBoxContainer = styled.div`
   left: 40%;
   width: 100%;
   max-width: 700px;
-  height: 300px;
+  height: 320px;
   margin-top: 10px;
   padding: 20px;
   z-index: 1;
