@@ -4,6 +4,7 @@ import { getChannel, getRecentDm, getOwnedChannel } from '../../api/api';
 import AddChannel from '../Channel/AddChannel';
 import SidebarOption from './SidebarOption';
 import styled from 'styled-components';
+import Alert from '../Alert/Alert';
 
 import './Sidebar.css';
 //Icons
@@ -36,6 +37,7 @@ function Sidebar() {
   const [toggleAddChannel, setToggleAddChannel] = useState(false);
   const [recentUser, setRecentUser] = useState('');
   const [render, setRender] = useState(false);
+  const [toggleWarning, setToggleWarning] = useState(false);
 
   const handleRender = () => {
     setRender(!render);
@@ -51,6 +53,10 @@ function Sidebar() {
 
   const handleToggleDropdown = () => {
     setToggleDropdown(!togDropdown)
+  }
+
+  const handleToggleWarning = () => {
+    setToggleWarning(!toggleWarning)
   }
 
   const handleToggle = () => {
@@ -141,7 +147,8 @@ function Sidebar() {
   })
 
   return (
-    <SidebarContainer>
+    <SidebarContainer> 
+      {toggleWarning ? <Alert handleToggleWarning={handleToggleWarning} /> : null} 
       <SidebarHeader>
         <SidebarInfo>
           <h2 onClick={home}>{email}</h2>
@@ -152,10 +159,26 @@ function Sidebar() {
         </SidebarInfo>
         <CreateIconStyle onClick={messagePage}/>
       </SidebarHeader>
-        <SidebarOption Icon={InsertCommentIcon} title="Threads" />
-        <SidebarOption Icon={AlternateEmailIcon} title="Mentions & Reactions" />
-        <SidebarOption Icon={BookmarkBorderIcon} title="Saved items" />
-        <SidebarOption Icon={MoreVertIcon} title="More" />
+        <SidebarOption 
+          Icon={InsertCommentIcon} 
+          title="Threads" 
+          onClick={handleToggleWarning}
+        />
+        <SidebarOption 
+          Icon={AlternateEmailIcon} 
+          title="Mentions & Reactions" 
+          onClick={handleToggleWarning}
+        />
+        <SidebarOption 
+          Icon={BookmarkBorderIcon} 
+          title="Saved items" 
+          onClick={handleToggleWarning}
+        />
+        <SidebarOption 
+          Icon={MoreVertIcon} 
+          title="More" 
+          onClick={handleToggleWarning}
+        />
       <hr />
       
       <SidebarOption
@@ -166,7 +189,7 @@ function Sidebar() {
       <div className={togDropdown ? `sidebar-channel` : `sidebar-channels hidden`}>
         {renderOwnedChannels}
         <SidebarOption Icon={AddIcon} title='Add Channel' onClick={handleToggleAddChannel}/>
-        {toggleAddChannel ? <AddChannel/> : null}
+        {toggleAddChannel ? <AddChannel/> : null} 
       </div>
 
       <SidebarOption
