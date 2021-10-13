@@ -1,0 +1,32 @@
+.peopleIcon {
+  color: #3F0E40;
+  width: 20px;
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+.memberList {
+  position: absolute;
+  height: 100vh;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 10;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.members {
+  display: flex;
+}
+
+.members h4 {
+    border-bottom: 2px solid #007A5A;
+    margin: 0 15px 15px 0;
+    width: 14%;
+    font-weight: 500;
+    font-size: 0.9rem;
+}

@@ -55,13 +55,14 @@ const SignUp = () => {
         <input
             onClick={handleRegister}
             type='submit'
-            value={'SignUp'}
+            value={'Register'}
         />
         </Form>
+        <p>
+          Already have an Account?
+          <Link to='/'>Sign in</Link>
+        </p>
       </SignUpInnerContainer>
-      <p>
-        Already have an Account? <Link to='/'>Login</Link>
-      </p>
     </SignUpContainer>
   )
 };

@@ -3,7 +3,8 @@ import styled from 'styled-components';
 
 function SidebarOption({Icon, title, onClick}) {
   return (
-    <SidebarOptionContainer onClick={onClick}>
+    <SidebarOptionContainer 
+      onClick={onClick}>
       {Icon && <Icon fontSize='large' style={{ padding: '10' }} />}
       <h3>{title}</h3>
     </SidebarOptionContainer>
@@ -18,6 +19,7 @@ const SidebarOptionContainer = styled.div`
   font-size: 12px;
   padding: 2px;
   cursor: pointer;
+  color: #BCABBC;
 
     >h3 {
       font-weight: 500;

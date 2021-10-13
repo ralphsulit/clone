@@ -1,18 +1,29 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import SearchBox from '../SearchBox/SearchBox';
+//icons and styles
 import styled from 'styled-components';
-//icons
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import SearchIcon from '@material-ui/icons/Search';
 import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 function Header() {
   //state
   const [toggleSearch, setToggleSearch] = useState(false);
+  
+  //variables
+  const history = useHistory();
 
   //toggle searchbox
   const handleToggleSearchBox = () => {
     setToggleSearch(!toggleSearch);
+  }
+
+  //logout
+  const handleLogout = () => {
+    history.push('/')
+    localStorage.clear()
   }
 
   return (
@@ -27,21 +38,22 @@ function Header() {
         <AccessTimeIcon/>
       </HeaderLeft>
       
-      <HeaderSearch>
-        <SearchIcon />
+      <HeaderSearch onClick={handleToggleSearchBox} style={{cursor: 'pointer'}}>
         <button>
           Search
         </button>
+        <SearchIcon />
       </HeaderSearch>
 
       <HeaderRight>
-        <HelpOutlineIcon/>
+        <HelpOutlineIcon />
       </HeaderRight>
+      <Logout>
+        <ExitToAppIcon onClick={handleLogout} style={{ cursor: 'pointer'}}/>
+      </Logout>
 
       {toggleSearch ? (
-        <SearchBox
-          handleToggleSearchBox={handleToggleSearchBox}
-        />
+        <SearchBox handleToggleSearchBox={handleToggleSearchBox}/>
       ) : null}
 
     </HeaderContainer>
@@ -52,56 +64,54 @@ export default Header;
 
 //Styled Component
 const HeaderContainer = styled.div`
-  background-color: var(--slack-color); 
+  background-color: rgb(53,13,54); 
   color: #fff;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: center;
   position: fixed;
   padding: 10px 0;
   width: 100%;
+  font-family: 'Noto Sans Display', sans-serif;
+  padding-left: 450px;
 `;
 
 const HeaderSearch = styled.div`
   border: 1px #808080 solid;
   border-radius: 6px;
+  background-color: #644565;
   color: #808080;
   display: flex;
-  flex; 0.4;
-  padding: 0 50px;
+  justify-content: space-between;
   opacity: 1;
-  text-align: center;
+  margin: 0 20px;
+  font-family: 'Noto Sans Display', sans-serif;
+  width: 500px;
+  padding: 0 10px;
 
     >button {
       color: #fff;
       cursor: pointer;
-      background-color: transparent;
+      background-color: #644565;
       border: none;
-      min-width: 30vw;
       outline: 0;
-      text-align: center;
+      text-align: left;
+      font-family: 'Noto Sans Display', sans-serif;
     }
 `;
 
 const HeaderLeft = styled.div`
   display: flex;
-  flex: 0.3;
   align-items: center;
-  margin-left: 20px;
 
     >.MuiSvgIcon-root {
-      margin-left: auto;
-      margin-right: 30px;
     }
 `;
 
 const HeaderRight = styled.div`
   display: flex;
-  flex: 0.3;
-  align-items: flex-end;
     
     > .MuiSvgIcon-root {
-      margin-left: auto;
       margin-right: 20px;
     }
 `;
@@ -113,3 +123,9 @@ const Image = styled.div`
       border-radius: 50%;
     }
 `;
+
+const Logout = styled.div`
+  display: flex;
+  margin-left: 100px;
+`;
+
