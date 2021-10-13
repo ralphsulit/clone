@@ -18,7 +18,6 @@ function ChatHeader({ receiver }) {
   const [toggleViewMembers, setToggleViewMembers] = useState(false);
   const [toggleAddMembers, setToggleAddMembers] = useState(false);
   const [render, setRender] = useState(false);
-
   //handle render
   const handleRender = () => {
     setRender(!render)
@@ -27,12 +26,6 @@ function ChatHeader({ receiver }) {
   //parameter
   const params = useParams();
   const { type, id } = params;
-
-  //data obj
-  const getDataObj = {
-    id: parseInt(id),
-    // headers
-  }
 
   //toggle view members
   const handleToggleViewMembers = () => {
@@ -55,7 +48,6 @@ function ChatHeader({ receiver }) {
       let members = {
         id: parseInt(id),
         member_id: user.id,
-        // headers
       }
       addMemberToTheChannel(members)
         .then(res => {
@@ -81,10 +73,9 @@ function ChatHeader({ receiver }) {
     getAllUsers()
       .then(res => { 
         setAllUsers(res.data.data)
-        getChannelData(getDataObj)
+        getChannelData(id)
           .then(res => {
             setChannelMembers(res.data.data.channel_members)
-            console.log(channelMembers)
           })
           .catch(err => err)
       })
