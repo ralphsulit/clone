@@ -53,22 +53,23 @@ function AddChannel({handleToggleAddChannel, handleRender}) {
     
     //add channel api
     addChannel(addNewChannelObj)
-      .then(res => {
+    .then(res => {
+        setError(res.data.errors)
+        setWarning(true)
         if(res.data.errors === 'Name has already been taken'){
-          setError(res.data.errors)
-          console.log(error)
-          return
+          return 
         }
         const channelID = res.data.data.id
         history.push(`/channel/${channelID}`)
         console.log(`Successfully added`, res)
+        setWarning(false)
+        handleToggleAddChannel()
+        handleRender()
       })
       .catch(err => err)
     
-    setWarning(false)
-    handleToggleAddChannel()
-    handleRender()
   }
+
   return (
     <AddChannelOuterContainer>
       <AddChannelContainer>
@@ -91,8 +92,9 @@ function AddChannel({handleToggleAddChannel, handleRender}) {
               <AddMember
               handleAddMemberArray={handleGetAddMemberArray}
               channelName={channelName}
-              handleToggleAddChannel={handleToggleAddChannel}
+              handleToggle={handleToggleAddChannel}
               />
+              <ErrorStyle>{warning ? <p>{error}</p> : ''}</ErrorStyle>
               <button onClick={createChannel}>Add Channel with Members</button>
             </div>
           : ''

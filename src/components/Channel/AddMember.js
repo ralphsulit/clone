@@ -1,15 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { getAllUsers, getUser } from '../../api/api';
 import styled from 'styled-components';
 import { headers } from '../../Headers';
 
-function AddMember({ handleAddMemberArray, channelName="", handleToggleAddChannel }) {
+function AddMember({ handleAddMemberArray, channelName="", handleToggle }) {
   //state
-  const [allUsers, setAllUsers] = useState([]);
+  const [users, setUsers] = useState([]);
   const [search, setSearch] = useState('');
+  const [allUser, setAllUser] = useState([]);
   const [warning, setWarning] = useState(false);
   const [toggleSearchList, setToggleSearchList] = useState(false);
   const [click, setClick] = useState([]);
+
+  useEffect(() => {
+    // const hideSearchBox = (e) => {
+    //   if (searchBoxRef.current.contains(e.target)) return
+    //   handleToggleSearchBox()
+    // }
+    //   document.body.addEventListener('click', hideSearchBox, { capture: true })
+    // return () => {
+    //   document.body.removeEventListener('click', hideSearchBox, {capture: true})
+    // }
+    getAllUsers()
+      .then(res => {
+        setAllUser(res.data.data)
+      })
+      .catch(err => err)
+  }, [])
 
   //remove user
   const remove = (id) => {
@@ -51,26 +68,17 @@ function AddMember({ handleAddMemberArray, channelName="", handleToggleAddChanne
       .catch(err => console.log(err))
   }
 
-  const viewAllusers = () => {
-    getAllUsers(headers)
-      .then(res => {
-        const userArray = res.data.data
-        const resArray = userArray.filter(user => user.email.includes(search))
-        setAllUsers(resArray)
-      })
-      .catch(err => err)
-  }
-
   const handleSearch = (e) => {
     setSearch(e.target.value)
-    viewAllusers()
+    const searchUser = allUser.filter(user => user.email.includes(search))
+    setUsers(searchUser)
   }
   
   const handleSearchList = () => {
     setToggleSearchList(!toggleSearchList);
   }
 
-  const searchUser = allUsers.map((user, i) => {
+  const searchUser = users.map((user, i) => {
     return (
       <LinkElement onClick={() => userSearchDetails(user.id)}>
         <SearchBoxResults key={i}>
@@ -101,7 +109,7 @@ function AddMember({ handleAddMemberArray, channelName="", handleToggleAddChanne
           onClick={handleSearchList}
           value={search}
         />
-        <p onClick={handleAddMemberArray}>x</p>
+        <p onClick={handleToggle}>x</p>
         {warning ? <label>User is already added</label> : ''}
       </HeaderSearch>
       {toggleSearchList 
@@ -121,7 +129,7 @@ function AddMember({ handleAddMemberArray, channelName="", handleToggleAddChanne
 export default AddMember;
 
 const Container = styled.div`
-  
+
 `
 
 const HeaderSearch = styled.div`

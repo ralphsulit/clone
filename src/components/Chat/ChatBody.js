@@ -1,6 +1,7 @@
 import React from 'react';
 import Moment from 'react-moment';
 import styled from 'styled-components';
+import { emailFormat, captalizedWord } from '../Utils/utils'
 
 function ChatBody({ data }) {
   //variables
@@ -13,8 +14,8 @@ function ChatBody({ data }) {
       </Image>
       <ChatBodySubContainerStyle>
         <ChatDetailsStyle>
-          <h3>{email.split('@')[0]}</h3>
-          <label><Moment fromNow ago date={created_at}>ago</Moment></label>
+          <h3>{captalizedWord(emailFormat(email))}</h3>
+          <label><Moment fromNow ago date={created_at}/> ago</label>
         </ChatDetailsStyle>
         <ChatBodyStyle>
           {body}

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getChannelData, getAllUsers, addMemberToTheChannel } from '../../api/api';
 import AddMember from '../Channel/AddMember.js';
+import { emailFormat, captalizedWord } from '../Utils/utils';
 //styles
 import styled from 'styled-components';
 import PeopleAltIcon from "@material-ui/icons/PeopleAlt";
@@ -62,7 +63,7 @@ function ChatHeader({ receiver }) {
     return (
       <div key={i}>
         <Member>    
-          <p>{user.email.split('@')[0]}</p>
+          <p>{captalizedWord(user.email)}</p>
         </Member>
       </div>
     )
@@ -96,7 +97,7 @@ function ChatHeader({ receiver }) {
     <ChatHeaderContainer>
       <HeaderLeft>
         <h2>
-          <strong>{ type === 'channel' ? receiver : receiver }</strong>
+          <strong>{ type === 'channel' ? captalizedWord(receiver) : emailFormat(receiver) }</strong>
         </h2>
       </HeaderLeft>
       {type === 'channel'
@@ -110,32 +111,33 @@ function ChatHeader({ receiver }) {
       }
       {toggleViewMembers
         ?
-            <div className='memberList'>
-            <MemberList>
-              <HeaderLeft>
-                <h2>
-                  <strong>{ type === 'channel' ? receiver : receiver }</strong>
-                </h2>
-              <CancelIcon onClick={handleToggleViewMembers} style={{ cursor: 'pointer', color: '#cd5c5c'}}/>
-              </HeaderLeft>
-              <div className="members">
-                <h4>Members</h4>
-                <GroupAddIcon onClick={handleToggleAddMembers} style={{ cursor: 'pointer', color: '#606060'}} />
-              </div>
-              {memberList}
-              </MemberList>
+          <div className='memberList'>
+          <MemberList>
+            <HeaderLeft>
+              <h2>
+                <strong>{ type === 'channel' ? receiver : receiver }</strong>
+              </h2>
+            <CancelIcon onClick={handleToggleViewMembers} style={{ cursor: 'pointer', color: '#cd5c5c'}}/>
+            </HeaderLeft>
+            <div className="members">
+              <h4>Members</h4>
+              <GroupAddIcon onClick={handleToggleAddMembers} style={{ cursor: 'pointer', color: '#606060'}} />
             </div>
+            {memberList}
+          </MemberList>
+          </div>
         : ''
       }
       {toggleAddMembers
         ?
-          <MemberList>
+          <div>
             <AddMember
               handleAddedMember={handleAddedMember}
-              handleAddMember={handleAddMember}
+              handleAddMemberArray={handleAddMember}
+              handleToggle={handleToggleAddMembers}
             />
             <button onClick={handleAddedMember}>+</button>
-          </MemberList>
+          </div>
         :
           ''
       }
@@ -197,6 +199,7 @@ const HeaderRight = styled.div`
 
 const MemberList = styled.div`
   font-family: 'Noto Sans Display', sans-serif;
+  top: 0;
   font-size: 1rem;
   background: #fff;
   border: 1px solid #c1c1c1;
@@ -207,7 +210,8 @@ const MemberList = styled.div`
   height: 500px;
   max-width: 500px;
   flex-direction: column;
-      
+  z-index: 20; 
+
     ${HeaderLeft} {
       color: #000;
       margin-bottom: 20px;

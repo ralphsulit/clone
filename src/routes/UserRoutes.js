@@ -2,10 +2,11 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import Header from '../components/Header/Header';
 import Sidebar from '../components/Sidebar/Sidebar';
+import './UserRoutes.css'
 
 const UserRoute = ({component: Component, ...rest}) => {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column'}}>
+    <div className='container'>
       {localStorage.getItem('access-token') && <Header/>} 
       <div style={{ display: 'flex', flexDirection: 'row'}}>
       {localStorage.getItem('access-token') && <Sidebar/>} 

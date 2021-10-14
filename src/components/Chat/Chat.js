@@ -64,12 +64,14 @@ function Chat() {
     if (type === 'user') {
       //get user data
       getUser()
+        .then(res => {
+          const userData = res.data.data.filter(data => data.id === userID)
+          setReceiver(userData[0].email)
+        })
     } else {
       //get channel data
       getChannelData(userID)
-        .then(res => {
-          setReceiver(res.data.data.name)
-        })
+        .then(res => setReceiver(res.data.data.name))
     }
     scrollToBottomSmooth();
   }, [id, render]);

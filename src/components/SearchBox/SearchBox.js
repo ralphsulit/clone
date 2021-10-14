@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { getAllUsers } from '../../api/api';
-import { headers } from '../../Headers';
 import styled from 'styled-components';
 //icons
 import ForumIcon from '@material-ui/icons/Forum';
@@ -28,17 +27,12 @@ function SearchBox({ handleToggleSearchBox, handleToggleWarning }) {
     // return () => {
     //   document.body.removeEventListener('click', hideSearchBox, {capture: true})
     // }
-    getAllUsers(headers)
+    getAllUsers()
       .then(res => {
         setAllUser(res.data.data)
       })
       .catch(err => err)
   }, [])
-
-  //get user data from api
-  const viewAllUsers = () => {
-
-  }
 
   const handleSearch = (e) => {
     setSearch(e.target.value);

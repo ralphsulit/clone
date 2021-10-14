@@ -5,6 +5,7 @@ import AddChannel from '../Channel/AddChannel';
 import SidebarOption from './SidebarOption';
 import styled from 'styled-components';
 import Alert from '../Alert/Alert';
+import { emailFormat } from '../Utils/utils';
 
 import './Sidebar.css';
 //Icons
@@ -18,6 +19,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import PeopleAltIcon from "@material-ui/icons/PeopleAlt";
 import AddIcon from "@material-ui/icons/Add";
+import AppsIcon from "@material-ui/icons/Apps";
 
 function Sidebar() {
   const headers = {
@@ -82,14 +84,12 @@ function Sidebar() {
     //get channels joined
     getChannel()
       .then(res => {
-      //   if(res.data.errors === 'No available channels.'){
-      //     setError(res.data.errors)
-      //     setChannelsJoined([])
-      //     console.log('test')
-      //   } else {
-      //     setChannelsJoined(res.data.data)
-      //   }
-      //   console.log(res)
+        if(res.data.errors === 'No available channels.'){
+          setError(res.data.errors)
+          setChannelsJoined([])
+        } else {
+          setChannelsJoined(res.data.data)
+        }
       })
       .catch(err => console.log(err));
     
@@ -122,7 +122,6 @@ function Sidebar() {
         key={i}
       >
         <SidebarOption
-          key={i}
           Icon={InsertCommentIcon}
           title={channel.name}
         />
@@ -131,19 +130,22 @@ function Sidebar() {
   });
 
   // render all channel (joined)
-  // const renderJoinedChannels = channelsJoined.map((channel, i) => {
-  //   if (userID !== channel.owner_id) {
-  //     return (
-  //       <NavLink
-  //         style={{textDecoration: 'none', color: 'white'}} 
-  //         to={`/channel/${channel.id}`}
-  //         key={i}
-  //       >
-  //         <SidebarOption Icon={InsertCommentIcon} title={channel.name} key={i} />
-  //       </NavLink>
-  //     )
-  //   }
-  // })
+  const renderJoinedChannels = channelsJoined.map((channel, i) => {
+    if (userID !== channel.owner_id) {
+      return (
+        <NavLink
+          style={{textDecoration: 'none', color: 'white'}} 
+          to={`/channel/${channel.id}`}
+          key={i}
+        >
+          <SidebarOption 
+            Icon={AppsIcon} 
+            title={channel.name} 
+          />
+        </NavLink>
+      )
+    }
+  })
 
   //direct messages
   const recentDM = recentUsers.map((user, i) => {
@@ -168,7 +170,7 @@ function Sidebar() {
           <h2 onClick={home}>{email}</h2>
           <h3>
             <FiberManualRecordIcon />
-            {user}
+            {emailFormat(user)}
           </h3>
         </SidebarInfo>
         <CreateIconStyle onClick={messagePage}/>
@@ -202,6 +204,7 @@ function Sidebar() {
       />
       <div className={togDropdown ? `sidebar-channel` : `sidebar-channels hidden`}>
         {renderOwnedChannels}
+        {renderJoinedChannels}
         {/* {error} */}
         <SidebarOption Icon={AddIcon} title='Add Channel' onClick={handleToggleAddChannel}/>
         {toggleAddChannel ? 
@@ -278,6 +281,7 @@ const SidebarInfo = styled.div`
       font-size: 13px;
       font-weight: 400;
       margin-bottom: 5px;
+      text-transform: capitalize;
     }
 
     > h3 > .MuiSvgIcon-root {
