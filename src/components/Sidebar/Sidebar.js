@@ -64,7 +64,7 @@ function Sidebar() {
   }
 
   const home = () => {
-    history.push('/main')
+    history.push('/homepage')
   }
 
   useEffect(() => {

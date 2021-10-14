@@ -2,7 +2,6 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import Header from '../components/Header/Header';
 import Sidebar from '../components/Sidebar/Sidebar';
-import styled from 'styled-components';
 
 const UserRoute = ({component: Component, ...rest}) => {
   return (
@@ -14,7 +13,7 @@ const UserRoute = ({component: Component, ...rest}) => {
         {...rest}
         render={(props) => {
           if (localStorage.getItem('access-token')) {
-            return < Component {...props} />
+            return <Component {...props}/>
           } else {
             return <Redirect to={{
               pathname: '/',
