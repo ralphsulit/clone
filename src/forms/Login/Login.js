@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { userLogin } from '../../api/api';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import Alert from '../../components/Alert/Alert';
 import { LoginContainer, LoginInnerContainer, Form, Socials, SocialContainer } from './Login.style';
 import AppleIcon from '@material-ui/icons/Apple';
 import styled from 'styled-components';
@@ -10,29 +11,36 @@ const Login = () => {
   //state
   const [email, setEmail] = useState('ayaya2@gmail.com');
   const [password, setPassword] = useState('123123');
-  
+  const [toggleWarning, setToggleWarning] = useState(false);
+
+  //toggle alert
+  const handleToggleWarning = () => {
+    setToggleWarning(!toggleWarning)
+  }
+
   const handleLogin = (e) => {
     //to prevent page reload
     e.preventDefault()
 
-    //email and password 
-    const data = { email, password }
-
-    //User login API
-    userLogin(data)
-      .then(res => {
-        localStorage.setItem('access-token', res.headers['access-token']);
-        localStorage.setItem('client', res.headers['client']);
-        localStorage.setItem('expiry', res.headers['expiry']);
-        localStorage.setItem('uid', res.headers['uid']);
-        localStorage.setItem('id', res.data.data.id);
-        window.location = '/homepage';
-      })
-      .catch(err => err)
+  //email and password 
+  const data = { email, password }
+  
+  //User login API
+  userLogin(data)
+    .then(res => {
+      localStorage.setItem('access-token', res.headers['access-token']);
+      localStorage.setItem('client', res.headers['client']);
+      localStorage.setItem('expiry', res.headers['expiry']);
+      localStorage.setItem('uid', res.headers['uid']);
+      localStorage.setItem('id', res.data.data.id);
+      window.location = '/homepage';
+    })
+    .catch(err => err)
   } 
-
+  
   return (
     <div>
+      {toggleWarning ? <Alert handleToggleWarning={handleToggleWarning} /> : null} 
       <LoginContainer className='container'>
         <LoginInnerContainer>
           <img
@@ -41,11 +49,11 @@ const Login = () => {
           />
           <h1>Sign in to Slack</h1>
           <SocialContainer>
-            <Socials>
+            <Socials onClick={handleToggleWarning}>
               <img src='https://i1.wp.com/www.androidawareness.com/wp-content/uploads/2018/10/google-icon.png?fit=500%2C500' alt='' />
               Sign in with Google
             </Socials>
-            <Socials>
+            <Socials onClick={handleToggleWarning}>
               <Sample/>
               Sign in with Apple
             </Socials>
