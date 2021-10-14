@@ -3,7 +3,7 @@ import { getAllUsers, getUser } from '../../api/api';
 import styled from 'styled-components';
 import { headers } from '../../Headers';
 
-function AddMember({handleAddMember }) {
+function AddMember({ handleAddMemberArray, channelName="", handleToggleAddChannel }) {
   //state
   const [allUsers, setAllUsers] = useState([]);
   const [search, setSearch] = useState('');
@@ -27,28 +27,26 @@ function AddMember({handleAddMember }) {
     const found = check.some(user => user.id === data.id)
     if (found) return setWarning(true)
 
-    //
-    const updatedArray = [...click, data]
+    //Since state was previously empty, we need to add it to an array first
+    const updatedUserArray = [...click, data]
     setWarning(false)
-    setClick(updatedArray)
+    setClick(updatedUserArray)
 
     //add array to chatHeader
-    if (handleAddMember !== null) {
-      handleAddMember(updatedArray)
+    if (handleAddMemberArray !== null) {
+      handleAddMemberArray(updatedUserArray)
     }
   }
 
   //user data 
   const userSearchDetails = (id) => {
     //user obj from api
-    const getUserObj = {
-      id,
-      headers
-    }
 
-    getUser(getUserObj)
+    getUser()
       .then(res => {
-        clickedUser(res[0])
+        const dataID = res.data.data.filter(data => data.id === id)
+        clickedUser(dataID[0])
+        //console.log(dataID)
       })
       .catch(err => console.log(err))
   }
@@ -94,6 +92,7 @@ function AddMember({handleAddMember }) {
 
   return (
     <Container>
+      <p style={{color: 'black'}}>{channelName}</p>
       <HeaderSearch>
         <input
           type='text'
@@ -102,7 +101,7 @@ function AddMember({handleAddMember }) {
           onClick={handleSearchList}
           value={search}
         />
-        <p onClick={handleAddMember}>x</p>
+        <p onClick={handleAddMemberArray}>x</p>
         {warning ? <label>User is already added</label> : ''}
       </HeaderSearch>
       {toggleSearchList 

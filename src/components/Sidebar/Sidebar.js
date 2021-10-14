@@ -30,18 +30,25 @@ function Sidebar() {
   //state
   const [email, setEmail] = useState('');
   const [togDropdown, setToggleDropdown] = useState(false);
+  const [render, setRender] = useState(false);
   const [toggle, setToggle] = useState(false);
   const [channelsJoined, setChannelsJoined] = useState([]);
   const [channelsOwned, setChannelsOwned] = useState([]);
   const [recentUsers, setRecentUsers] = useState([]);
   const [toggleAddChannel, setToggleAddChannel] = useState(false);
   const [toggleWarning, setToggleWarning] = useState(false);
+  const [error, setError] = useState('');
 
   //variables
   const history = useHistory();
   const userID = parseInt(localStorage.getItem('id'));
   const user = localStorage.getItem('uid');
 
+  //refreshes the sidebar everytime we add the channel
+  const handleRender = () => {
+    setRender(!render)
+  }
+  
   const handleToggleAddChannel = () => {
     setToggleAddChannel(!toggleAddChannel)
   }
@@ -71,10 +78,18 @@ function Sidebar() {
     //variables
     setEmail(headers.uid)
   
+
     //get channels joined
     getChannel()
       .then(res => {
-        setChannelsJoined(res.data.data)
+      //   if(res.data.errors === 'No available channels.'){
+      //     setError(res.data.errors)
+      //     setChannelsJoined([])
+      //     console.log('test')
+      //   } else {
+      //     setChannelsJoined(res.data.data)
+      //   }
+      //   console.log(res)
       })
       .catch(err => console.log(err));
     
@@ -88,12 +103,17 @@ function Sidebar() {
     //get owned channels
     getOwnedChannel()
       .then(res => {
-        setChannelsOwned(res.data.data)
+        if(res.data.errors === 'No available owned channels.'){
+          setError(res.data.errors)
+          setChannelsOwned([])
+        } else {
+          setChannelsOwned(res.data.data)
+        }
       })
       .catch(err => err)
-  }, []);
+  }, [render]);
 
-  // render all channel (owned)
+  //render all channel (owned)
   const renderOwnedChannels = channelsOwned.map((channel, i) => {
     return (
       <NavLink
@@ -111,19 +131,19 @@ function Sidebar() {
   });
 
   // render all channel (joined)
-  const renderJoinedChannels = channelsJoined.map((channel, i) => {
-    if (userID !== channel.owner_id) {
-      return (
-        <NavLink
-          style={{textDecoration: 'none', color: 'white'}} 
-          to={`/channel/${channel.id}`}
-          key={i}
-        >
-          <SidebarOption Icon={InsertCommentIcon} title={channel.name} key={i} />
-        </NavLink>
-      )
-    }
-  })
+  // const renderJoinedChannels = channelsJoined.map((channel, i) => {
+  //   if (userID !== channel.owner_id) {
+  //     return (
+  //       <NavLink
+  //         style={{textDecoration: 'none', color: 'white'}} 
+  //         to={`/channel/${channel.id}`}
+  //         key={i}
+  //       >
+  //         <SidebarOption Icon={InsertCommentIcon} title={channel.name} key={i} />
+  //       </NavLink>
+  //     )
+  //   }
+  // })
 
   //direct messages
   const recentDM = recentUsers.map((user, i) => {
@@ -182,8 +202,14 @@ function Sidebar() {
       />
       <div className={togDropdown ? `sidebar-channel` : `sidebar-channels hidden`}>
         {renderOwnedChannels}
+        {/* {error} */}
         <SidebarOption Icon={AddIcon} title='Add Channel' onClick={handleToggleAddChannel}/>
-        {toggleAddChannel ? <AddChannel/> : null} 
+        {toggleAddChannel ? 
+          <AddChannel 
+            handleToggleAddChannel={handleToggleAddChannel}
+            handleRender={handleRender}
+          /> 
+        : null} 
       </div>
 
       <SidebarOption

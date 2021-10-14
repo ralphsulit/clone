@@ -10,7 +10,7 @@ function Alert({ handleToggleWarning }) {
             <h1>Warning</h1>
           </ModalHeader>
           <ModalBody>
-            <h1>This feature is not available yet</h1>
+            <h1>This feature is not yet available</h1>
           </ModalBody>
           <button onClick={handleToggleWarning}>Go Back</button>
         </ModalContent>

@@ -6,12 +6,12 @@ import AddMember from './AddMember';
 import styled from 'styled-components';
 
 
-function AddChannel() {
+function AddChannel({handleToggleAddChannel, handleRender}) {
   //state
   const [warning, setWarning] = useState(false);
   const [error, setError] = useState('');
   const [addMemberToggle, setAddMemberToggle] = useState(false);
-  const [userData, setUserData] = useState([]);
+  const [userDataArray, setUserDataArray] = useState([]);
   const [channelName, setChannelName] = useState('');
 
   //variables 
@@ -19,8 +19,8 @@ function AddChannel() {
 
   const handleGetAddMemberArray = (data) => {
     const memberId = data.map(user => user.id)
-    setUserData(memberId)
-    console.log(userData)
+    setUserDataArray(memberId)
+    console.log(userDataArray)
   }
 
   const handleToggleAddMembersForm = () => {
@@ -48,20 +48,26 @@ function AddChannel() {
   const createChannel = () => {
     const addNewChannelObj = {
       name: channelName,
-      user_ids: userData,
-      headers
+      user_ids: userDataArray
     }
     
     //add channel api
     addChannel(addNewChannelObj)
       .then(res => {
-        const channelID = res.data.data
+        if(res.data.errors === 'Name has already been taken'){
+          setError(res.data.errors)
+          console.log(error)
+          return
+        }
+        const channelID = res.data.data.id
         history.push(`/channel/${channelID}`)
         console.log(`Successfully added`, res)
       })
       .catch(err => err)
     
     setWarning(false)
+    handleToggleAddChannel()
+    handleRender()
   }
   return (
     <AddChannelOuterContainer>
@@ -83,8 +89,9 @@ function AddChannel() {
           ?
             <div>
               <AddMember
-              addMember={handleGetAddMemberArray}
+              handleAddMemberArray={handleGetAddMemberArray}
               channelName={channelName}
+              handleToggleAddChannel={handleToggleAddChannel}
               />
               <button onClick={createChannel}>Add Channel with Members</button>
             </div>

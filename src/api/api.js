@@ -1,7 +1,8 @@
 import axios from 'axios';
 
 const axiosFetch = axios.create({
-  baseURL: process.env.REACT_APP_SLACK_API_URL,
+  //baseURL: process.env.REACT_APP_SLACK_API_URL,
+  baseURL: 'http://206.189.91.54/',
   headers: {
   'access-token': localStorage.getItem('access-token'),
   'client': localStorage.getItem('client'),
