@@ -7,7 +7,7 @@ const AuthRoute = ({component: Component, ...rest}) => {
       {...rest}
       render={(props) => {
         if (!localStorage.getItem('access-token')) {
-          return < Component {...props} />
+          return <Component {...props} />
         } else {
           return <Redirect to={{
             pathname: '/message',

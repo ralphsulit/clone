@@ -10,7 +10,6 @@ const Login = () => {
   //state
   const [email, setEmail] = useState('ayaya2@gmail.com');
   const [password, setPassword] = useState('123123');
-  const history = useHistory();
   
   const handleLogin = (e) => {
     //to prevent page reload
