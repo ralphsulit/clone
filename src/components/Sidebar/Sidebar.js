@@ -208,9 +208,8 @@ const SidebarContainer = styled.div`
   background-color: var(--slack-color);
   border-top: 1px solid #49274b;
   width: 300px;
-  margin-top: 40px;
   overflow-y: auto;
-  height: 95vh;
+  height: 100vh;
 
     >hr {
       margin-top: 10px;
@@ -227,6 +226,7 @@ const SidebarHeader = styled.div`
   display: flex;
   border-bottom: 1px solid #49274b;
   padding: 13px;
+  margin-top: 50px;
 
     >.MuiSvgIcon-root {
       padding: 8px;

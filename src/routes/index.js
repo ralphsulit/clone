@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, withRouter } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 import AuthRoute from './AuthRoutes';
 import UserRoute from './UserRoutes';
 import Login from '../forms/Login/Login';

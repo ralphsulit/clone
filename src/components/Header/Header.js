@@ -13,14 +13,11 @@ function Header() {
   //state
   const [toggleSearch, setToggleSearch] = useState(false);
   const [warning, setWarning] = useState(false);
-  
-  //variables
-  const history = useHistory();
 
-//toggle warning
-const handleToggleWarning = () => {
-  setWarning(!warning);
-}
+  //toggle warning
+  const handleToggleWarning = () => {
+    setWarning(!warning);
+  }
 
   //toggle searchbox
   const handleToggleSearchBox = () => {
@@ -82,6 +79,7 @@ const HeaderContainer = styled.div`
   width: 100%;
   font-family: 'Noto Sans Display', sans-serif;
   padding-left: 450px;
+  height: 5vh;
 `;
 
 const HeaderSearch = styled.div`
