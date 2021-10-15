@@ -3,7 +3,7 @@ import { getAllUsers, getUser } from '../../api/api';
 import styled from 'styled-components';
 import CancelIcon from '@material-ui/icons/Cancel';
 
-function AddMember({ handleAddMemberArray, channelName="", handleToggle }) {
+function AddMember({ handleAddMemberArray, channelName="", handleToggle, receiver }) {
   //state
   const [users, setUsers] = useState([]);
   const [search, setSearch] = useState('');
@@ -102,7 +102,7 @@ function AddMember({ handleAddMemberArray, channelName="", handleToggle }) {
     <Container>
       <CancelIcon onClick={handleToggle}/> 
       <h1>Add people</h1>
-      <p>#{channelName}</p>
+      <p>#{channelName}{receiver}</p>
       <DisplayUser>
         {displayUser}
       </DisplayUser>
@@ -132,9 +132,11 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   >h1{
+    font-family: 'Noto Sans Display', sans-serif;
     margin-top: 2vh;
     text-align: left;
     margin-left: 2vw;
+    font-size: 2rem;
   }
   >p{
     margin-top: 0.5vh;
@@ -187,7 +189,6 @@ const SearchBoxResult = styled.div`
   width: 84%;  
   margin-left: 2vw;
   margin-right: 2vw;
-  border-radius: 10px;
 
   ::-webkit-scrollbar {
     display: none;
