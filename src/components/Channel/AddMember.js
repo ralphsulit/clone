@@ -3,7 +3,7 @@ import { getAllUsers, getUser } from '../../api/api';
 import styled from 'styled-components';
 import CancelIcon from '@material-ui/icons/Cancel';
 
-function AddMember({ handleAddMemberArray, channelName="", handleToggle }) {
+function AddMember({ handleAddMemberArray, channelName="", handleToggle, receiver }) {
   //state
   const [users, setUsers] = useState([]);
   const [search, setSearch] = useState('');
@@ -102,7 +102,7 @@ function AddMember({ handleAddMemberArray, channelName="", handleToggle }) {
     <Container>
       <CancelIcon onClick={handleToggle}/> 
       <h1>Add people</h1>
-      <p>#{channelName}</p>
+      <p>#{channelName}{receiver}</p>
       <Search>
         <input
           type='text'
@@ -135,18 +135,19 @@ const Container = styled.div`
   flex-direction: column;
   font-family: Noto Sans Display, 'sans-serif';
 
-    >h1{
-      margin-top: 2vh;
-      text-align: left;
-      margin-left: 2vw;
+    > h1{
+    font-family: 'Noto Sans Display', sans-serif;
+    margin-top: 2vh;
+    text-align: left;
+    margin-left: 2vw;
+    font-size: 2rem;
     }
 
-    >p{
-      margin-top: 0.5vh;
-      text-align: left;
-      margin-left: 2vw;
-      color: #4e4e4e;
-      font-size: 0.9rem;
+    >p {
+        margin-top: 0.5vh;
+        text-align: left;
+        margin-left: 2vw;
+        color: #4e4e4e;
     }
 
     .MuiSvgIcon-root {
