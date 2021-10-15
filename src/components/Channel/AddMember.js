@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getAllUsers, getUser } from '../../api/api';
 import styled from 'styled-components';
-import { headers } from '../../Headers';
+import CancelIcon from '@material-ui/icons/Cancel';
 
 function AddMember({ handleAddMemberArray, channelName="", handleToggle }) {
   //state
@@ -90,18 +90,23 @@ function AddMember({ handleAddMemberArray, channelName="", handleToggle }) {
 
   const displayUser = click.map(user => {
     return (
-      <div>
-        <h3>{user.email}</h3>
-        <p onClick={() => remove(user.id)}>x</p>
-      </div>
+      <section>
+      <h3>{user.email}</h3>
+      <p onClick={() => remove(user.id)}>x</p>
+    </section>
     )
   })
 
 
   return (
     <Container>
-      <p style={{color: 'black'}}>{channelName}</p>
-      <HeaderSearch>
+      <CancelIcon onClick={handleToggle}/> 
+      <h1>Add people</h1>
+      <p>#{channelName}</p>
+      <DisplayUser>
+        {displayUser}
+      </DisplayUser>
+      <Search>
         <input
           type='text'
           placeholder='search'
@@ -109,9 +114,8 @@ function AddMember({ handleAddMemberArray, channelName="", handleToggle }) {
           onClick={handleSearchList}
           value={search}
         />
-        <p onClick={handleToggle}>x</p>
         {warning ? <label>User is already added</label> : ''}
-      </HeaderSearch>
+      </Search>
       {toggleSearchList 
         ?
           <SearchBoxResult>
@@ -119,53 +123,75 @@ function AddMember({ handleAddMemberArray, channelName="", handleToggle }) {
           </SearchBoxResult>
         : ''
       }
-      <div>
-        {displayUser}
-      </div>
     </Container>
   )
 }
 
 export default AddMember;
-
 const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  >h1{
+    margin-top: 2vh;
+    text-align: left;
+    margin-left: 2vw;
+  }
+  >p{
+    margin-top: 0.5vh;
+    text-align: left;
+    margin-left: 2vw;
+    color: #4e4e4e;
+  }
 
+.MuiSvgIcon-root {
+  margin-top: 1vh;
+  margin-right: 2px;
+  margin-left:90%;
+  color: gray;
+}
 `
 
-const HeaderSearch = styled.div`
-  background-color: white;
-  margin-top: 1rem;
-  height: 3rem;
-  width: 25rem;
+
+const Search = styled.div`
   display: flex;
-  padding-right: 1rem;
-  justify-content: space-between;
-  align-items: center;
-  border-radius: 0.5rem;
-  border-bottom: 1px gray solid;
+  flex-direction: column;
+  margin-top: 1vh;
+  margin-left: 2vw;
+  margin-right: 2vw;
+  text-align: center;
+  justify-content: center;
+
   
   > input {
-    background-color: transparent;
-    border: none;
-    text-align: center;
+    background-color: white;
+    border: 1.5px solid #c5c5c5;
+    text-align: left;
     color: black;
     outline: 0;
-    font-weight: bolder;
+    font-weight: 1;
     font-size: 1rem;
+    width: 100%;
+    padding: 1vh;
+    border-radius: 10px;
   }
 
   > p {
-    color: black;
-    cursor: pointer;
   }
 `;
 
 const SearchBoxResult = styled.div`
-  width: 26rem;
-  max-height: 30rem;
+  max-height: 10rem;
   overflow-y: scroll;
   overflow-x: hidden;
-  border-radius: 0.5rem;
+  border-radius: 1px;  
+  width: 84%;  
+  margin-left: 2vw;
+  margin-right: 2vw;
+  border-radius: 10px;
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `
 
 const LinkElement = styled.div`
@@ -176,23 +202,52 @@ const SearchBoxResults = styled.div`
   display: flex;
   align-items: center;
   padding: 1rem;
-  padding-left: 3rem;
+  padding-left: .5rem;
   cursor: pointer;
   background: white;
+  z-index: 30;
+
 
   > p {
     font-size: 1rem;
-    font-weight: bolder;
-    padding-left: 1rem;
-    letter-spacing: .2px;
+    font-weight: 1;
+    padding-left: 1rem;;
     color: black;
   }
 
   :hover {
-    background-color: #135999;
+    background-color: var(--slack-color);
 
     > p {
       color: white;
     }
   }
+`
+const DisplayUser = styled.div`
+z-index: -1;
+background-color: transparent;
+scrollbar-color: transparent;
+height:5vw;
+display: flex;
+flex-direction: column;
+overflow-x: hidden;
+overflow-y: scroll;
+width:70%;
+margin: 15px auto;
+cursor: default;
+
+::-webkit-scrollbar {
+    display: none;
+  }
+
+>section{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+>section >h3 {
+  font-weight: normal;
+  color: #5a5a5a;
+  font-size:1.5vh;
+}
 `
