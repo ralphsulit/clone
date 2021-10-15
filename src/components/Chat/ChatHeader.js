@@ -130,14 +130,15 @@ function ChatHeader({ receiver }) {
       }
       {toggleAddMembers
         ?
-          <div>
+          <AddMemberDiv>
             <AddMember
+              receiver={receiver}
               handleAddedMember={handleAddedMember}
               handleAddMemberArray={handleAddMember}
               handleToggle={handleToggleAddMembers}
             />
-            <button onClick={handleAddedMember}>+</button>
-          </div>
+            <button onClick={handleAddedMember}>Add</button>
+          </AddMemberDiv>
         :
           ''
       }
@@ -225,3 +226,27 @@ const MemberList = styled.div`
 const Member = styled.div`
   margin: 2px 0
 `;
+
+const AddMemberDiv = styled.div`
+z-index: 21;
+background-color:  white;
+position: absolute;
+top: 24vh;
+width: 52vh;
+height: 52vh;
+left:37%;
+border-radius: 10px;
+
+>button{
+width: 3vw;
+background-color: #006E5B;
+border-radius: 5px;
+border: solid 1px transparent;
+color: white;
+padding: 1vh;
+position: absolute;
+font-weight:bolder;
+margin-left:80%;
+bottom: 3vh;
+}
+`

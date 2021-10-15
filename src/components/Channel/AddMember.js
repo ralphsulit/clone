@@ -103,6 +103,10 @@ function AddMember({ handleAddMemberArray, channelName="", handleToggle, receive
       <CancelIcon onClick={handleToggle}/> 
       <h1>Add people</h1>
       <p>#{channelName}{receiver}</p>
+      <DisplayUser>
+        {displayUser}
+      </DisplayUser>
+
       <Search>
         <input
           type='text'
@@ -133,15 +137,14 @@ export default AddMember;
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  font-family: Noto Sans Display, 'sans-serif';
-
+  
     > h1{
+
     font-family: 'Noto Sans Display', sans-serif;
     margin-top: 2vh;
     text-align: left;
     margin-left: 2vw;
     font-size: 2rem;
-    }
 
     >p {
         margin-top: 0.5vh;
@@ -192,7 +195,6 @@ const SearchBoxResult = styled.div`
   width: 84%;  
   margin-left: 2vw;
   margin-right: 2vw;
-  border-radius: 10px;
 
   ::-webkit-scrollbar {
     display: none;
