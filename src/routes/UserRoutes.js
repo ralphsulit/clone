@@ -8,7 +8,7 @@ const UserRoute = ({component: Component, ...rest}) => {
   return (
     <div className='container'>
       {localStorage.getItem('access-token') && <Header/>} 
-      <div style={{ display: 'flex', flexDirection: 'row'}}>
+      <div className='innerContainer'>
       {localStorage.getItem('access-token') && <Sidebar/>} 
       <Route
         {...rest}

@@ -92,7 +92,7 @@ function AddMember({ handleAddMemberArray, channelName="", handleToggle, receive
     return (
       <section>
       <h3>{user.email}</h3>
-      <p onClick={() => remove(user.id)}>x</p>
+      <span onClick={() => remove(user.id)}>X</span>
     </section>
     )
   })
@@ -106,6 +106,7 @@ function AddMember({ handleAddMemberArray, channelName="", handleToggle, receive
       <DisplayUser>
         {displayUser}
       </DisplayUser>
+
       <Search>
         <input
           type='text'
@@ -123,35 +124,43 @@ function AddMember({ handleAddMemberArray, channelName="", handleToggle, receive
           </SearchBoxResult>
         : ''
       }
+      <DisplayUser>
+        {displayUser}
+      </DisplayUser>
+      
     </Container>
   )
 }
 
 export default AddMember;
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  >h1{
+  
+    > h1{
+
     font-family: 'Noto Sans Display', sans-serif;
     margin-top: 2vh;
     text-align: left;
     margin-left: 2vw;
     font-size: 2rem;
-  }
-  >p{
-    margin-top: 0.5vh;
-    text-align: left;
-    margin-left: 2vw;
-    color: #4e4e4e;
-  }
 
-.MuiSvgIcon-root {
-  margin-top: 1vh;
-  margin-right: 2px;
-  margin-left:90%;
-  color: gray;
-}
-`
+    >p {
+        margin-top: 0.5vh;
+        text-align: left;
+        margin-left: 2vw;
+        color: #4e4e4e;
+    }
+
+    .MuiSvgIcon-root {
+      margin-top: 1vh;
+      margin-right: 2px;
+      margin-left:90%;
+      color: #cd5c5c;
+      cursor: pointer;
+    }
+`;
 
 
 const Search = styled.div`
@@ -176,9 +185,6 @@ const Search = styled.div`
     padding: 1vh;
     border-radius: 10px;
   }
-
-  > p {
-  }
 `;
 
 const SearchBoxResult = styled.div`
@@ -193,11 +199,11 @@ const SearchBoxResult = styled.div`
   ::-webkit-scrollbar {
     display: none;
   }
-`
+`;
 
 const LinkElement = styled.div`
   text-decoration: none;
-`
+`;
 
 const SearchBoxResults = styled.div`
   display: flex;
@@ -223,7 +229,8 @@ const SearchBoxResults = styled.div`
       color: white;
     }
   }
-`
+`;
+
 const DisplayUser = styled.div`
 z-index: -1;
 background-color: transparent;
@@ -234,21 +241,27 @@ flex-direction: column;
 overflow-x: hidden;
 overflow-y: scroll;
 width:70%;
-margin: 15px auto;
+margin: 20px auto;
 cursor: default;
 
-::-webkit-scrollbar {
-    display: none;
+  ::-webkit-scrollbar {
+      display: none;
+    }
+
+  >section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
   }
 
->section{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
->section >h3 {
-  font-weight: normal;
-  color: #5a5a5a;
-  font-size:1.5vh;
-}
-`
+  >section >h3 {
+    font-weight: normal;
+    color: #5a5a5a;
+    font-size:1.5vh;
+  }
+
+    >span {
+    font-family: 'Fredoka One', cursive;
+    font-size: 0.9rem;
+  }
+`;
