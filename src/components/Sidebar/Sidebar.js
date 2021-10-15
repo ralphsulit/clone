@@ -20,6 +20,7 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import PeopleAltIcon from "@material-ui/icons/PeopleAlt";
 import AddIcon from "@material-ui/icons/Add";
 import AppsIcon from "@material-ui/icons/Apps";
+import LockIcon from '@material-ui/icons/Lock';
 
 function Sidebar() {
   const headers = {
@@ -122,7 +123,7 @@ function Sidebar() {
         key={i}
       >
         <SidebarOption
-          Icon={InsertCommentIcon}
+          Icon={LockIcon}
           title={channel.name}
         />
       </NavLink>

@@ -56,7 +56,7 @@ function SearchBox({ handleToggleSearchBox, handleToggleWarning }) {
       <div ref={searchBoxRef}>
         <HeaderSearch>
           <input type='text' placeholder='Search' onChange={handleSearch} />
-          <p onClick={handleToggleSearchBox}>X</p>
+          <span onClick={handleToggleSearchBox}>X</span>
         </HeaderSearch>
         <SearchBoxResult>
           {searchUserList}
@@ -142,7 +142,7 @@ const HeaderSearch = styled.div`
       outline: 0;
     }
 
-    >p {
+    >span {
       color: black;
       cursor: pointer;
       font-family: 'Fredoka One', cursive;

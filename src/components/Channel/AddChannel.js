@@ -146,42 +146,47 @@ const AddChannelForm = styled.form`
   width: 80%;
   margin-left: auto;
   margin-right: auto;
-  >h2{
-    margin: 30px auto 10px 0px;
-    font-size: 1.5rem;
-  }
-  >p{
-    text-align: left;
-    line-height: 15px;
-    padding: 1vh 1vh 1vh 0;
-    font-size: 0.70rem;
-    color: #5f5f5f;
-  }
-  >label{
-    text-align: left;
-    font-size: 1rem;
-    padding: 10px 10px 10px 0;
-  }
-  > button {
-    width: 10vh;
-    margin: auto auto auto 20px;
-    background-color: #006E5B;
-    border-radius: 5px;
-    border: solid 1px transparent;
-    color: white;
-    padding: 1vh;
-    position: absolute;
-    bottom: 28%;
-    right: 40%;
-    font-weight:bolder;
-  }
+    >h2{
+      margin: 30px auto 10px 0px;
+      font-size: 1.5rem;
+    }
 
-  .MuiSvgIcon-root {
-  margin-top: 1.5vh;
-  margin-right: 2px;
-  margin-left:98%;
-  color: gray;
-}
+    >p{
+      text-align: left;
+      line-height: 15px;
+      padding: 1vh 1vh 1vh 0;
+      font-size: 0.70rem;
+      color: #5f5f5f;
+    }
+
+    >label{
+      text-align: left;
+      font-size: 1rem;
+      padding: 10px 10px 10px 0;
+    }
+
+    > button {
+      width: 10vh;
+      margin: auto auto auto 20px;
+      background-color: #350D36;
+      border-radius: 5px;
+      border: solid 1px transparent;
+      color: white;
+      padding: 1vh;
+      position: absolute;
+      bottom: 28%;
+      right: 40%;
+      font-weight:bolder;
+      cursor: pointer;
+    }
+
+      .MuiSvgIcon-root {
+      margin-top: 1.5vh;
+      margin-right: 2px;
+      margin-left:98%;
+      color: #cd5c5c;
+      cursor: pointer;
+    }
 `;
 
 const AddChannelInput = styled.input`
@@ -219,17 +224,18 @@ const ErrorStyle = styled.div`
 
 const AddMemberDiv = styled.div` 
 
-> button {
-width: 3vw;
-margin: auto auto auto 20px;
-background-color: #006E5B;
-border-radius: 5px;
-border: solid 1px transparent;
-color: white;
-padding: 1vh;
-position: absolute;
-bottom: 28%;
-right: 40%;
-font-weight:bolder;
-}
-`
+  > button {
+  width: 3vw;
+  margin: auto auto auto 20px;
+  background-color: #350D36;
+  border-radius: 5px;
+  border: solid 1px transparent;
+  color: white;
+  padding: 1vh;
+  position: absolute;
+  bottom: 28%;
+  right: 40%;
+  font-weight:bolder;
+  cursor: pointer;
+  }
+`;

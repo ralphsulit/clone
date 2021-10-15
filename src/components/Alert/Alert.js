@@ -47,13 +47,14 @@ const ModalContent = styled.div`
   padding: 50px;
 
     >button{
+      font-weight: 900;
       width: 100px;
       margin: 50px auto;
       padding: 10px 10px;
       border: none;
       border-radius: 5px;
       background: #350D36;
-      color: #D1C8D2;
+      color: #fff;
       cursor: pointer;
     }
 `;
