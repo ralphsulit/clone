@@ -192,7 +192,7 @@ const SearchBoxResult = styled.div`
   overflow-y: scroll;
   overflow-x: hidden;
   border-radius: 1px;  
-  width: 84%;  
+  width: 22.5rem;  
   margin-left: 2vw;
   margin-right: 2vw;
 
@@ -232,15 +232,14 @@ const SearchBoxResults = styled.div`
 `;
 
 const DisplayUser = styled.div`
-z-index: -1;
 background-color: transparent;
 scrollbar-color: transparent;
-height:5vw;
+height: 15rem;
 display: flex;
 flex-direction: column;
 overflow-x: hidden;
 overflow-y: scroll;
-width:70%;
+width: 70%;
 margin: 20px auto;
 
   ::-webkit-scrollbar {

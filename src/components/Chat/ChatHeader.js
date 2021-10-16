@@ -246,5 +246,6 @@ z-index: 21;
   color: white;
   padding: 1vh;
   font-weight:bolder;
+  cursor: pointer;
   }
 `;
