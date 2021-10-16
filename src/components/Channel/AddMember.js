@@ -237,7 +237,7 @@ const DisplayUser = styled.div`
   left: 5rem;
   background-color: transparent;
   scrollbar-color: transparent;
-  height: 15rem;
+  height: 11rem;
   display: flex;
   flex-direction: column;
   overflow-x: hidden;

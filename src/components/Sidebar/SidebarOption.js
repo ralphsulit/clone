@@ -2,14 +2,17 @@ import React from 'react';
 import styled from 'styled-components';
 
 function SidebarOption({Icon, title, onClick, 
-  addChannelICon=false, handleToggleAddChannel}) {
+  addChannelICon=false, handleToggleAddChannel, style}) {
   return (
     <SidebarOptionContainer 
       onClick={onClick}>
       {Icon && <Icon fontSize='large' style={{ padding: '10' }} />}
       <h3>{title}</h3>
       {addChannelICon && 
-        <span onClick={handleToggleAddChannel}>+</span>}
+        <span 
+          onClick={handleToggleAddChannel}
+          style={style}
+        >+</span>}
     </SidebarOptionContainer>
   )
 };
@@ -38,13 +41,19 @@ const SidebarOptionContainer = styled.div`
     }
 
     > span {
-      left: 13rem;
-
+      width: 1.5rem;
+      padding: 0.2rem;
+      text-align: center;
+      margin-left: auto;
+      margin-right: 2rem;
+      border-radius: 5px;
+      font-size: 1rem;
+      font-weight: bolder;
       z_index: 2;
 
       :hover {
-        color: red;
-        background-color: blue;
+        color: #340e36;
+        background-color: #BCABBC;
       }
     }
 `;

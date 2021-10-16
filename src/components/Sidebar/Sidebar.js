@@ -41,6 +41,7 @@ function Sidebar() {
   const [toggleAddChannel, setToggleAddChannel] = useState(false);
   const [toggleWarning, setToggleWarning] = useState(false);
   const [error, setError] = useState('');
+  const [style, setStyle] = useState({display: 'none'});
 
   //variables
   const history = useHistory();
@@ -199,25 +200,39 @@ function Sidebar() {
         />
       <hr />
       
-      <SidebarOption
-        Icon={togDropdown ? ExpandMoreIcon : ChevronRightIcon}
-        title='Channels'
-        onClick={handleToggleDropdown}
-        addChannelICon={true}
-        handleToggleAddChannel={handleToggleAddChannel}
-      />
+      <div         
+          onMouseEnter={e => {
+          setStyle({display: 'block'})
+          }}
+          onMouseLeave={e => {
+            setStyle({display: 'none'})
+          }}
+        >
+        <SidebarOption
+          Icon={togDropdown ? ExpandMoreIcon : ChevronRightIcon}
+          title='Channels'
+          onClick={handleToggleDropdown}
+          addChannelICon={true}
+          handleToggleAddChannel={handleToggleAddChannel}
+          style={style}
+        />
+      </div>
       <div className={togDropdown ? `sidebar-channel` : `sidebar-channels hidden`}>
         {renderOwnedChannels}
         {renderJoinedChannels}
         {/* {error} */}
-        <SidebarOption Icon={AddIcon} title='Add Channel' onClick={handleToggleAddChannel}/>
+        <SidebarOption 
+          Icon={AddIcon} 
+          title='Add Channel' 
+          onClick={handleToggleAddChannel}
+          />
+      </div>
         {toggleAddChannel ? 
           <AddChannel 
             handleToggleAddChannel={handleToggleAddChannel}
             handleRender={handleRender}
           /> 
         : null} 
-      </div>
 
       <SidebarOption
         Icon={toggle ? ExpandMoreIcon : ChevronRightIcon}
