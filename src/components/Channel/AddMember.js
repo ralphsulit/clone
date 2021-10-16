@@ -32,8 +32,6 @@ function AddMember({
         setAllUser(res.data.data)
       })
       .catch(err => err)
-
-    console.log('add member clicked')
   }, [])
 
   //remove user
@@ -96,9 +94,9 @@ function AddMember({
     )
   })
 
-  const displayUser = click.map((user, i) => {
+  const displayUser = click.map(user => {
     return (
-      <section key={i}>
+      <section>
         <h3>{user.email}</h3>
         <span onClick={() => remove(user.id)}>X</span>
       </section>
@@ -112,18 +110,18 @@ function AddMember({
       <h1>Add people</h1>
       <p>#{channelName}{receiver}</p>
       <Search>
-      {warning ? <label>User is already added</label> : ''}
         <input
           type='text'
           placeholder='search'
           onChange={handleSearch}
           onClick={handleSearchList}
           value={search}
-          />
+        />
+        {warning ? <label>User is already added</label> : ''}
       </Search>
       {toggleSearchList 
         ?
-        <SearchBoxResult>
+          <SearchBoxResult>
             {searchUser}
           </SearchBoxResult>
         : ''
@@ -194,9 +192,9 @@ const SearchBoxResult = styled.div`
   overflow-y: scroll;
   overflow-x: hidden;
   border-radius: 1px;  
-  width: 23.2rem;  
+  width: 22.5 rem;
   margin-left: 2vw;
-  z-index: 30;
+  margin-right: 2vw;
 
   ::-webkit-scrollbar {
     display: none;
@@ -214,7 +212,9 @@ const SearchBoxResults = styled.div`
   padding-left: .5rem;
   cursor: pointer;
   background: white;
-  
+  z-index: 30;
+
+
   > p {
     font-size: 1rem;
     font-weight: 1;
@@ -232,39 +232,36 @@ const SearchBoxResults = styled.div`
 `;
 
 const DisplayUser = styled.div`
-  position: absolute;
-  top: 13rem;
-  left: 5rem;
-  background-color: transparent;
-  scrollbar-color: transparent;
-  height: 11rem;
-  display: flex;
-  flex-direction: column;
-  overflow-x: hidden;
-  overflow-y: scroll;
-  width: 70%;
-  margin: 20px auto;
+background-color: transparent;
+scrollbar-color: transparent;
+height:5vw;
+display: flex;
+flex-direction: column;
+overflow-x: hidden;
+overflow-y: scroll;
+width:70%;
+margin: 20px auto;
 
-    ::-webkit-scrollbar {
-        display: none;
-      }
-
-    >section {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
+  ::-webkit-scrollbar {
+      display: none;
     }
 
-    >section > h3 {
-      font-weight: normal;
-      color: #5a5a5a;
-    }
+  >section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
 
-    >section > span {
-      display: flex;
-      align-items: center;
-      font-family: 'Fredoka One', cursive;
-      font-size: 1rem;
-      cursor: pointer;
-    }
+  >section > h3 {
+    font-weight: normal;
+    color: #5a5a5a;
+  }
+
+  >section > span {
+    display: flex;
+    align-items: center;
+    font-family: 'Fredoka One', cursive;
+    font-size: 1rem;
+    cursor: pointer;
+  }
 `;

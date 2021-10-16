@@ -12,7 +12,10 @@ function SidebarOption({Icon, title, onClick,
         <span 
           onClick={handleToggleAddChannel}
           style={style}
-        >+</span>}
+        >
+          +
+        </span>
+      }
     </SidebarOptionContainer>
   )
 };
@@ -42,7 +45,7 @@ const SidebarOptionContainer = styled.div`
 
     > span {
       width: 1.5rem;
-      padding: 0.2rem;
+      padding: 2px 3px 5px 3px;
       text-align: center;
       margin-left: auto;
       margin-right: 2rem;

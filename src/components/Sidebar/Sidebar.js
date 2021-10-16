@@ -220,7 +220,6 @@ function Sidebar() {
       <div className={togDropdown ? `sidebar-channel` : `sidebar-channels hidden`}>
         {renderOwnedChannels}
         {renderJoinedChannels}
-        {/* {error} */}
         <SidebarOption 
           Icon={AddIcon} 
           title='Add Channel' 
