@@ -52,7 +52,8 @@ function Sidebar() {
     setRender(!render)
   }
   
-  const handleToggleAddChannel = () => {
+  const handleToggleAddChannel = (e) => {
+    e.stopPropagation()
     setToggleAddChannel(!toggleAddChannel)
   }
 
@@ -202,6 +203,8 @@ function Sidebar() {
         Icon={togDropdown ? ExpandMoreIcon : ChevronRightIcon}
         title='Channels'
         onClick={handleToggleDropdown}
+        addChannelICon={true}
+        handleToggleAddChannel={handleToggleAddChannel}
       />
       <div className={togDropdown ? `sidebar-channel` : `sidebar-channels hidden`}>
         {renderOwnedChannels}

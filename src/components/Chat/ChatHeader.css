@@ -1,5 +1,5 @@
 .peopleIcon {
-  color: #3F0E40;
+  color: #3f0e40;
   width: 20px;
   font-weight: 700;
   font-size: 1.2rem;
@@ -24,9 +24,9 @@
 }
 
 .members h4 {
-    border-bottom: 2px solid #007A5A;
-    margin: 0 15px 15px 0;
-    width: 14%;
-    font-weight: 500;
-    font-size: 0.9rem;
+  border-bottom: 2px solid #007a5a;
+  margin: 0 15px 15px 0;
+  width: 14%;
+  font-weight: 500;
+  font-size: 0.9rem;
 }

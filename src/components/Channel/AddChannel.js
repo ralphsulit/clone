@@ -100,11 +100,12 @@ function AddChannel({handleToggleAddChannel, handleRender}) {
               handleToggle={handleToggleAddChannel}
               />
               <ErrorStyle>{warning ? <p>{error}</p> : ''}</ErrorStyle>
-              <button onClick={createChannel}>Done</button>
             </AddMemberDiv>
           : ''
         }
-        
+        <DoneButtonDiv>
+          {addMemberToggle && <button onClick={createChannel}>Done</button>}
+        </DoneButtonDiv>
       </AddChannelContainer>
     </AddChannelOuterContainer>
   ) 
@@ -126,17 +127,34 @@ const AddChannelOuterContainer = styled.div`
 `;
 
 const AddChannelContainer = styled.div`
-  z-index: 1;
-  height: 50vh;
-  width: 25vw;
-  display: flex;
-  flex-direction: column;
+  z-index: 10;
+  height: 500px;
+  width: 450px;
   background-color: whitesmoke;
   margin: auto;
   font-size: 1vh;
   box-shadow: 0 1px 3px rgba(219, 219, 219, 0.9), 0 1px 2px rgba(199, 194, 194, 0.75);
   border-radius: 2vh;
+  display: flex;
+  flex-direction: column;
 `;
+
+const DoneButtonDiv = styled.div`
+  margin-top: auto;
+  margin-left: auto;
+  padding: 2rem;
+
+  > button {
+    width: 4rem;
+    background-color: #350D36;
+    border-radius: 5px;
+    border: solid 1px transparent;
+    color: white;
+    padding: 1rem;
+    font-weight:bolder;
+    cursor: pointer;
+  }
+`
 
 const AddChannelForm = styled.form`
   display: flex;
@@ -197,22 +215,6 @@ const AddChannelInput = styled.input`
   padding: 2vh;
 `;
 
-const AddMemberChannelForm = styled.form`
-  display: flex;
-  width: 80%;
-  padding: 2vh;
-`;
-
-const AddMemberChannelSearch = styled.input`
-  width: 100%;
-  padding: 1.5vh;
-  height: 2vh;
-  margin: auto;
-  border-radius: 2vh;
-  border: 1px solid black;
-  font-size: 2vh;
-`;
-
 const ErrorStyle = styled.div`
   >p {
     color: red;
@@ -221,19 +223,5 @@ const ErrorStyle = styled.div`
 `;
 
 const AddMemberDiv = styled.div` 
-
-  > button {
-  width: 3vw;
-  margin: auto auto auto 20px;
-  background-color: #350D36;
-  border-radius: 5px;
-  border: solid 1px transparent;
-  color: white;
-  padding: 1vh;
-  position: absolute;
-  bottom: 28%;
-  right: 40%;
-  font-weight:bolder;
-  cursor: pointer;
-  }
+  position: relative;
 `;
