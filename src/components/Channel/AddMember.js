@@ -3,7 +3,13 @@ import { getAllUsers, getUser } from '../../api/api';
 import styled from 'styled-components';
 import CancelIcon from '@material-ui/icons/Cancel';
 
-function AddMember({ handleAddMemberArray, channelName="", handleToggle, receiver }) {
+function AddMember({
+  handleAddMemberArray,
+  channelName = "",
+  handleToggle,
+  receiver
+})
+{
   //state
   const [users, setUsers] = useState([]);
   const [search, setSearch] = useState('');
@@ -80,8 +86,8 @@ function AddMember({ handleAddMemberArray, channelName="", handleToggle, receive
 
   const searchUser = users.map((user, i) => {
     return (
-      <LinkElement onClick={() => userSearchDetails(user.id)}>
-        <SearchBoxResults key={i}>
+      <LinkElement key={i} onClick={() => userSearchDetails(user.id)}>
+        <SearchBoxResults>
           <p>{ user.email }</p>
         </SearchBoxResults>
       </LinkElement>
@@ -91,22 +97,18 @@ function AddMember({ handleAddMemberArray, channelName="", handleToggle, receive
   const displayUser = click.map(user => {
     return (
       <section>
-      <h3>{user.email}</h3>
-      <span onClick={() => remove(user.id)}>X</span>
-    </section>
+        <h3>{user.email}</h3>
+        <span onClick={() => remove(user.id)}>X</span>
+      </section>
     )
   })
 
 
   return (
     <Container>
-      <CancelIcon onClick={handleToggle}/> 
+      <CancelIcon onClick={ handleToggle }/>
       <h1>Add people</h1>
       <p>#{channelName}{receiver}</p>
-      <DisplayUser>
-        {displayUser}
-      </DisplayUser>
-
       <Search>
         <input
           type='text'
@@ -139,12 +141,12 @@ const Container = styled.div`
   flex-direction: column;
   
     > h1{
-
-    font-family: 'Noto Sans Display', sans-serif;
-    margin-top: 2vh;
-    text-align: left;
-    margin-left: 2vw;
-    font-size: 2rem;
+      font-family: 'Noto Sans Display', sans-serif;
+      margin-top: 2vh;
+      text-align: left;
+      margin-left: 2vw;
+      font-size: 2rem;
+    }
 
     >p {
         margin-top: 0.5vh;
@@ -166,9 +168,7 @@ const Container = styled.div`
 const Search = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 1vh;
-  margin-left: 2vw;
-  margin-right: 2vw;
+  margin: 1vh 2vw;
   text-align: center;
   justify-content: center;
 
@@ -242,7 +242,6 @@ overflow-x: hidden;
 overflow-y: scroll;
 width:70%;
 margin: 20px auto;
-cursor: default;
 
   ::-webkit-scrollbar {
       display: none;
@@ -254,14 +253,16 @@ cursor: default;
     justify-content: space-between;
   }
 
-  >section >h3 {
+  >section > h3 {
     font-weight: normal;
     color: #5a5a5a;
-    font-size:1.5vh;
   }
 
-    >span {
+  >section > span {
+    display: flex;
+    align-items: center;
     font-family: 'Fredoka One', cursive;
-    font-size: 0.9rem;
+    font-size: 1rem;
+    cursor: pointer;
   }
 `;

@@ -130,15 +130,17 @@ function ChatHeader({ receiver }) {
       }
       {toggleAddMembers
         ?
-          <AddMemberDiv>
-            <AddMember
-              receiver={receiver}
-              handleAddedMember={handleAddedMember}
-              handleAddMemberArray={handleAddMember}
-              handleToggle={handleToggleAddMembers}
-            />
-            <button onClick={handleAddedMember}>Add</button>
-          </AddMemberDiv>
+          <div className='memberList'>
+            <AddMemberDiv>
+              <AddMember
+                receiver={receiver}
+                handleAddedMember={handleAddedMember}
+                handleAddMemberArray={handleAddMember}
+                handleToggle={handleToggleAddMembers}
+              />
+              <button onClick={handleAddedMember}>Add</button>
+            </AddMemberDiv>
+          </div>
         :
           ''
       }
@@ -200,18 +202,15 @@ const HeaderRight = styled.div`
 
 const MemberList = styled.div`
   font-family: 'Noto Sans Display', sans-serif;
-  top: 0;
   font-size: 1rem;
   background: #fff;
   border: 1px solid #c1c1c1;
   border-radius: 10px;
   padding: 30px;
-  height: 20rem;
-  width: 100%;
   height: 500px;
-  max-width: 500px;
+  min-width: 500px;
   flex-direction: column;
-  z-index: 20; 
+  z-index: 20;
 
     ${HeaderLeft} {
       color: #000;
@@ -228,25 +227,24 @@ const Member = styled.div`
 `;
 
 const AddMemberDiv = styled.div`
-z-index: 21;
+position: relative;
 background-color:  white;
-position: absolute;
-top: 24vh;
-width: 52vh;
-height: 52vh;
-left:37%;
+padding: 30px;
+min-width: 500px;
+height: 500px;
 border-radius: 10px;
+z-index: 21;
 
->button{
-width: 3vw;
-background-color: #006E5B;
-border-radius: 5px;
-border: solid 1px transparent;
-color: white;
-padding: 1vh;
-position: absolute;
-font-weight:bolder;
-margin-left:80%;
-bottom: 3vh;
-}
-`
+  >button{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 0 30px 30px 0;
+  background-color: #006E5B;
+  border-radius: 5px;
+  border: solid 1px transparent;
+  color: white;
+  padding: 1vh;
+  font-weight:bolder;
+  }
+`;

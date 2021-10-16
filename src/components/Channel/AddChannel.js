@@ -73,16 +73,14 @@ function AddChannel({handleToggleAddChannel, handleRender}) {
 
   return (
     <AddChannelOuterContainer>
-
       <AddChannelContainer>      
-
         {!addMemberToggle
           ?
             <AddChannelForm onSubmit={handleAddChanneltoAddMembers}>        
             <CancelIcon onClick={handleToggleAddChannel}/>
               <h2>Create a channel</h2>
               <p>Channels are where your team communicates. They're best when organized around  a topic. #chika for example</p>
-              <label >Name</label>
+              <label>Name</label>
               <AddChannelInput
                 placeholder='Add Channel Name'
                 onChange={handleChannelInput}
