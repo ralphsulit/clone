@@ -9,8 +9,8 @@ import styled from 'styled-components';
 
 const Login = () => {
   //state
-  const [email, setEmail] = useState('username@gmail.com');
-  const [password, setPassword] = useState('123123');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [toggleWarning, setToggleWarning] = useState(false);
 
   //toggle alert
@@ -78,6 +78,7 @@ const Login = () => {
               type='submit'
               value='Sign In with Email'
               onClick={handleLogin}
+              data-testid='submit-btn'
             />
           </Form>
           <p>
