@@ -241,9 +241,6 @@ function Sidebar() {
       <div className={toggle ? `sidebar-channel` : `sidebar-channels hidden`}>
         {recentDM}
       </div>
-
-      
-      
     </SidebarContainer>
   )
 };
@@ -254,7 +251,8 @@ const SidebarContainer = styled.div`
   color: #fff;
   background-color: var(--slack-color);
   border-top: 1px solid #49274b;
-  width: 300px;
+  width: 100%;
+  max-width: 250px;
   overflow-y: auto;
   height: 100vh;
 
