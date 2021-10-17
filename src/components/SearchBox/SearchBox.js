@@ -44,7 +44,6 @@ function SearchBox({ handleToggleSearchBox, handleToggleWarning }) {
     return (
       <LinkElement to={`/user/${user.id}`} onClick={handleToggleSearchBox} key={i}>
         <SearchBoxResults>
-          {/* <Image><img src={`https://picsum.photos/id/${user.id}/40`} alt=""/></Image> */}
           <p>{user.email}</p>
         </SearchBoxResults>
       </LinkElement>
@@ -160,18 +159,6 @@ const SearchBoxResult = styled.div`
     display: none;
   }
 `;
-
-const Image = styled.div`
-  display: flex;
-
-    >img {
-      border-radius: 50%;
-      width: 30px;
-      height: 30px;
-      padding: auto;
-    }
-`;
-
 
 const SearchBoxResults = styled.div`
   display: flex;

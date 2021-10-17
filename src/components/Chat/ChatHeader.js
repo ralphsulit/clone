@@ -174,18 +174,6 @@ const HeaderLeft = styled.div`
     }
 `;
 
-const Image = styled.div`
-  display: flex;
-  margin-right: 10px;
-  
-    >img {
-      border-radius: 50%;
-      width: 30px;
-      height: 30px;
-      padding: auto;
-    }
-`;
-
 const HeaderRight = styled.div`
   display: flex;
   align-items: center;

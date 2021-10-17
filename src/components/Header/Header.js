@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import SearchBox from '../SearchBox/SearchBox';
 import Alert from '../Alert/Alert';
 //icons and styles

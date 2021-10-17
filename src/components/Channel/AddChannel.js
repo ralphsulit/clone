@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { addChannel } from '../../api/api';
-import { headers } from '../../Headers';
 import AddMember from './AddMember';
 import styled from 'styled-components';
 import CancelIcon from '@material-ui/icons/Cancel';

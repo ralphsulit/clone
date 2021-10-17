@@ -46,7 +46,6 @@ function Chat() {
   const getMessageObj = {
     receiver_class: capitalizedType,
     receiver_id: parseInt(id),
-    // headers
   }
 
   const userID = parseInt(id);
