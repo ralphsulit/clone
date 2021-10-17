@@ -29,8 +29,8 @@ function NewMessage() {
   //list of all users
   const userList = allUsers.map((user, i) => {
     return (
-      <LinkElement to={`/user/${user.id}`}>
-        <SearchBoxResult key={i}>
+      <LinkElement key={i} to={`/user/${user.id}`}>
+        <SearchBoxResult>
           <p>{user.email}</p>
         </SearchBoxResult>
       </LinkElement>
