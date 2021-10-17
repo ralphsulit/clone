@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { sendMessage } from '../../api/api';
 import { Button } from '@material-ui/core';
+import { emailFormat } from '../Utils/utils';
 import styled from 'styled-components';
 
 function ChatInput({ headers, render, receiver  }) {
@@ -21,6 +22,10 @@ function ChatInput({ headers, render, receiver  }) {
     body: chatMessage,
     headers
   }
+
+  useEffect(() => {
+    
+  })
 
   const handleMessage = (e) => {
     //prevent page reload
@@ -43,7 +48,7 @@ function ChatInput({ headers, render, receiver  }) {
       <form>
         <input
           onChange={(e) => setChatMessage(e.target.value)}
-          placeholder={`Message ${receiver}`}
+          placeholder={`Message ${emailFormat(receiver)}`}
           onSubmit={handleMessage}
           value={chatMessage}
         />
