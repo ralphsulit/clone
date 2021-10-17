@@ -40,6 +40,9 @@ test(`Redirect to Homepage when authenticated`, async () => {
 
   render(<BrowserRouter><Homepage/></BrowserRouter>)
   await screen.findByText('Group 6 Slack App Clone')
+  await screen.findByText('Ralph')
+  await screen.findByText('Julie')
+  await screen.findByText('JC')
 });
 
 it(`Toggle warning modal`, () => {
@@ -49,6 +52,5 @@ it(`Toggle warning modal`, () => {
   fireEvent.click(btn)
   expect(screen.getByTestId('alert-modal')).toBeInTheDocument()
 })
-
 
 
