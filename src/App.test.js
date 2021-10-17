@@ -1,22 +1,14 @@
 import React from 'react'
-<<<<<<< HEAD
 import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { BrowserRouter } from 'react-router-dom';
 import Login from './forms/Login/Login';
 import SignUp from './forms/SignUp/SignUp';
-import Homepage from './pages/Homepage'
+import Homepage from './pages/Homepage';
+import Alert from './components/Alert/Alert';
 import userEvent from '@testing-library/user-event';
 
 
 it(`renders Login with the button if it's not signed in`, () => {
-=======
-import { render, screen } from '@testing-library/react'
-import Login from './forms/Login/Login'
-import { BrowserRouter } from 'react-router-dom';
-
-
-it('renders Login with the button if it\'s not signed in', () => {
->>>>>>> b369229db48886572033db48d35e54e25f559a93
   render(<BrowserRouter><Login /></BrowserRouter>)
   const test = screen.getByText(/Sign In with Email/i)
   expect(test).toBeInTheDocument()
@@ -27,7 +19,6 @@ it ("Renders correctly", () => {
   expect(queryByTestId("submit-btn")).toBeTruthy()
   expect(queryByPlaceholderText('Password', 'Email')).toBeTruthy()
 })
-<<<<<<< HEAD
 
 it(`Render Signup Button`, () => {
   render(<BrowserRouter><SignUp /></BrowserRouter>)
@@ -51,7 +42,13 @@ test(`Redirect to Homepage when authenticated`, async () => {
   await screen.findByText('Group 6 Slack App Clone')
 });
 
+it(`Toggle warning modal`, () => {
+  render(<BrowserRouter><Login/></BrowserRouter>)
+  const btn = screen.queryByText('Sign in with Google')
+
+  fireEvent.click(btn)
+  expect(screen.getByTestId('alert-modal')).toBeInTheDocument()
+})
 
 
-=======
->>>>>>> b369229db48886572033db48d35e54e25f559a93
+

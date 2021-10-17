@@ -3,7 +3,7 @@ import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 
 function Alert({ handleToggleWarning }) {
   return (
-      <Modal>
+      <Modal data-testid="alert-modal">
         <ModalContent>
           <ModalHeader>
             <ErrorOutlineIcon/> 
