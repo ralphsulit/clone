@@ -159,7 +159,7 @@ function Sidebar() {
           to={`/user/${user.id}`}
           key={i}
         >
-          <SidebarOption Icon={PeopleAltIcon} title={user.uid} key={i} />
+          <SidebarOption Icon={PeopleAltIcon} title={emailFormat(user.uid)} key={i} />
         </NavLink>
       )
     }
