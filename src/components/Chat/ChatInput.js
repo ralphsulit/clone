@@ -23,10 +23,6 @@ function ChatInput({ headers, render, receiver  }) {
     headers
   }
 
-  useEffect(() => {
-    
-  })
-
   const handleMessage = (e) => {
     //prevent page reload
     e.preventDefault();
