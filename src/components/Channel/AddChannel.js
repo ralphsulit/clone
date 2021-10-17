@@ -145,12 +145,16 @@ const DoneButtonDiv = styled.div`
   padding: 2rem;
 
   > button {
-    width: 4rem;
+    width: 10vh;
+    margin: auto auto auto 20px;
     background-color: #350D36;
     border-radius: 5px;
     border: solid 1px transparent;
     color: white;
-    padding: 1rem;
+    padding: 1vh;
+    position: absolute;
+    bottom: 28%;
+    right: 40%;
     font-weight:bolder;
     cursor: pointer;
   }

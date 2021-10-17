@@ -200,7 +200,7 @@ function Sidebar() {
         />
       <hr />
       
-      <div         
+        <div         
           onMouseEnter={e => {
           setStyle({display: 'block'})
           }}

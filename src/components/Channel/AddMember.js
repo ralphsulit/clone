@@ -94,9 +94,9 @@ function AddMember({
     )
   })
 
-  const displayUser = click.map(user => {
+  const displayUser = click.map((user, i) => {
     return (
-      <section>
+      <section key={i}> 
         <h3>{user.email}</h3>
         <span onClick={() => remove(user.id)}>X</span>
       </section>
@@ -192,9 +192,10 @@ const SearchBoxResult = styled.div`
   overflow-y: scroll;
   overflow-x: hidden;
   border-radius: 1px;  
-  width: 22.5 rem;
-  margin-left: 2vw;
-  margin-right: 2vw;
+  width: 350px;
+  z-index: 30;
+  margin: 0 auto;
+
 
   ::-webkit-scrollbar {
     display: none;
@@ -232,6 +233,10 @@ const SearchBoxResults = styled.div`
 `;
 
 const DisplayUser = styled.div`
+font-size: 16px;
+position: absolute;
+top: 13rem;
+left: 5rem;
 background-color: transparent;
 scrollbar-color: transparent;
 height:5vw;
@@ -239,7 +244,7 @@ display: flex;
 flex-direction: column;
 overflow-x: hidden;
 overflow-y: scroll;
-width:70%;
+width: 65%;
 margin: 20px auto;
 
   ::-webkit-scrollbar {

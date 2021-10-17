@@ -102,8 +102,8 @@ function ChatHeader({ receiver }) {
       </HeaderLeft>
       {type === 'channel'
         ?
-          <HeaderRight>
-            <PeopleAltIcon onClick={handleToggleViewMembers} fontSize='medium' className="peopleIcon" />
+          <HeaderRight onClick={handleToggleViewMembers} >
+            <PeopleAltIcon fontSize='medium' className="peopleIcon" />
             <h1>{channelMembers.length}</h1>
           </HeaderRight>
         :
@@ -228,7 +228,7 @@ const Member = styled.div`
 
 const AddMemberDiv = styled.div`
 position: relative;
-background-color:  white;
+background-color: #F5F5F5;
 padding: 30px;
 min-width: 500px;
 height: 500px;
@@ -239,13 +239,14 @@ z-index: 21;
   position: absolute;
   bottom: 0;
   right: 0;
-  margin: 0 30px 30px 0;
-  background-color: #006E5B;
+  margin: 0 50px 30px 0;
+  background-color: #350D36;
   border-radius: 5px;
   border: solid 1px transparent;
   color: white;
   padding: 1vh;
   font-weight:bolder;
   cursor: pointer;
+  width: 10vh;
   }
 `;
