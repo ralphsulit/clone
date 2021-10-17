@@ -114,7 +114,7 @@ function Sidebar() {
         }
       })
       .catch(err => err)
-  }, [render]);
+  }, [render, recentUsers]);
 
   //render all channel (owned)
   const renderOwnedChannels = channelsOwned.map((channel, i) => {
