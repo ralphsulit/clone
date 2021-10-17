@@ -107,7 +107,7 @@ function Sidebar() {
     getOwnedChannel()
       .then(res => {
         if(res.data.errors === 'No available owned channels.'){
-          setError(res.data.errors)
+          //setError(res.data.errors)
           setChannelsOwned([])
         } else {
           setChannelsOwned(res.data.data)
@@ -216,6 +216,7 @@ function Sidebar() {
           handleToggleAddChannel={handleToggleAddChannel}
           style={style}
         />
+        <p style={{color: '#BCABBC', paddingLeft: '1rem'}}>{error}</p>
       </div>
       <div className={togDropdown ? `sidebar-channel` : `sidebar-channels hidden`}>
         {renderOwnedChannels}

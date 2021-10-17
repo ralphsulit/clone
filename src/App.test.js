@@ -1,4 +1,5 @@
 import React from 'react'
+<<<<<<< HEAD
 import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { BrowserRouter } from 'react-router-dom';
 import Login from './forms/Login/Login';
@@ -8,6 +9,14 @@ import userEvent from '@testing-library/user-event';
 
 
 it(`renders Login with the button if it's not signed in`, () => {
+=======
+import { render, screen } from '@testing-library/react'
+import Login from './forms/Login/Login'
+import { BrowserRouter } from 'react-router-dom';
+
+
+it('renders Login with the button if it\'s not signed in', () => {
+>>>>>>> b369229db48886572033db48d35e54e25f559a93
   render(<BrowserRouter><Login /></BrowserRouter>)
   const test = screen.getByText(/Sign In with Email/i)
   expect(test).toBeInTheDocument()
@@ -18,6 +27,7 @@ it ("Renders correctly", () => {
   expect(queryByTestId("submit-btn")).toBeTruthy()
   expect(queryByPlaceholderText('Password', 'Email')).toBeTruthy()
 })
+<<<<<<< HEAD
 
 it(`Render Signup Button`, () => {
   render(<BrowserRouter><SignUp /></BrowserRouter>)
@@ -43,3 +53,5 @@ test(`Redirect to Homepage when authenticated`, async () => {
 
 
 
+=======
+>>>>>>> b369229db48886572033db48d35e54e25f559a93

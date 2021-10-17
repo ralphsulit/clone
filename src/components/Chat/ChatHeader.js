@@ -45,7 +45,7 @@ function ChatHeader({ receiver }) {
 
   const handleAddedMember = () => {
     handleToggleAddMembers(false)
-    addUser.map(user => {
+    addUser.forEach(user => {
       let members = {
         id: parseInt(id),
         member_id: user.id,
