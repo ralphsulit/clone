@@ -71,7 +71,7 @@ function ChatHeader({ receiver }) {
   //member list
   const memberList = channelMemberInfo.map((user, i) => {
     return (
-      <div key={i} className='member'>
+      <div key={i}>
         <Member>
           <img src={ `https://robohash.org/${user.id}.png?size=40x40` }  alt=''/>
           <h3>{captalizedWord(user.email)}</h3>
@@ -149,7 +149,9 @@ function ChatHeader({ receiver }) {
               <h4>Members</h4>
               <GroupAddIcon onClick={handleToggleAddMembers} style={{ cursor: 'pointer', color: '#606060'}} />
             </div>
-            {memberList}
+            <MembersContainer>
+              {memberList}
+            </MembersContainer>
           </MemberList>
           </div>
         : ''
@@ -302,6 +304,20 @@ const Member = styled.div`
       margin-left: 10px;
       font-size: 0.8rem;
       font-weight: 400;
+    }
+`;
+
+const MembersContainer = styled.div`
+  overflow-y: scroll;
+  height: 350px;
+
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      border-radius: 8px;
+      background: #888888;
     }
 `;
 
