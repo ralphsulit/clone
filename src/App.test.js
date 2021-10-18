@@ -7,17 +7,19 @@ import Homepage from './pages/Homepage';
 import Alert from './components/Alert/Alert';
 import userEvent from '@testing-library/user-event';
 
+describe('Login page', () => {
+  it('renders Login with the button if it\'s not signed in', () => {
+    render(<BrowserRouter><Login /></BrowserRouter>)
+    const test = screen.getByText(/Sign In with Email/i)
+    expect(test).toBeInTheDocument()
+  })
 
-it(`renders Login with the button if it's not signed in`, () => {
-  render(<BrowserRouter><Login /></BrowserRouter>)
-  const test = screen.getByText(/Sign In with Email/i)
-  expect(test).toBeInTheDocument()
-})
+  it(`renders Login with the button if it's not signed in`, () => {
+    render(<BrowserRouter><Login /></BrowserRouter>)
+    const test = screen.getByText(/Sign In with Email/i)
+    expect(test).toBeInTheDocument()
+  })
 
-it ("Renders correctly", () => {
-  const {queryByTestId, queryByPlaceholderText} = render(<BrowserRouter><Login /></BrowserRouter>)
-  expect(queryByTestId("submit-btn")).toBeTruthy()
-  expect(queryByPlaceholderText('Password', 'Email')).toBeTruthy()
 })
 
 it(`Render Signup Button`, () => {
