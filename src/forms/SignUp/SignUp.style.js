@@ -18,7 +18,7 @@ const SignUpInnerContainer = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 100px;
-  text-align: center:
+  text-align: center;
   background-color: white;
   border-radius: 10px;
   width: 600px;

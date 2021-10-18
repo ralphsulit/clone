@@ -111,6 +111,7 @@ const ChatContainer = styled.div`
   width: 100%;
   margin-top: 45px;
   background-color: #F8F8F8;
+  z-index: 0;
 `;
 
 const ChatMessages = styled.div`
