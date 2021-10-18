@@ -50,6 +50,11 @@ function SearchBox({ handleToggleSearchBox, handleToggleWarning }) {
     )
   })
 
+  const handleToggleAlert = () => {
+    handleToggleWarning();
+    handleToggleSearchBox();
+  }
+
   return (
     <SearchBoxContainer>
       <div ref={searchBoxRef}>
@@ -62,12 +67,18 @@ function SearchBox({ handleToggleSearchBox, handleToggleWarning }) {
         </SearchBoxResult>
       </div>
       <Footer>
-        <span onClick={handleToggleWarning}><ForumIcon fontSize='small' style={{ marginRight: '2px' }} />
-          <p onClick={handleToggleSearchBox}>Messages</p>
+        <span onClick={handleToggleAlert}><ForumIcon fontSize='small' style={{ marginRight: '2px' }} />
+          Messages
         </span>
-        <span onClick={handleToggleWarning}><DescriptionIcon fontSize='small' style={{marginRight: '2px'}}/><p onClick={handleToggleSearchBox}>Files</p></span>
-        <span onClick={handleToggleWarning}><ListAltIcon fontSize='small' style={{marginRight: '2px'}}/><p onClick={handleToggleSearchBox}>Channels</p></span>
-        <span onClick={handleToggleWarning}><SupervisedUserCircleIcon fontSize='small' style={{marginRight: '2px'}}/><p onClick={handleToggleSearchBox}>People</p></span>
+        <span onClick={handleToggleAlert}><DescriptionIcon fontSize='small' style={{ marginRight: '2px' }} />
+          Files
+        </span>
+        <span onClick={handleToggleAlert}><ListAltIcon fontSize='small' style={{ marginRight: '2px' }} />
+          Channels
+        </span>
+        <span onClick={handleToggleAlert}><SupervisedUserCircleIcon fontSize='small' style={{ marginRight: '2px' }} />
+          People
+        </span>
       </Footer>
     </SearchBoxContainer>
   )
