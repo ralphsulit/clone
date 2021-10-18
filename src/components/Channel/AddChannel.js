@@ -118,7 +118,7 @@ const AddChannelOuterContainer = styled.div`
   background-color: rgba(0, 0, 0, .7);
   position: absolute;
   margin: auto;
-  z-index: 1;
+  z-index: 21;
   text-align: center;
   height: 100vh;
   width:100vw;

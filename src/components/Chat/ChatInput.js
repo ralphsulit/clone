@@ -64,6 +64,7 @@ export default ChatInput;
 const ChatInputContainer = styled.div`
   border-radius: 20px;
   width: 100%;
+  z-index: 0;
     
     >form {
       display: flex;

@@ -282,7 +282,6 @@ const MemberList = styled.div`
   height: 500px;
   min-width: 500px;
   flex-direction: column;
-  z-index: 20;
 
     ${HeaderLeft} {
       color: #000;

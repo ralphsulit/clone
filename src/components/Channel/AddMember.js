@@ -140,6 +140,7 @@ export default AddMember;
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  z-index: 21;
   
     >h1 {
       font-family: 'Noto Sans Display', sans-serif;
