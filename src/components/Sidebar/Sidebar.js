@@ -212,7 +212,7 @@ function Sidebar() {
           Icon={togDropdown ? ExpandMoreIcon : ChevronRightIcon}
           title='Channels'
           onClick={handleToggleDropdown}
-          addChannelICon={true}
+          addChannelIcon={true}
           handleToggleAddChannel={handleToggleAddChannel}
           style={style}
         />
