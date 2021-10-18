@@ -18,10 +18,14 @@ export default ChatContainer;
 
 const Container = styled.div`
   display: flex;
-  flex-direction: column-reverse;
+  flex-flow: column nowrap;
   height: 42rem;
   margin-left: 70px;
   overflow-y: scroll;
+
+  > :first-child {
+    margin-top: auto !important;
+  }
 
   ::-webkit-scrollbar {
     display: none;
