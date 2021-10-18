@@ -6,19 +6,14 @@ import ChatInput from './ChatInput';
 import ChatBodyContainer from './ChatContainer';
 import styled from 'styled-components';
 
-// const headers = {
-// 'token': localStorage.getItem('access-token'),
-// 'client': localStorage.getItem('client'),
-// 'expiry': localStorage.getItem('expiry'),
-// 'uid': localStorage.getItem('uid')
-// }
-
 function Chat() {
   //state
   const [chatData, setChatData] = useState('');
   const [receiver, setReceiver] = useState('');
   const [render, setRender] = useState(false);
   const chatRef = useRef(null);
+
+  const loginUserID = parseInt(localStorage.getItem('id'))
 
   //parameter 
   const params = useParams();
@@ -57,6 +52,7 @@ function Chat() {
     getMessage(getMessageObj)
       .then(res => {
         setChatData(res.data.data)
+        console.log(res.data.data)
       })
       .catch(err => console.log('Error Sending Message: ', err))
     
@@ -83,7 +79,26 @@ function Chat() {
         render={handleChatRender}
       />
       <ChatMessages>
-        <ChatBodyContainer chatData={chatData} chatRef={chatRef}/>
+        { chatData.length > 0 ?
+          <ChatBodyContainer chatData={chatData} chatRef={chatRef}/>
+      : 
+      <EmptyMessageStyle>
+        {
+          type === "user"
+          ? loginUserID === userID
+            ? <div> 
+                <strong>This is your space.</strong> Draft messages, list your to-dos, or keep links and files handy. You can also talk to yourself here, but please bear in mind you’ll have to supply both sides of the conversation.
+              </div>
+            :
+              <div>
+                This is the very beginning of your direct message history with <EmailSpanStyle> {receiver}</EmailSpanStyle>. Only the two of you are in this conversation, and no one else can join it.
+              </div>
+          : <div>
+              This is the very beginning of your direct message history in <EmailSpanStyle> {receiver} </EmailSpanStyle>. Only the members of this channel can see the messages.
+            </div>
+        }
+            
+      </EmptyMessageStyle>}
       </ChatMessages>
       <ChatInput render={handleChatRender} receiver={receiver} />
     </ChatContainer>
@@ -103,3 +118,16 @@ const ChatMessages = styled.div`
   margin-bottom: 2rem;
   z-index: -1;
 `;
+
+const EmptyMessageStyle = styled.div`
+  display: flex;
+  align-items: flex-end;
+  height: 42rem;
+  margin-left: 70px;
+`
+
+const EmailSpanStyle = styled.span`
+  color: #1264a3;
+  background-color: #1d9bd11a;
+  padding: 0 0.3rem 0 0.3rem;
+`

@@ -62,7 +62,8 @@ function ChatHeader({ receiver }) {
   const memberList = channelMemberInfo.map((user, i) => {
     return (
       <div key={i}>
-        <Member>    
+        <Member>
+          <img src={ `https://robohash.org/${user.id}.png?size=50x50` }  alt=''/>
           <p>{captalizedWord(user.email)}</p>
         </Member>
       </div>

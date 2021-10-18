@@ -10,7 +10,7 @@ function ChatBody({ data }) {
   return (
     <ChatBodyContainerStyle>
       <Image>
-        <img src={ `https://picsum.photos/id/${id}/40` } alt='' />
+        <img src={ `https://robohash.org/${id}.png?size=50x50` }  alt=''/>
       </Image>
       <ChatBodySubContainerStyle>
         <ChatDetailsStyle>
@@ -33,9 +33,12 @@ const ChatBodyContainerStyle = styled.div`
 `;
 
 const Image = styled.div`
+  transform: translateY(-0.6rem);
   width: 4rem;
   height: 4rem;
-  overflow: hidden;
+  background-position: center;
+  background-size: cover;
+
 
     >img {
       border-radius: 50%;

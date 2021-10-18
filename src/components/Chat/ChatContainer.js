@@ -18,7 +18,7 @@ export default ChatContainer;
 
 const Container = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   height: 42rem;
   margin-left: 70px;
   overflow-y: scroll;

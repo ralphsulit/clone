@@ -4,7 +4,6 @@ import { BrowserRouter } from 'react-router-dom';
 import Login from './forms/Login/Login';
 import SignUp from './forms/SignUp/SignUp';
 import Homepage from './pages/Homepage';
-import Alert from './components/Alert/Alert';
 import userEvent from '@testing-library/user-event';
 
 describe('Login page', () => {
@@ -13,13 +12,6 @@ describe('Login page', () => {
     const test = screen.getByText(/Sign In with Email/i)
     expect(test).toBeInTheDocument()
   })
-
-  it(`renders Login with the button if it's not signed in`, () => {
-    render(<BrowserRouter><Login /></BrowserRouter>)
-    const test = screen.getByText(/Sign In with Email/i)
-    expect(test).toBeInTheDocument()
-  })
-
 })
 
 it(`Render Signup Button`, () => {
