@@ -299,6 +299,9 @@ const Member = styled.div`
   text-align: center;
   margin: 15px 0;
 
+    :hover{
+      background: rgba(0, 0, 0, .1);
+    }
     >h3 {
       padding-top: 8px;
       margin-left: 10px;

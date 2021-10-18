@@ -30,6 +30,7 @@ export default ChatBody;
 const ChatBodyContainerStyle = styled.div`
   display: flex;
   width: 100%;
+  padding-left: 7%;
 `;
 
 const Image = styled.div`

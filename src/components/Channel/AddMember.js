@@ -88,6 +88,7 @@ function AddMember({
     return (
       <LinkElement key={i} onClick={() => userSearchDetails(user.id)}>
         <SearchBoxResults>
+          <img src={ `https://robohash.org/${user.id}.png?size=40x40` }  alt=''/>
           <p>{ user.email }</p>
         </SearchBoxResults>
       </LinkElement>
@@ -96,7 +97,8 @@ function AddMember({
 
   const displayUser = click.map((user, i) => {
     return (
-      <section key={i}> 
+      <section key={i}>
+        <img src={ `https://robohash.org/${user.id}.png?size=40x40` }  alt=''/>
         <h3>{user.email}</h3>
         <span onClick={() => remove(user.id)}>X</span>
       </section>
@@ -108,7 +110,7 @@ function AddMember({
     <Container>
       <CancelIcon onClick={ handleToggle }/>
       <h1>Add people</h1>
-      <p>{channelName}{receiver}</p>
+      <p>#{channelName}{receiver}</p>
       <Search>
         <input
           type='text'
@@ -153,6 +155,7 @@ const Container = styled.div`
         text-align: left;
         margin-left: 2vw;
         color: #4e4e4e;
+        font-size: 0.8rem;
     }
 
     .MuiSvgIcon-root {
@@ -188,11 +191,11 @@ const Search = styled.div`
 `;
 
 const SearchBoxResult = styled.div`
-  max-height: 10rem;
+  max-height: 12rem;
   overflow-y: scroll;
   overflow-x: hidden;
   border-radius: 1px;  
-  width: 350px;
+  width: 425px;
   z-index: 30;
   margin: 0 auto;
 
@@ -235,38 +238,55 @@ const SearchBoxResults = styled.div`
 const DisplayUser = styled.div`
 font-size: 16px;
 position: absolute;
-top: 13rem;
-left: 5rem;
+top: 180px;
+left: 2.5rem;
 background-color: transparent;
 scrollbar-color: transparent;
-height:5vw;
+height:180px;
 display: flex;
 flex-direction: column;
 overflow-x: hidden;
 overflow-y: scroll;
-width: 65%;
+width: 83%;
 margin: 20px auto;
+font-size: 0.8rem;
 
-  ::-webkit-scrollbar {
-      display: none;
-    }
+::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    background: #888888;
+  }
 
   >section {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    align-items: center;
+    justify-content:flex-start;
+    width:100%; 
+
+    :hover{
+      background: rgba(0, 0, 0, .1);
+    }
   }
 
   >section > h3 {
     font-weight: normal;
     color: #5a5a5a;
+    margin: 0 60px 0 8px;
+    padding-top: 8px;
+    width:80%;
   }
 
   >section > span {
-    display: flex;
-    align-items: center;
+    padding-top: 8px ;
     font-family: 'Fredoka One', cursive;
     font-size: 1rem;
     cursor: pointer;
+    display:flex;
+    justify-content:flex-end;
+    margin-right: 10px;
   }
 `;
