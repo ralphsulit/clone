@@ -3,6 +3,7 @@ import { getAllUsers, getUser } from '../../api/api';
 import styled from 'styled-components';
 import CancelIcon from '@material-ui/icons/Cancel';
 
+
 function AddMember({
   handleAddMemberArray,
   channelName = "",
@@ -108,7 +109,7 @@ function AddMember({
     <Container>
       <CancelIcon onClick={ handleToggle }/>
       <h1>Add people</h1>
-      <p>#{channelName}{receiver}</p>
+      <p>{channelName}{receiver}</p>
       <Search>
         <input
           type='text'

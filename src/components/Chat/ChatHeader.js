@@ -2,12 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getChannelData, getAllUsers, addMemberToTheChannel } from '../../api/api';
 import AddMember from '../Channel/AddMember.js';
+import Alert from '../Alert/Alert';
 import { emailFormat, captalizedWord } from '../Utils/utils';
 //styles
 import styled from 'styled-components';
 import PeopleAltIcon from "@material-ui/icons/PeopleAlt";
 import GroupAddIcon from '@material-ui/icons/GroupAdd';
 import CancelIcon from '@material-ui/icons/Cancel';
+import StarBorderIcon from '@material-ui/icons/StarBorder';
+import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
+import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
+import LocalPhoneIcon from '@material-ui/icons/LocalPhone';
 import './ChatHeader.css';
 
 function ChatHeader({ receiver }) {
@@ -18,6 +23,7 @@ function ChatHeader({ receiver }) {
   const [channelMemberInfo, setChannelMemberInfo] = useState([]);
   const [toggleViewMembers, setToggleViewMembers] = useState(false);
   const [toggleAddMembers, setToggleAddMembers] = useState(false);
+  const [toggleWarning, setToggleWarning] = useState(false);
   const [render, setRender] = useState(false);
   //handle render
   const handleRender = () => {
@@ -41,6 +47,10 @@ function ChatHeader({ receiver }) {
   //add member data into an array
   const handleAddMember = (data) => {
     setAddUser(data)
+  }
+
+  const handleToggleWarning = () => {
+    setToggleWarning(!toggleWarning)
   }
 
   const handleAddedMember = () => {
@@ -120,6 +130,21 @@ function ChatHeader({ receiver }) {
               </h2>
             <CancelIcon onClick={handleToggleViewMembers} style={{ cursor: 'pointer', color: '#cd5c5c'}}/>
             </HeaderLeft>
+            <Span>
+              {toggleWarning ? <Alert handleToggleWarning={handleToggleWarning} /> : null} 
+              <Star onClick={handleToggleWarning}>
+                <StarBorderIcon fontSize='small' />
+                <KeyboardArrowDownIcon fontSize='small'/>
+              </Star>
+              <Bell onClick={handleToggleWarning}>
+                <NotificationsNoneIcon fontSize='small' />
+                Enable Notifications
+              </Bell>
+              <Call onClick={handleToggleWarning}>
+                <LocalPhoneIcon fontSize='small' />
+                Start a Call
+              </Call>
+            </Span>
             <div className="members">
               <h4>Members</h4>
               <GroupAddIcon onClick={handleToggleAddMembers} style={{ cursor: 'pointer', color: '#606060'}} />
@@ -175,6 +200,62 @@ const HeaderLeft = styled.div`
     }
 `;
 
+const Span = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
+`;
+
+const Star = styled.div`
+  margin: 15px 0;
+  border: 1px solid #BABABA;
+  border-radius: 3px;
+  width: 50px;
+  padding: 2px 8px 2px 3px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+    >.MuiSvgIcon-root {
+      color: #5F5F5F;
+    }
+`;
+
+const Bell = styled.div`
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #BABABA;
+  border-radius: 3px;
+  width: 170px;
+  margin: 0 15px;
+  padding: 2px 8px 2px 3px;
+  cursor: pointer;
+
+    >.MuiSvgIcon-root {
+      color: #5F5F5F;
+      margin-right: 2px;
+    }
+`;
+
+const Call = styled.div`
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #BABABA;
+  border-radius: 3px;
+  width: 100px;
+  padding: 2px 8px 2px 3px;
+  cursor: pointer;
+
+    >.MuiSvgIcon-root {
+      color: #5F5F5F;
+      margin-right: 2px;
+    }
+`;
+
 const HeaderRight = styled.div`
   display: flex;
   align-items: center;
@@ -203,7 +284,6 @@ const MemberList = styled.div`
 
     ${HeaderLeft} {
       color: #000;
-      margin-bottom: 20px;
       width: 100%;
       display: flex;
       align-items: center;
