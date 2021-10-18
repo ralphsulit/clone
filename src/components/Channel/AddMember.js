@@ -119,7 +119,7 @@ function AddMember({
           onClick={handleSearchList}
           value={search}
         />
-        {warning ? <label>User is already added</label> : ''}
+      {warning ? <label>User is already added</label> : ''}
       </Search>
       {toggleSearchList 
         ?
@@ -131,7 +131,6 @@ function AddMember({
       <DisplayUser>
         {displayUser}
       </DisplayUser>
-      
     </Container>
   )
 }
@@ -171,7 +170,7 @@ const Container = styled.div`
 const Search = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 1vh 2vw;
+  margin: 1vh 2vw 0 2vw;
   text-align: center;
   justify-content: center;
 
@@ -188,13 +187,19 @@ const Search = styled.div`
     padding: 1vh;
     border-radius: 10px;
   }
+
+  >label {
+    text-align: center;
+    font-size: 0.8rem;
+    color: #ea4c46;
+  }
 `;
 
 const SearchBoxResult = styled.div`
-  max-height: 12rem;
+  max-height: 14.5rem;
   overflow-y: scroll;
   overflow-x: hidden;
-  border-radius: 1px;  
+  border-radius: 4px;  
   width: 425px;
   z-index: 30;
   margin: 0 auto;
@@ -238,7 +243,7 @@ const SearchBoxResults = styled.div`
 const DisplayUser = styled.div`
 font-size: 16px;
 position: absolute;
-top: 180px;
+top: 200px;
 left: 2.5rem;
 background-color: transparent;
 scrollbar-color: transparent;

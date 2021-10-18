@@ -275,7 +275,7 @@ const HeaderRight = styled.div`
 const MemberList = styled.div`
   font-family: 'Noto Sans Display', sans-serif;
   font-size: 1rem;
-  background: #fff;
+  background: #F5F5F5;
   border: 1px solid #c1c1c1;
   border-radius: 10px;
   padding: 30px;
