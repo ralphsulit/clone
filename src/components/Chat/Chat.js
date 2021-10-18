@@ -123,7 +123,8 @@ const EmptyMessageStyle = styled.div`
   display: flex;
   align-items: flex-end;
   height: 42rem;
-  margin-left: 70px;
+  margin-left: 7.5%;
+  color: gray;
 `
 
 const EmailSpanStyle = styled.span`
