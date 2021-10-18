@@ -3,11 +3,13 @@ import { Link } from 'react-router-dom';
 import { userRegister } from '../../api/api';
 import { useHistory } from 'react-router-dom';
 import { SignUpContainer, SignUpInnerContainer, Form } from './SignUp.style';
+import styled from 'styled-components';
 
 const SignUp = () => {
   //state
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   const history = useHistory();
 
   const handleRegister = (e) => {
@@ -26,9 +28,7 @@ const SignUp = () => {
       .then(() => {
         history.push('/')
       })
-      .catch(() => {
-        alert(`email already taken`);
-      })
+      .catch(err => setError(`Username Already taken`))
   }
 
   return (
@@ -58,6 +58,7 @@ const SignUp = () => {
             value={'Register'}
         />
         </Form>
+        <ErrorStyle>{error ? error : ''}</ErrorStyle>
         <p>
           Already have an Account?
           <Link to='/'>Sign in</Link>
@@ -68,3 +69,9 @@ const SignUp = () => {
 };
 
 export default SignUp;
+
+const ErrorStyle = styled.div`
+  color: red;
+  font-size: 1rem;
+  text-align: center;
+`
