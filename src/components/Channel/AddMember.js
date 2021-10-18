@@ -65,7 +65,6 @@ function AddMember({
   //user data 
   const userSearchDetails = (id) => {
     //user obj from api
-
     getUser()
       .then(res => {
         const dataID = res.data.data.filter(data => data.id === id)
@@ -141,7 +140,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   
-    > h1{
+    >h1 {
       font-family: 'Noto Sans Display', sans-serif;
       margin-top: 2vh;
       text-align: left;

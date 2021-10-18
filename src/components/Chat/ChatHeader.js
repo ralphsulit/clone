@@ -71,10 +71,10 @@ function ChatHeader({ receiver }) {
   //member list
   const memberList = channelMemberInfo.map((user, i) => {
     return (
-      <div key={i}>
+      <div key={i} className='member'>
         <Member>
-          <img src={ `https://robohash.org/${user.id}.png?size=50x50` }  alt=''/>
-          <p>{captalizedWord(user.email)}</p>
+          <img src={ `https://robohash.org/${user.id}.png?size=40x40` }  alt=''/>
+          <h3>{captalizedWord(user.email)}</h3>
         </Member>
       </div>
     )
@@ -292,7 +292,17 @@ const MemberList = styled.div`
 `;
 
 const Member = styled.div`
-  margin: 2px 0
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 15px 0;
+
+    >h3 {
+      padding-top: 8px;
+      margin-left: 10px;
+      font-size: 0.8rem;
+      font-weight: 400;
+    }
 `;
 
 const AddMemberDiv = styled.div`
