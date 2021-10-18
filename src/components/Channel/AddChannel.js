@@ -60,11 +60,12 @@ function AddChannel({handleToggleAddChannel, handleRender}) {
           return 
         }
         const channelID = res.data.data.id
-        history.push(`/channel/${channelID}`)
         console.log(`Successfully added`, res)
         setWarning(false)
         handleToggleAddChannel()
+        console.log('this works')
         handleRender()
+        history.push(`/channel/${channelID}`)
       })
       .catch(err => err)
     

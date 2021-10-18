@@ -54,7 +54,7 @@ function Sidebar() {
   }
   
   const handleToggleAddChannel = (e) => {
-    e.stopPropagation()
+    //e.stopPropagation()
     setToggleAddChannel(!toggleAddChannel)
   }
 
