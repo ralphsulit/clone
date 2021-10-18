@@ -6,6 +6,7 @@ import SignUp from './forms/SignUp/SignUp';
 import Homepage from './pages/Homepage';
 import Alert from './components/Alert/Alert';
 import userEvent from '@testing-library/user-event';
+import Sidebar from './components/Sidebar/Sidebar';
 
 describe('Login page', () => {
   it('renders Login with the button if it\'s not signed in', () => {
@@ -28,7 +29,14 @@ it(`Render Signup Button`, () => {
   expect(text).toBeInTheDocument()
 })
 
-test(`Redirect to Homepage when authenticated`, async () => {
+describe('Render Sidebar', () =>{
+  test('sidebar is rendering corectly', () => {
+  const component = <Sidebar />;
+  console.log(component);
+  })
+})
+
+it(`Redirect to Homepage when authenticated`, async () => {
   render(<BrowserRouter><Login/></BrowserRouter>);
 
   const email = screen.getByPlaceholderText('Email')
