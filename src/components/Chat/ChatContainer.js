@@ -20,7 +20,6 @@ const Container = styled.div`
   display: flex;
   flex-flow: column nowrap;
   height: 42rem;
-  margin-left: 70px;
   overflow-y: scroll;
 
   > :first-child {
