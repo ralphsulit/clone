@@ -12,6 +12,7 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [toggleWarning, setToggleWarning] = useState(false);
+  const [errors, setErrors] = useState(false)
 
   //toggle alert
   const handleToggleWarning = () => {
@@ -35,7 +36,7 @@ const Login = () => {
       localStorage.setItem('id', res.data.data.id);
       window.location = '/homepage';
     })
-    .catch(err => err)
+    .catch(err => setErrors('Invalid Credentials. Please try again'))
   } 
   
   return (
@@ -74,6 +75,7 @@ const Login = () => {
               type='password'
               title='password'
             />
+            <ErrorStyle>{ errors ? errors : null}</ErrorStyle>
             <input
               type='submit'
               value='Sign In with Email'
@@ -96,3 +98,9 @@ export default Login;
 const Sample = styled(AppleIcon)`
   margin-right: 15px;
 `;
+
+const ErrorStyle = styled.div`
+  color: red;
+  font-size: 1rem;
+  text-align: center;
+`
