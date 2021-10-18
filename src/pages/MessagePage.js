@@ -31,6 +31,7 @@ function NewMessage() {
     return (
       <LinkElement key={i} to={`/user/${user.id}`}>
         <SearchBoxResult>
+          <img src={ `https://robohash.org/${user.id}.png?size=40x40` }  alt=''/>
           <p>{user.email}</p>
         </SearchBoxResult>
       </LinkElement>
@@ -114,7 +115,6 @@ const SearchBox = styled.div`
   overflow-y: scroll;
   scrollbar-width: none;
   border: none;
-  border-radius: 20px;
   margin-top: 20px;
 
   ::-webkit-scrollbar {

@@ -44,6 +44,7 @@ function SearchBox({ handleToggleSearchBox, handleToggleWarning }) {
     return (
       <LinkElement to={`/user/${user.id}`} onClick={handleToggleSearchBox} key={i}>
         <SearchBoxResults>
+          <img src={ `https://robohash.org/${user.id}.png?size=40x40` }  alt=''/>
           <p>{user.email}</p>
         </SearchBoxResults>
       </LinkElement>

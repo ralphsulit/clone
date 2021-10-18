@@ -33,12 +33,6 @@ function Header() {
     <HeaderContainer>
       {warning ? <Alert handleToggleWarning={handleToggleWarning} /> : null} 
       <HeaderLeft>
-        <Image>
-          <img
-            src=""
-            alt=""
-          />
-        </Image>
         <AccessTimeIcon/>
       </HeaderLeft>
       
@@ -118,14 +112,6 @@ const HeaderRight = styled.div`
     
     > .MuiSvgIcon-root {
       margin-right: 20px;
-    }
-`;
-
-const Image = styled.div`
-  overflow: hidden;
-
-    >img {
-      border-radius: 50%;
     }
 `;
 
