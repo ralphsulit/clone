@@ -229,7 +229,7 @@ function Sidebar() {
           title='Channels'
           onClick={handleToggleDropdown}
           addChannelIcon={true}
-          handleToggleAddChannel={handleToggleAddChannel}
+          handleToggleAddChannel={handleToggleAddChannelProp}
           style={style}
         />
         <p style={{color: '#BCABBC', paddingLeft: '1rem'}}>{error}</p>
@@ -240,7 +240,7 @@ function Sidebar() {
         <SidebarOption 
           Icon={AddIcon} 
           title='Add Channel' 
-          onClick={handleToggleAddChannelProp}
+          onClick={handleToggleAddChannel}
           />
       </div>
         {toggleAddChannel ? 
