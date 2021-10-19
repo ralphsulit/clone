@@ -117,7 +117,7 @@ function Sidebar() {
         }
       })
       .catch(err => err)
-  }, [render])
+  }, [render, recentUsers])
 
   useEffect(() => {
     const dummyArray = []
