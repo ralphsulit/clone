@@ -23,13 +23,6 @@ import AppsIcon from "@material-ui/icons/Apps";
 import LockIcon from '@material-ui/icons/Lock';
 
 function Sidebar() {
-  const headers = {
-    'token': localStorage.getItem('access-token'),
-    'client': localStorage.getItem('client'),
-    'expiry': localStorage.getItem('expiry'),
-    'uid': localStorage.getItem('uid')
-  }
-
   //state
   const [email, setEmail] = useState('');
   const [togDropdown, setToggleDropdown] = useState(false);
@@ -86,7 +79,7 @@ function Sidebar() {
 
   useEffect(() => {
     //variables
-    setEmail(headers.uid)
+    setEmail(localStorage.getItem('uid'))
   
 
     //get channels joined

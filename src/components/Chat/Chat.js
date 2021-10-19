@@ -19,8 +19,7 @@ function Chat() {
   const params = useParams();
   const { type, id } = params;
 
-  //capitalize the first letter
-  const capitalizedType = type.charAt(0).toUpperCase() + type.slice(1);
+
 
   //render
   const handleChatRender = () => {
@@ -36,18 +35,22 @@ function Chat() {
   const scrollToBottom = () => {
     chatRef?.current?.scrollIntoView()
   }
-
-  //message data
-  const getMessageObj = {
-    receiver_class: capitalizedType,
-    receiver_id: parseInt(id),
-  }
-
+  
   const userID = parseInt(id);
 
   useEffect(scrollToBottom, [chatData]);
 
   useEffect(() => {
+
+    //capitalize the first letter
+    const capitalizedType = type.charAt(0).toUpperCase() + type.slice(1);
+
+    //message data
+    const getMessageObj = {
+      receiver_class: capitalizedType,
+      receiver_id: parseInt(id),
+    }
+
     //get user message data
     getMessage(getMessageObj)
       .then(res => {
