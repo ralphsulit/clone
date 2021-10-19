@@ -41,14 +41,15 @@ function SearchBox({ handleToggleSearchBox, handleToggleWarning }) {
   }
 
   const searchUserList = users.map((user, i) => {
-    return (
-      <LinkElement to={`/user/${user.id}`} onClick={handleToggleSearchBox} key={i}>
-        <SearchBoxResults>
-          <img src={ `https://robohash.org/${user.id}.png?size=40x40` }  alt=''/>
-          <p>{user.email}</p>
-        </SearchBoxResults>
-      </LinkElement>
-    )
+    if(search.length > 0)
+      return (
+        <LinkElement to={`/user/${user.id}`} onClick={handleToggleSearchBox} key={i}>
+          <SearchBoxResults>
+            <img src={ `https://robohash.org/${user.id}.png?size=40x40` }  alt=''/>
+            <p>{user.email}</p>
+          </SearchBoxResults>
+        </LinkElement>
+      )
   })
 
   const handleToggleAlert = () => {

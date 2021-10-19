@@ -20,7 +20,6 @@ function AddChannel({handleToggleAddChannel, handleRender, handleError}) {
   const handleGetAddMemberArray = (data) => {
     const memberId = data.map(user => user.id)
     setUserDataArray(memberId)
-    console.log(userDataArray)
   }
 
   const handleToggleAddMembersForm = () => {
@@ -63,7 +62,6 @@ function AddChannel({handleToggleAddChannel, handleRender, handleError}) {
         console.log(`Successfully added`, res)
         setWarning(false)
         handleToggleAddChannel()
-        console.log('this works')
         handleRender()
         handleError('')
         history.push(`/channel/${channelID}`)

@@ -85,14 +85,15 @@ function AddMember({
   }
 
   const searchUser = users.map((user, i) => {
-    return (
-      <LinkElement key={i} onClick={() => userSearchDetails(user.id)}>
-        <SearchBoxResults>
-          <img src={ `https://robohash.org/${user.id}.png?size=40x40` }  alt=''/>
-          <p>{ user.email }</p>
-        </SearchBoxResults>
-      </LinkElement>
-    )
+    if(search.length > 0)
+      return (
+        <LinkElement key={i} onClick={() => userSearchDetails(user.id)}>
+          <SearchBoxResults>
+            <img src={ `https://robohash.org/${user.id}.png?size=40x40` }  alt=''/>
+            <p>{ user.email }</p>
+          </SearchBoxResults>
+        </LinkElement>
+      )
   })
 
   const displayUser = click.map((user, i) => {

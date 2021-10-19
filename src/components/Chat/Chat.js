@@ -55,7 +55,6 @@ function Chat() {
     getMessage(getMessageObj)
       .then(res => {
         setChatData(res.data.data)
-        console.log(res.data.data)
       })
       .catch(err => console.log('Error Sending Message: ', err))
     

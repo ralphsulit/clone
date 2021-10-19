@@ -132,7 +132,7 @@ function Sidebar() {
 
   // render all channel (joined)
   const renderJoinedChannels = channelsJoined.map((channel, i) => {
-    if (userID !== channel.owner_id) {
+    if (userID !== channel.owner_id)
       return (
         <NavLink
           style={{textDecoration: 'none', color: 'white'}} 
@@ -145,12 +145,11 @@ function Sidebar() {
           />
         </NavLink>
       )
-    }
   })
 
   //direct messages
   const recentDM = recentUsers.map((user, i) => {
-    if (user.id !== userID) {
+    if (user.id !== userID) 
       return (
         <NavLink
           style={{textDecoration: 'none', color: 'white'}} 
@@ -160,7 +159,6 @@ function Sidebar() {
           <SidebarOption Icon={PeopleAltIcon} title={emailFormat(user.uid)} key={i} />
         </NavLink>
       )
-    }
   })
 
   return (

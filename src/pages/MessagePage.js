@@ -28,14 +28,15 @@ function NewMessage() {
 
   //list of all users
   const userList = allUsers.map((user, i) => {
-    return (
-      <LinkElement key={i} to={`/user/${user.id}`}>
-        <SearchBoxResult>
-          <img src={ `https://robohash.org/${user.id}.png?size=40x40` }  alt=''/>
-          <p>{user.email}</p>
-        </SearchBoxResult>
-      </LinkElement>
-    )
+    if(search.length > 0)
+      return (
+        <LinkElement key={i} to={`/user/${user.id}`}>
+          <SearchBoxResult>
+            <img src={ `https://robohash.org/${user.id}.png?size=40x40` }  alt=''/>
+            <p>{user.email}</p>
+          </SearchBoxResult>
+        </LinkElement>
+      )
   })
 
   return (
