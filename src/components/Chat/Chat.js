@@ -19,8 +19,6 @@ function Chat() {
   const params = useParams();
   const { type, id } = params;
 
-
-
   //render
   const handleChatRender = () => {
     setRender(!render)

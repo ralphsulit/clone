@@ -31,6 +31,7 @@ function Sidebar() {
   const [channelsJoined, setChannelsJoined] = useState([]);
   const [channelsOwned, setChannelsOwned] = useState([]);
   const [recentUsers, setRecentUsers] = useState([]);
+  const [uniqueRecent, setUniqueRecent] = useState([]);
   const [toggleAddChannel, setToggleAddChannel] = useState(false);
   const [toggleWarning, setToggleWarning] = useState(false);
   const [error, setError] = useState('');
@@ -51,8 +52,12 @@ function Sidebar() {
     setRender(!render)
   }
   
-  const handleToggleAddChannel = (e) => {
-    //e.stopPropagation()
+  const handleToggleAddChannelProp = (e) => {
+    e.stopPropagation()
+    setToggleAddChannel(!toggleAddChannel)
+  }
+
+  const handleToggleAddChannel = () => {
     setToggleAddChannel(!toggleAddChannel)
   }
 
@@ -112,7 +117,20 @@ function Sidebar() {
         }
       })
       .catch(err => err)
-  }, [render, recentUsers]);
+  }, [render])
+
+  useEffect(() => {
+    const dummyArray = []
+    const usersObjs = []
+    recentUsers.forEach(user => {
+      if(!dummyArray.includes(user.id)){
+        dummyArray.push(user.id)
+        usersObjs.push(user)
+      }
+    })
+
+    setUniqueRecent(usersObjs)
+  }, [recentUsers])
 
   //render all channel (owned)
   const renderOwnedChannels = channelsOwned.map((channel, i) => {
@@ -148,17 +166,19 @@ function Sidebar() {
   })
 
   //direct messages
-  const recentDM = recentUsers.map((user, i) => {
-    if (user.id !== userID) 
-      return (
-        <NavLink
-          style={{textDecoration: 'none', color: 'white'}} 
-          to={`/user/${user.id}`}
-          key={i}
-        >
-          <SidebarOption Icon={PeopleAltIcon} title={emailFormat(user.uid)} key={i} />
-        </NavLink>
-      )
+  const recentDM = uniqueRecent.map((user, i) => {
+    return (
+      <NavLink
+        style={{textDecoration: 'none', color: 'white'}} 
+        to={`/user/${user.id}`}
+        key={i}
+      >
+        <SidebarOption 
+          Icon={PeopleAltIcon} 
+          title={emailFormat(user.uid)}
+        />
+      </NavLink>
+    )
   })
 
   return (
@@ -220,7 +240,7 @@ function Sidebar() {
         <SidebarOption 
           Icon={AddIcon} 
           title='Add Channel' 
-          onClick={handleToggleAddChannel}
+          onClick={handleToggleAddChannelProp}
           />
       </div>
         {toggleAddChannel ? 
