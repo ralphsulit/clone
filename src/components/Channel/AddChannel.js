@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import CancelIcon from '@material-ui/icons/Cancel';
 
 
-function AddChannel({handleToggleAddChannel, handleRender}) {
+function AddChannel({handleToggleAddChannel, handleRender, handleError}) {
   //state
   const [warning, setWarning] = useState(false);
   const [error, setError] = useState('');
@@ -65,6 +65,7 @@ function AddChannel({handleToggleAddChannel, handleRender}) {
         handleToggleAddChannel()
         console.log('this works')
         handleRender()
+        handleError('')
         history.push(`/channel/${channelID}`)
       })
       .catch(err => err)

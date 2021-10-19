@@ -48,6 +48,11 @@ function Sidebar() {
   const userID = parseInt(localStorage.getItem('id'));
   const user = localStorage.getItem('uid');
 
+  //handling error so we can pass the function to the component
+  const handleError = (err) => {
+    setError(err)
+  }
+
   //refreshes the sidebar everytime we add the channel
   const handleRender = () => {
     setRender(!render)
@@ -231,6 +236,7 @@ function Sidebar() {
           <AddChannel 
             handleToggleAddChannel={handleToggleAddChannel}
             handleRender={handleRender}
+            handleError={handleError}
           /> 
         : null} 
 
