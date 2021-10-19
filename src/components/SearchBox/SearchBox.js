@@ -226,6 +226,7 @@ const SearchBoxResults = styled.div`
   > div .MuiSvgIcon-root {
     height: 25px;
     width: 25px;
+    color: #BCABBC;
   }
 
   > p {
