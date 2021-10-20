@@ -173,7 +173,7 @@ function Sidebar({handleToggleSidebar, handleClose}) {
   return (
     <SidebarContainer className={handleToggleSidebar ? `nav-menu active` : `nav-menu`}>
       {toggleWarning ? <Alert handleToggleWarning={handleToggleWarning} /> : null}
-      <span onClick={handleClose} className='close'>X</span>
+      <span onClick={handleClose} className='close'><h4 style={{cursor: 'pointer'}}>X</h4></span>
       <SidebarHeader>
         <SidebarInfo>
           <h2 onClick={home}>{email}</h2>
@@ -276,7 +276,6 @@ const SidebarContainer = styled.div`
 
     > span {
       color: #fff;
-      cursor: pointer;
       font-family: "Fredoka One", cursive;
     }
 `;

@@ -16,6 +16,7 @@
     position: absolute;
     left: 5%;
     display: block !important;
+    cursor: pointer;
   }
 }
 
