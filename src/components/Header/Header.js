@@ -2,13 +2,15 @@ import React, { useState } from 'react';
 import SearchBox from '../SearchBox/SearchBox';
 import Alert from '../Alert/Alert';
 //icons and styles
+import './Header.css'
 import styled from 'styled-components';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import SearchIcon from '@material-ui/icons/Search';
 import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import MenuIcon from '@material-ui/icons/Menu';
 
-function Header() {
+function Header({handleToggleSidebar}) {
   //state
   const [toggleSearch, setToggleSearch] = useState(false);
   const [warning, setWarning] = useState(false);
@@ -17,6 +19,7 @@ function Header() {
   const handleToggleWarning = () => {
     setWarning(!warning);
   }
+
 
   //toggle searchbox
   const handleToggleSearchBox = () => {
@@ -30,8 +33,9 @@ function Header() {
   }
 
   return (
-    <HeaderContainer>
-      {warning ? <Alert handleToggleWarning={handleToggleWarning} /> : null} 
+    <HeaderContainer className='header'>
+      {warning ? <Alert handleToggleWarning={handleToggleWarning} /> : null}
+      <MenuIcon className='menu-icon' onClick={handleToggleSidebar}/>
       <HeaderLeft>
         <AccessTimeIcon/>
       </HeaderLeft>
@@ -53,7 +57,6 @@ function Header() {
       {toggleSearch ? (
         <SearchBox handleToggleSearchBox={handleToggleSearchBox} handleToggleWarning={handleToggleWarning}/>
       ) : null}
-
     </HeaderContainer>
   )
 };
@@ -103,17 +106,10 @@ const HeaderSearch = styled.div`
 const HeaderLeft = styled.div`
   display: flex;
   align-items: center;
-
-    >.MuiSvgIcon-root {
-    }
 `;
 
 const HeaderRight = styled.div`
   display: flex;
-    
-    > .MuiSvgIcon-root {
-      margin-right: 20px;
-    }
 `;
 
 const Logout = styled.div`

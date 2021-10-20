@@ -1,15 +1,23 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import Header from '../components/Header/Header';
 import Sidebar from '../components/Sidebar/Sidebar';
 import './UserRoutes.css'
 
 const UserRoute = ({component: Component, ...rest}) => {
+  const [toggleSidebar, setToggleSidebar] = useState(false);
+
+  //sidebar toggle
+  const handleToggleSidebar = () => {
+    setToggleSidebar(!toggleSidebar)
+    console.log(toggleSidebar)
+  }
+
   return (
     <div className='container'>
-      {localStorage.getItem('access-token') && <Header/>} 
+      {localStorage.getItem('access-token') && <Header handleToggleSidebar={handleToggleSidebar}/>}
       <div className='innerContainer'>
-      {localStorage.getItem('access-token') && <Sidebar/>} 
+      {localStorage.getItem('access-token') && <Sidebar handleToggleSidebar={toggleSidebar}/>}
       <Route
         {...rest}
         render={(props) => {

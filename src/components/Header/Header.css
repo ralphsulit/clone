@@ -1,0 +1,21 @@
+.menu-icon {
+  display: none !important;
+}
+
+.exit-icon {
+  cursor: pointer;
+}
+
+@media(max-width: 1023px) {
+  .header { 
+    padding-left: 200px !important;
+    padding-right: 70px !important;
+  }
+
+  .menu-icon {
+    position: absolute;
+    left: 5%;
+    display: block !important;
+  }
+}
+

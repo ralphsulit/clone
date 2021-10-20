@@ -6,7 +6,6 @@ import SidebarOption from './SidebarOption';
 import styled from 'styled-components';
 import Alert from '../Alert/Alert';
 import { emailFormat } from '../Utils/utils';
-
 import './Sidebar.css';
 //Icons
 import FiberManualRecordIcon from "@material-ui/icons/FiberManualRecord";
@@ -22,7 +21,7 @@ import AddIcon from "@material-ui/icons/Add";
 import AppsIcon from "@material-ui/icons/Apps";
 import LockIcon from '@material-ui/icons/Lock';
 
-function Sidebar() {
+function Sidebar({handleToggleSidebar}) {
   //state
   const [email, setEmail] = useState('');
   const [togDropdown, setToggleDropdown] = useState(false);
@@ -35,7 +34,8 @@ function Sidebar() {
   const [toggleAddChannel, setToggleAddChannel] = useState(false);
   const [toggleWarning, setToggleWarning] = useState(false);
   const [error, setError] = useState('');
-  const [style, setStyle] = useState({display: 'none'});
+  const [style, setStyle] = useState({ display: 'none' });
+
 
   //variables
   const history = useHistory();
@@ -85,7 +85,6 @@ function Sidebar() {
   useEffect(() => {
     //variables
     setEmail(localStorage.getItem('uid'))
-  
 
     //get channels joined
     getChannel()
@@ -182,8 +181,8 @@ function Sidebar() {
   })
 
   return (
-    <SidebarContainer> 
-      {toggleWarning ? <Alert handleToggleWarning={handleToggleWarning} /> : null} 
+    <SidebarContainer className={handleToggleSidebar ? `nav-menu active` : `nav-menu`}>
+      {toggleWarning ? <Alert handleToggleWarning={handleToggleWarning} /> : null}
       <SidebarHeader>
         <SidebarInfo>
           <h2 onClick={home}>{email}</h2>
@@ -281,8 +280,8 @@ const SidebarContainer = styled.div`
     }
 
     ::-webkit-scrollbar {
-    display: none;
-    }    
+      display: none;
+    }
 `;
 
 const SidebarHeader = styled.div`

@@ -5,3 +5,17 @@
 .hidden {
   display: none;
 }
+
+.nav-menu.active {
+  left: 0;
+  transition: 350ms;
+}
+
+@media(max-width: 1023px) {
+  .nav-menu {
+    background-color: red;
+    position: fixed;
+    left: -100%;  
+    transition: 350ms;
+  }
+}
