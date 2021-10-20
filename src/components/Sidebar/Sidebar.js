@@ -21,7 +21,7 @@ import AddIcon from "@material-ui/icons/Add";
 import AppsIcon from "@material-ui/icons/Apps";
 import LockIcon from '@material-ui/icons/Lock';
 
-function Sidebar({handleToggleSidebar}) {
+function Sidebar({handleToggleSidebar, handleClose}) {
   //state
   const [email, setEmail] = useState('');
   const [togDropdown, setToggleDropdown] = useState(false);
@@ -46,32 +46,22 @@ function Sidebar({handleToggleSidebar}) {
   const handleError = (err) => {
     setError(err)
   }
-
+  
   //refreshes the sidebar everytime we add the channel
-  const handleRender = () => {
-    setRender(!render)
-  }
+  const handleRender = () => setRender(!render);
   
   const handleToggleAddChannelProp = (e) => {
     e.stopPropagation()
     setToggleAddChannel(!toggleAddChannel)
   }
 
-  const handleToggleAddChannel = () => {
-    setToggleAddChannel(!toggleAddChannel)
-  }
+  const handleToggleAddChannel = () => setToggleAddChannel(!toggleAddChannel);
+  
+  const handleToggleDropdown = () => setToggleDropdown(!togDropdown);
 
-  const handleToggleDropdown = () => {
-    setToggleDropdown(!togDropdown)
-  }
+  const handleToggleWarning = () => setToggleWarning(!toggleWarning);
 
-  const handleToggleWarning = () => {
-    setToggleWarning(!toggleWarning)
-  }
-
-  const handleToggle = () => {
-    setToggle(!toggle)
-  }
+  const handleToggle = () => setToggle(!toggle);
 
   //route to message page
   const messagePage = () => {
@@ -183,6 +173,7 @@ function Sidebar({handleToggleSidebar}) {
   return (
     <SidebarContainer className={handleToggleSidebar ? `nav-menu active` : `nav-menu`}>
       {toggleWarning ? <Alert handleToggleWarning={handleToggleWarning} /> : null}
+      <span onClick={handleClose} className='close'>X</span>
       <SidebarHeader>
         <SidebarInfo>
           <h2 onClick={home}>{email}</h2>
@@ -281,6 +272,12 @@ const SidebarContainer = styled.div`
 
     ::-webkit-scrollbar {
       display: none;
+    }
+
+    > span {
+      color: #fff;
+      cursor: pointer;
+      font-family: "Fredoka One", cursive;
     }
 `;
 

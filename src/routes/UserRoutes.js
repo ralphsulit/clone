@@ -8,31 +8,31 @@ const UserRoute = ({component: Component, ...rest}) => {
   const [toggleSidebar, setToggleSidebar] = useState(false);
 
   //sidebar toggle
-  const handleToggleSidebar = () => {
-    setToggleSidebar(!toggleSidebar)
-    console.log(toggleSidebar)
-  }
+  const handleToggleSidebar = () => setToggleSidebar(!toggleSidebar);
 
   return (
     <div className='container'>
       {localStorage.getItem('access-token') && <Header handleToggleSidebar={handleToggleSidebar}/>}
       <div className='innerContainer'>
-      {localStorage.getItem('access-token') && <Sidebar handleToggleSidebar={toggleSidebar}/>}
-      <Route
-        {...rest}
-        render={(props) => {
-          if (localStorage.getItem('access-token')) {
-            return <Component {...props}/>
-          } else {
-            return <Redirect to={{
-              pathname: '/',
-              state: {
-                from: props.location
-              }
-            }} />
-          }
-        }}
-      />
+        {
+          localStorage.getItem('access-token') &&
+          <Sidebar handleToggleSidebar={toggleSidebar} handleClose={handleToggleSidebar} />
+        }
+        <Route
+          {...rest}
+          render={(props) => {
+            if (localStorage.getItem('access-token')) {
+              return <Component {...props}/>
+            } else {
+              return <Redirect to={{
+                pathname: '/',
+                state: {
+                  from: props.location
+                }
+              }} />
+            }
+          }}
+        />
       </div>
     </div>
   )

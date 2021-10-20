@@ -6,14 +6,21 @@
   display: none;
 }
 
+.close {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px 10px 0 0;
+  cursor: pointer;
+}
+
 .nav-menu.active {
   left: 0;
   transition: 350ms;
+  z-index: 100;
 }
 
 @media(max-width: 1023px) {
   .nav-menu {
-    background-color: red;
     position: fixed;
     left: -100%;  
     transition: 350ms;
