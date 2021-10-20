@@ -19,8 +19,10 @@ export default ChatContainer;
 const Container = styled.div`
   display: flex;
   flex-flow: column nowrap;
+  margin: 0 auto;
   height: 42rem;
   overflow-y: scroll;
+  width: 100%;
 
   > :first-child {
     margin-top: auto !important;
@@ -33,4 +35,8 @@ const Container = styled.div`
 
 const Bottom = styled.div`
   padding-bottom: 1px;
+
+  @media(max-width: 1023px) {
+    max-width: 800px;
+  } 
 `;

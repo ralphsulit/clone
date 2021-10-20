@@ -59,6 +59,7 @@ export default NewMessage;
 
 const MessageContainer = styled.div`
   width: 100%;
+  height: 95vh;
   margin-top: 40px;
   background-color: #F8F8F8;
 `;

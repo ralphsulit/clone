@@ -108,7 +108,8 @@ function Chat() {
 export default Chat;
 
 const ChatContainer = styled.div`
-  width: 100%;
+  width: 100vw;
+  height: 95vh;
   margin-top: 45px;
   background-color: #F8F8F8;
 `;
